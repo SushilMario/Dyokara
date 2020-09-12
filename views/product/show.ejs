@@ -2,14 +2,14 @@
 	<h1>
 		<%=product.name%>
 	</h1>
-	<img src="<%=product.image%>" height=300>
+	<img src="<%= product.image %>" height = 300>
 	<li>$<%=product.price%></li>
 </div>
 <br/>
 <br/>
 
-<% product.reviews.forEach(function(comment){%>
-	<p><strong><%= comment.author%></strong> - <%= comment.text%></p>
+<% product.reviews.forEach(function(review){%>
+	<p><strong><%= review.author%></strong> - <%= review.text%></p>
 <%})%>
 
 <form action="/users/<%=currentUser._id%>/cart/products/<%=product._id%>" method="POST">

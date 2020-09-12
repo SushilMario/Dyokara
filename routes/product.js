@@ -30,32 +30,32 @@ router.get("/",
 
 //Index - category
 
-router.get("/:category", 
-    (req, res) =>
-    {	
-        Product.find({category: req.params.category},
-            (err, foundProducts) =>
-            {
-                if(err)
-                {
-                    console.log(err);
-                    res.redirect("/");
-                }
-                else
-                {
-                    res.render("product/index", {products: foundProducts});
-                }
-            }
-        );
-    }
-)
+// router.get("/:category", 
+//     (req, res) =>
+//     {	
+//         Product.find({category: req.params.category},
+//             (err, foundProducts) =>
+//             {
+//                 if(err)
+//                 {
+//                     console.log(err);
+//                     res.redirect("/");
+//                 }
+//                 else
+//                 {
+//                     res.render("product/index", {products: foundProducts});
+//                 }
+//             }
+//         );
+//     }
+// )
 
 //New
 
 router.get("/new",
     (req, res) =>
     {
-        res.render("products/new");
+        res.render("product/new");
     }
 )
 
@@ -64,7 +64,7 @@ router.get("/new",
 router.post("/",
     (req, res) =>
     {
-        Product.create({name: req.body.name, shortDesc: req.body.shortDesc, longDesc: req.body.longDesc, price: req.body.price, specifications: req.body.specifications},
+        Product.create({name: req.body.name, image: req.body.image, shortDesc: req.body.shortDesc, longDesc: req.body.longDesc, price: req.body.price, specifications: req.body.specifications},
             (err, product) =>  
             {
                 if(err)

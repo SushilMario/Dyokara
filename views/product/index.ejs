@@ -8,10 +8,10 @@
 <a href="/logout">Logout</a>
 
 
-<%products.forEach(function(item){%>
+<%products.forEach(function(product){%>
 	<div>
-		<li><%=item.name%></li>
-		<img src="<%=item.image%>">
-		<a href="/products/<%=item._id%>">View item</a>
+		<li><%=product.name%></li>
+		<img src="<%=product.image%>">
+		<a href="/products/<%=product._id%>">View item</a>
 	</div>
 <%})%>
