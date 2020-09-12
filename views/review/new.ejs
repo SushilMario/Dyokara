@@ -1,0 +1,18 @@
+<h1>
+	Add New Review to <%=product.name%>
+</h1>
+<form action="/" method="POST">
+	<input class="form-control" type="text" name="review[author]" placeholder="Author">
+	<br/>
+	<br/>
+	<input class="form-control" type="text" name="review[text]" placeholder="Review">
+	<br/>
+	<br/>
+	<button>
+		Submit
+	</button>
+	
+</form>
+<br/>
+<br/>
+<a href="/products/<%=product._id%>">Back</a>

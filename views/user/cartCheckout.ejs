@@ -1,0 +1,11 @@
+<h1>
+	Checkout
+</h1>
+
+<%products.forEach(function(item){%>
+	<div>
+		<li><%=item.name%></li>
+		<img src="<%=item.image%>">
+		<li>$<%=item.price%></li>
+	</div>
+<%})%>

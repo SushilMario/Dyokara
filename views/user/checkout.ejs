@@ -1,0 +1,8 @@
+<h1>
+	Checkout page
+</h1>
+<%product.forEach(function(item){%>
+	<li><%= item.name%></li>
+	<img src="<%=item.image%>" height="200">
+	<li>$<%=item.price%></li>
+<%})%>

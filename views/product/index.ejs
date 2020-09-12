@@ -1,0 +1,17 @@
+<h1>index</h1>
+<a class="topright" href="/users/<%=currentUser._id%>/cart">Cart</a>
+<br/>
+<a class="topright" href="/users/<%=currentUser._id%>/wishlist">Wishlist</a>
+<br/>
+<a href="/products/new">Add product</a>
+<br/>
+<a href="/logout">Logout</a>
+
+
+<%products.forEach(function(item){%>
+	<div>
+		<li><%=item.name%></li>
+		<img src="<%=item.image%>">
+		<a href="/products/<%=item._id%>">View item</a>
+	</div>
+<%})%>
