@@ -4,12 +4,12 @@
 
 <% wishlist.forEach(function(item){%>
 	<div>
-		<li><%=item.name%></li>
-		<img src="<%=item.image%>">
+		<li><%=item.product.name%></li>
+		<img src="<%=item.product.image%>">
 		<li>Rs <%=item.product.price%></li>
         <li>Qty: <%=item.quantity%></li>
 	</div>
-	<form id="delete-form" action="/products/<%=item._id%>?_method=DELETE" method="POST">
+	<form id="delete-form" action="/users/<%= currentUser._id %>/wishlist/products/<%=item.product._id%>?_method=DELETE" method="POST">
 		<input type="submit" class="btn btn-xs btn-danger" value="Delete">
 	</form>
 	<a href="/products/<%=item._id%>/move">Add to cart</a>
@@ -20,5 +20,5 @@
 	
 <%})%>
 
-<a href="/cartCheckout">Buy</a>
+
 <a href="/products">Back</a>

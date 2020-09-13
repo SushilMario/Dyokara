@@ -7,8 +7,6 @@ const User = require("../models/User.js");
 
 const router = express.Router();
 
-
-
 //Home 
 
 router.get("/",
@@ -85,27 +83,6 @@ router.get("/logout",
         req.logout();
         res.redirect("/");
     }
-)
-
-//Checkout
-
-router.get("/checkout", middleware.isLoggedIn,
-    (req,res) =>
-    {
-        User.findById(req.user.id,
-			(err, user) =>
-			{
-				if(err)
-				{
-					console.log(err);
-				}
-				else
-				{
-					res.render("user/checkout", {cart: user.cart});	
-				}
-			}
-		);
-	}
 )
 
 //Catch all 

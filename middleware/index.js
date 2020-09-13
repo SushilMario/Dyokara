@@ -83,4 +83,24 @@ middlewareObj.isReviewOwner =
 	}
 }
 
+//Delete function
+middlewareObj.delete = 
+(user, group, foundProduct) =>
+{
+    let index = -1;
+    for(let i = 0; i < user[group].length; i++)
+    {
+        const {product} = user[group][i];
+        if(product.equals(foundProduct._id))
+        {
+            index = i;
+        }
+    }
+    if(index >= 0)
+    {
+        user[group].splice(index,1);
+        user.save();
+    }
+}
+
 module.exports = middlewareObj;

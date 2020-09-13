@@ -30,7 +30,7 @@ router.get("/", middleware.isLoggedIn,
 
 //Create 
 
-router.post("/products/:product_id",  
+router.post("/products/:product_id", middleware.isLoggedIn,  
 	(req, res) =>
 	{
         const quantity = req.body.quantity;
@@ -83,7 +83,7 @@ router.post("/products/:product_id",
 
 //Update 
 
-router.put("/products/:product_id",
+router.put("/products/:product_id", middleware.isLoggedIn,
 	(req, res) =>
 	{
         const quantity = req.body.quantity;
@@ -131,7 +131,7 @@ router.put("/products/:product_id",
 
 //Destroy 
 
-router.delete("/products/:product_id",
+router.delete("/products/:product_id", middleware.isLoggedIn,
     (req,res) =>
     {
         User.findById(req.params.id,
@@ -143,23 +143,10 @@ router.delete("/products/:product_id",
                 }
                 else
                 {
-                    let index = -1;
                     Product.findById(req.params.product_id,
                         (err,foundProduct) =>
                         {
-                            for(let i = 0; i < user.wishlist.length; i++)
-                            {
-                                const {product} = user.wishlist[i];
-                                if(product.equals(foundProduct._id))
-                                {
-                                    index = i;
-                                }
-                            }
-                            if(index >= 0)
-                            {
-                                user.wishlist.splice(index,1);
-                                user.save();
-                            }
+                            middleware.delete(user, "wishlist", foundProduct);
                             res.redirect(`/users/${req.params.id}/wishlist`);
                         }
                     )
@@ -169,9 +156,9 @@ router.delete("/products/:product_id",
     }
 )
 
-//Add to wishlist
+//Move to cart
 
-router.post("/products/:product_id/move",
+router.post("/products/:product_id/move", middleware.isLoggedIn,
     (req,res) =>
     {
         User.findById(req.params.id,
@@ -183,25 +170,10 @@ router.post("/products/:product_id/move",
                 }
                 else
                 {
-                    let index = -1;
                     Product.findById(req.params.product_id,
                         (err,foundProduct) =>
                         {
-                            for(let i = 0; i < user.wishlist.length; i++)
-                            {
-                                const {product} = user.wishlist[i];
-                                if(product.equals(foundProduct._id))
-                                {
-                                    index = i;
-                                }
-                            }
-                            if(index >= 0)
-                            {
-                                const shiftProductArray = user.wishlist.splice(index,1);
-                                const shiftProduct = shiftProductArray[0];
-                                user.cart.push(shiftProduct);
-                                user.save();
-                            }
+                            middleware.delete(user, "wishlist", foundProduct);
                             res.redirect(`/users/${req.params.id}/wishlist`);
                         }
                     )

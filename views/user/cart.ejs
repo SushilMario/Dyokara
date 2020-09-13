@@ -14,5 +14,8 @@
     </form>
 <%})%>
 
-<a href="/checkout">Buy</a>
+<form action="/users/<%= currentUser._id %>/cart/checkout" method="POST">
+    <button type="submit">Proceed to checkout</button>
+</form>
+
 <a href="/products">Back</a>

@@ -8,8 +8,10 @@
 <br/>
 <br/>
 
+<h2>Reviews</h2>
+
 <% product.reviews.forEach(function(review){%>
-	<p><strong><%= review.author%></strong> - <%= review.text%></p>
+	<p><strong><%= review.author.username%></strong> - <%= review.text%></p>
 <%})%>
 
 <form action="/users/<%=currentUser._id%>/cart/products/<%=product._id%>" method="POST">
@@ -18,7 +20,10 @@
 
 <br/>
 
-<a href="/checkout">Buy now</a>
+<form action="/products/<%= product._id %>/checkout" method="POST">
+    <button type="submit">Buy now</button>
+</form>
+
 <br/>
 <a href="/products/<%=product._id%>/reviews/new">Review</a>
 <br/>

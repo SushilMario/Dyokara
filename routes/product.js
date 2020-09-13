@@ -1,7 +1,7 @@
 const express = require("express");
 
 //Models
-let Product = require("../models/Product.js");
+const Product = require("../models/Product.js");
 
 const middleware = require("../middleware");
 
@@ -156,6 +156,35 @@ router.put("/:id", middleware.isAdmin,
             }    
         );
     }
+)
+
+//Checkout
+
+router.post("/:id/checkout", middleware.isLoggedIn,
+    (req,res) =>
+    {
+        Product.findById(req.params.id,
+			(err, product) =>
+			{
+				if(err)
+				{
+					console.log(err);
+				}
+				else
+				{
+                    const quantity = req.body.quantity;
+                    const item = 
+                    {
+                        product, 
+                        quantity
+                    };
+                    const order = [];
+                    order.push(item);
+					res.render("user/checkout", {order: order});	
+				}
+			}
+		);
+	}
 )
 
 //Destroy

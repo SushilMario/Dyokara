@@ -1,7 +1,8 @@
 const express = require("express");
 
-let Product = require("../models/Product");
+const Product = require("../models/Product");
 
+const Review = require("../models/Review.js");
 
 const middleware = require("../middleware");
 
@@ -22,7 +23,7 @@ router.get("/new", middleware.isLoggedIn,
 				}
 				else
 				{
-					res.render("reviews/new", {product: product});
+					res.render("review/new", {product: product});
 				}
 			}
 		);	
