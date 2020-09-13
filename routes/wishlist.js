@@ -12,7 +12,19 @@ const router = express.Router({mergeParams: true});
 router.get("/", middleware.isLoggedIn,
     (req, res) =>
     {
-        res.render("user/wishlist");
+        User.findById(req.params.id).populate({path: "wishlist.product"}).exec(
+            (err, user) =>
+            {
+                if(err)
+                {
+                    console.log(err);
+                }
+                else
+                {
+                    res.render("user/wishlist", {wishlist: user.wishlist});
+                }
+            }
+        );	
     }
 )
 
@@ -23,7 +35,7 @@ router.post("/products/:product_id",
 	{
         const quantity = req.body.quantity;
         Product.findById(req.params.product_id,
-			(err, product) =>
+			(err, foundProduct) =>
 			{
 				if(err)
 				{
@@ -40,22 +52,23 @@ router.post("/products/:product_id",
                             }
                             else
                             {
+                                let index = -1;
                                 for(let i = 0; i < user.wishlist.length; i++)
                                 {
                                     const {product} = user.wishlist[i];
-                                    if(product._id === foundProduct._id)
+                                    if(product.equals(foundProduct._id))
                                     {
                                         index = i;
                                     }
                                 }
                                 if(index >= 0)
                                 {
-                                    user.wishlist.product.quantity += 1;
+                                    user.wishlist[index].quantity += 1;
                                 }
                                 else
                                 {
-                                    user.wishlist.product.push(product);
-                                    user.wishlist.product.quantity = quantity;
+                                    const newItem = {quantity: quantity, product: foundProduct._id};
+                                    user.wishlist.push(newItem);
                                 }
                                 user.save();
                                 res.redirect(`/users/${req.params.id}/wishlist`);
@@ -92,7 +105,19 @@ router.put("/products/:product_id",
                             }
                             else
                             {
-                                user.wishlist.product.quantity = quantity;
+                                let index = -1;
+                                for(let i = 0; i < user.wishlist.length; i++)
+                                {
+                                    const {product} = user.wishlist[i];
+                                    if(product.equals(foundProduct._id))
+                                    {
+                                        index = i;
+                                    }
+                                }
+                                if(index >= 0)
+                                {
+                                    user.wishlist[index].quantity = quantity;
+                                }
                                 user.save();
                                 res.redirect(`/users/${req.params.id}/wishlist`);
                             }
@@ -119,13 +144,13 @@ router.delete("/products/:product_id",
                 else
                 {
                     let index = -1;
-                    Product.findById(req.params.id,
+                    Product.findById(req.params.product_id,
                         (err,foundProduct) =>
                         {
                             for(let i = 0; i < user.wishlist.length; i++)
                             {
                                 const {product} = user.wishlist[i];
-                                if(product._id === foundProduct._id)
+                                if(product.equals(foundProduct._id))
                                 {
                                     index = i;
                                 }
@@ -144,7 +169,7 @@ router.delete("/products/:product_id",
     }
 )
 
-//Add to cart
+//Add to wishlist
 
 router.post("/products/:product_id/move",
     (req,res) =>
@@ -159,13 +184,13 @@ router.post("/products/:product_id/move",
                 else
                 {
                     let index = -1;
-                    Product.findById(req.params.id,
+                    Product.findById(req.params.product_id,
                         (err,foundProduct) =>
                         {
                             for(let i = 0; i < user.wishlist.length; i++)
                             {
                                 const {product} = user.wishlist[i];
-                                if(product._id === foundProduct._id)
+                                if(product.equals(foundProduct._id))
                                 {
                                     index = i;
                                 }
@@ -177,7 +202,7 @@ router.post("/products/:product_id/move",
                                 user.cart.push(shiftProduct);
                                 user.save();
                             }
-                            res.redirect(`/users/${req.params.id}/cart`);
+                            res.redirect(`/users/${req.params.id}/wishlist`);
                         }
                     )
                 }

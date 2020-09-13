@@ -12,7 +12,19 @@ const router = express.Router({mergeParams: true});
 router.get("/", middleware.isLoggedIn,
     (req, res) =>
     {
-        res.render("user/cart");
+        User.findById(req.params.id).populate({path: "cart.product"}).exec(
+            (err, user) =>
+            {
+                if(err)
+                {
+                    console.log(err);
+                }
+                else
+                {
+                    res.render("user/cart", {cart: user.cart});
+                }
+            }
+        );	
     }
 )
 
@@ -23,7 +35,7 @@ router.post("/products/:product_id",
 	{
         const quantity = req.body.quantity;
         Product.findById(req.params.product_id,
-			(err, product) =>
+			(err, foundProduct) =>
 			{
 				if(err)
 				{
@@ -40,22 +52,23 @@ router.post("/products/:product_id",
                             }
                             else
                             {
+                                let index = -1;
                                 for(let i = 0; i < user.cart.length; i++)
                                 {
                                     const {product} = user.cart[i];
-                                    if(product._id === foundProduct._id)
+                                    if(product.equals(foundProduct._id))
                                     {
                                         index = i;
                                     }
                                 }
                                 if(index >= 0)
                                 {
-                                    user.cart.product.quantity += 1;
+                                    user.cart[index].quantity += 1;
                                 }
                                 else
                                 {
-                                    user.cart.product.push(product);
-                                    user.cart.product.quantity = quantity;
+                                    const newItem = {quantity: quantity, product: foundProduct._id};
+                                    user.cart.push(newItem);
                                 }
                                 user.save();
                                 res.redirect(`/users/${req.params.id}/cart`);
@@ -92,7 +105,19 @@ router.put("/products/:product_id",
                             }
                             else
                             {
-                                user.cart.product.quantity = quantity;
+                                let index = -1;
+                                for(let i = 0; i < user.cart.length; i++)
+                                {
+                                    const {product} = user.cart[i];
+                                    if(product.equals(foundProduct._id))
+                                    {
+                                        index = i;
+                                    }
+                                }
+                                if(index >= 0)
+                                {
+                                    user.cart[index].quantity = quantity;
+                                }
                                 user.save();
                                 res.redirect(`/users/${req.params.id}/cart`);
                             }
@@ -119,13 +144,13 @@ router.delete("/products/:product_id",
                 else
                 {
                     let index = -1;
-                    Product.findById(req.params.id,
+                    Product.findById(req.params.product_id,
                         (err,foundProduct) =>
                         {
                             for(let i = 0; i < user.cart.length; i++)
                             {
                                 const {product} = user.cart[i];
-                                if(product._id === foundProduct._id)
+                                if(product.equals(foundProduct._id))
                                 {
                                     index = i;
                                 }
