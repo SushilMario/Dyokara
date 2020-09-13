@@ -173,8 +173,14 @@ router.post("/products/:product_id/move", middleware.isLoggedIn,
                     Product.findById(req.params.product_id,
                         (err,foundProduct) =>
                         {
+                            const item = 
+                            {
+                                product: foundProduct._id,
+                                quantity: 1
+                            };
+                            user.cart.push(item);
                             middleware.delete(user, "wishlist", foundProduct);
-                            res.redirect(`/users/${req.params.id}/wishlist`);
+                            res.redirect(`/users/${req.params.id}/cart`);
                         }
                     )
                 }

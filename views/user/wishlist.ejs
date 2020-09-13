@@ -11,8 +11,10 @@
 	</div>
 	<form id="delete-form" action="/users/<%= currentUser._id %>/wishlist/products/<%=item.product._id%>?_method=DELETE" method="POST">
 		<input type="submit" class="btn btn-xs btn-danger" value="Delete">
+    </form>
+    <form action="/users/<%= currentUser._id %>/wishlist/products/<%=item.product._id%>/move" method="POST">
+		<button type="submit">Add to cart</button>
 	</form>
-	<a href="/products/<%=item._id%>/move">Add to cart</a>
 <br/>
 <br/>
 <br/>
