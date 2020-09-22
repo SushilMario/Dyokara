@@ -1,0 +1,34 @@
+.cart-container{
+    width: 80vw;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+.cart-text{
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.delete>a{
+    font-size: 32px;
+    margin-right: 10px;
+    color: black !important;
+    cursor: pointer;
+}
+
+.amount{
+    font-size: 20px;
+}
+
+.total{
+    font-size: 32px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn{
+    width: 150px;
+    height: 60px;
+}

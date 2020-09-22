@@ -1,4 +1,126 @@
-<div>
+<!DOCTYPE html>
+<link rel="stylesheet" href="style_prod_page.css" />
+<!-- jQuery 1.8 or later, 33 KB -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+
+
+<!-- Fotorama from CDNJS, 19 KB -->
+<link  href="https://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js"></script>
+
+<title>Product page</title>
+<body>
+<div class="container-1">
+    <div class="box-1">
+      <div class="fotorama">
+        <img src="pictures/sample7.jpg" alt="imgnotfound" class="ImageBorder" style='border:1px solid #000000'>
+        <img src="https://s.fotorama.io/2.jpg"alt="imgnotfound">
+      </div>
+      <!-- 300 x 500 -->
+      
+    </div>
+    <div class="box-2">
+      <p><h1>Visit the DYOKARA Store
+      </h1></p>
+    
+    <p>Ikea ADDE Chair Black<br> Indoor/Outdoor Back Rest
+        </b></p>
+        
+        <div class="ui star rating" data-rating="3" data-max-rating="5"></div>
+        <p>  456 ratings |
+            58 Replies
+        </p><br><hr><br>
+
+        <p>Price: 
+         ₹ 1,145.00 
+        FREE Delivery </p></b>
+        <p>incluive of all taxes</p>
+        <p>Delivery By: 
+        <b>Sep 5 - 7</b></p>
+        <button class="ui circular home icon button" >
+            <i class="home icon"></i>
+          </button>
+          <button class="ui circular box icon button" >
+            <i class="box icon"></i>
+          </button>
+          <button class="ui circular shipping fast icon button" >
+            <i class="shipping fast icon"></i>
+          </button><br>
+          <p><br>
+             No-Contact
+                10 days Postal<br>
+                Delivery
+                    ReplacementDelivered<br>
+          </p>
+          <hr>
+          <p>
+              <div>
+            <b>Product details </b><br><br>
+            <b>Product Dimensions :</b>
+            47 x 39 x 77 cm<br><br>
+            <b>Item Weight : </b>
+            250 Grams<br><br>
+            <b>Included Components :</b>
+            Entire Chair with Frame<br><br>
+            <b>Is Discontinued By Manufacturer :</b>
+            No<br><br>
+            <b>Item part number : </b>
+            902.191.79<br><br>
+            <b>ASIN :</b>
+            B07FVPYYZ9<br><br>
+            <hr>
+          </p>
+          
+
+        </p>
+          
+    </div>
+    </div>
+    <div class="box-3">
+      
+      <p>
+        Share
+        <button class="ui  instagram icon button" onclick="window.location.href='http://www.instagram.com'">
+          <i class="instagram icon"></i>
+      </button>&emsp;
+      <button class="ui  facebook icon button" onclick="window.location.href='https://www.facebook.com/'">
+        <i class="facebook icon"></i>
+    </button>&emsp;
+    
+      </p>
+      
+      <div class="ui left floated compact segment">
+    <form class="form-inputs" action="/add_to_cart" method="POST">
+      <div class="orange_button">
+      <br><button  type="submit" class="ui orange button">
+        <i class="cart arrow down icon"></i>Add to Cart&emsp;&nbsp;&nbsp;</button></div><br>
+         </form> 
+         <form class="form-inputs" action="/buy_now" method="POST">
+        <div class="yellow_button">
+          <button  type="submit" class="ui yellow button">
+            &emsp;&emsp;<i class="play icon"></i>Buy Now&nbsp;&emsp;&emsp;</button><br><br></form>
+            <i class="lock icon"></i>Secure transaction<br>
+            <i class="map marker alternate icon"></i>Select delivery location<br>
+        </div>  
+        </div>
+    
+      </div>
+  </div>
+
+  </div>
+  <script>
+    $('.ui.rating')
+    .rating({
+      initialRating: 3,
+      maxRating: 5
+    });
+  </script>
+</body>
+</html>
+
+<!-- <div>
 	<h1>
 		<%=product.name%>
 	</h1>
@@ -36,4 +158,4 @@
 <a href="/users/<%= currentUser._id%>/wishlist/products/<%=product._id%>">Wishlist</a>
 
 <br/>
-<a href="/products">Back</a>
+<a href="/products">Back</a> -->
