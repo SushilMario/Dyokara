@@ -29,7 +29,7 @@ mongoose.connect("mongodb://localhost/dyokara");
 
 //App setup
 
-var app = express();
+const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
@@ -75,6 +75,15 @@ app.use("/products/:id/reviews", reviewRoutes);
 app.use("/users/:id/cart", cartRoutes);
 app.use("/users/:id/wishlist", wishlistRoutes);
 app.use(authRoutes);
+
+//Catch all 
+
+app.get("*",
+    (req, res) =>
+    {
+        res.send("ERROR 404! PAGE NOT FOUND!");
+    }
+)
 
 const port = process.env.PORT || 3000;
 

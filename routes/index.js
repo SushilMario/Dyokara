@@ -85,13 +85,4 @@ router.get("/logout",
     }
 )
 
-//Catch all 
-
-router.get("*",
-    (req, res) =>
-    {
-        res.send("ERROR 404! PAGE NOT FOUND!");
-    }
-)
-
 module.exports = router;

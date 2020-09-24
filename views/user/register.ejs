@@ -1,56 +1,31 @@
 <!DOCTYPE html>
-<link rel="stylesheet" href="style_sign_up.css" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Dyokara</title>
 
-<title>sign up</title>
-<body>
-  <div class="container-1">
-    <div class="box-1">
-      <!-- 750 x 660 ... full webpage-->
-      <img src="pictures/sample3(650x660).jpg">
-    </div>
-        <div class="box-2">
-        
-        <p><h1><b><font face = "WildWest" size = "6.5">
-            Perfect for Stargazers &
-        
-        <p>the wide-eyed dreamers.</p>
-        </font></h1></b></p>
-        <p><font color = "red"><b>
-            
-        Specially crafted for the people who care about design.</font></b></p>
-        
-        <form class="form-inputs" action="/sign_in" method="POST"> 
-                <div class="form-inputs ui large icon input">   
-                <input  class="form-input" type="text" placeholder="Full Name" ></div>
-                
-                <div class="form-inputs ui large icon input">
-                <input class="form-input"  type="email" placeholder="Email"></div>
-
-                <div class="form-inputs ui large icon input">
-                <input class="form-input"  type="password" placeholder="Password"></div>
-
-
-                <div class="form-button">
-                <button type="submit" class="ui secondary medium button" >
-                        
-                        Sign Up
-                        
-                    </button>
+        <link href="https://fonts.googleapis.com/css2?family=Baskervville&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+        <link rel="stylesheet" href="/stylesheets/form.css">
+    </head>
+    <body>
+        <div class="form-container">
+            <h1 class = "form-heading">Welcome to Dyokara!</h1>
+            <form action="/register" method="POST" class="ui form">
+                <div class="field">
+                    <label class = "label">Username</label>
+                    <input class = "form-input" type="text" name="username" placeholder="Your username" required>
                 </div>
-            
-            </div>
-          </form>
+                <div class="field">
+                    <label class = "label">Password</label>
+                    <input class = "form-input" type="password" name="password" placeholder="Your password" required>
+                </div>
+                <a class="ui button" type="submit">Submit</a>
+            </form>
         </div>
-    
-  </div>
-  <script>
-    
-  </script>
-</body>
+    </body>
 </html>
-
 
 <!-- <h1>Sign Up</h1>
 <form action="/register" method="POST">
