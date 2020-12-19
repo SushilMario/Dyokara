@@ -1,182 +1,55 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="cart.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.css"/>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
-    <title>Document</title>
-</head>
-<body>
-    <div class="cart-container">
-    <div class="back-button">
-        <a href="" class="back"><i class="fas fa-chevron-left"></i>RETURN TO SHOPPING</a>
-    </div>
-    <div class="header-text">
-        <p class="cart-text">Your Favourite Products</p>
-    </div>
-    <div class="table-container">
-        <table class="ui very basic collapsing celled table">
-            <thead>
-              <tr><th class="nine wide">Item</th>
-              <th class="seven wide">Quantity</th>
-              <th class="nine wide">Price</th>
-            </tr></thead>
-            <tbody>
-              <tr>
-                <td>
-                  <h4 class="ui image header">
-                    <span class="delete"><a><i class="far fa-trash-alt"></i></a></span>
-                    <img src="./pictures/back_full.jpg" class="ui tiny rounded image">
-                    <div class="content">
-                      Dyokora Wall Clock
-                      <div class="sub header">I tell time sumtyms
+<%- include("../partials/header"); %>
+
+<link rel="stylesheet" href="/stylesheets/bag.css">
+
+<%- include("../partials/navbar"); %>
+
+<div class="container initial-container">
+    <div class = "bag-header">
+        <% if(cart.length == 0){ %>
+            <div class = "heading bag-heading m-auto">Your cart is empty</div>
+        <% }else{ %>
+            <div class = "heading bag-heading">Your items</div>
+            <div>
+                <form action="/users/<%= currentUser._id %>/cart/checkout" method="POST">
+                    <button class = "ui button checkout" type="submit">Proceed to checkout</button>
+                </form>
+            </div>
+        <% } %>
+    </div> 
+
+    <% cart.forEach(item => { %>
+        <div class = "item">
+            <div style = "background-image: url('<%= item.product.images[0].url %>');" class="item-image"></div>
+            <div class="item-details">
+                <div class = "item-details-container">
+                    <div class = "item-details-name overflow">
+                        <a href = "/products/<%= item.product._id %>" class = "item-details-name_link"><%= item.product.name %></a>
                     </div>
-                   </div>
-                     
-                </h4></td>
-                <td>
-                    <div class="ui fluid search selection dropdown">
-                        <input type="hidden" name="country">
-                        <div class="default text">Quantity</div>
-                        <i class="dropdown icon"></i>
-                        <div class="menu">
-                        <div class="item" data-value="1">1</div>
-                        <div class="item" data-value="2">2</div>
-                        <div class="item" data-value="3">3</div>
-                        <div class="item" data-value="4">4</div>
-                        </div>
+                    <div class = "item-sub_details">
+                        <div><%= item.product.size %></div>
+                        <div><%= item.product.colour %></div>
                     </div>
-                </td>
-                <td>69bux</td>
-              </tr>
-              <tr>
-                <td>
-                  <h4 class="ui image header">
-                    <span class="delete"><a><i class="far fa-trash-alt"></i></a></span> 
-                    <img src="./pictures/clock-1.jpg" class="ui tiny rounded image">
-                    <div class="content">
-                      Matthew
-                      <div class="sub header">Lawyer by day, daredevil by night
+                </div>
+                <div>
+                    Quantity: <input type="number" name="quantity" class = "item-details-quantity" value = "1" min="1" max="10" step="1">
+                </div>
+                <div class = "item-final-container">
+                    <div class = "item-details-price">Unit Price: Rs <%= item.product.price %></div>
+                    <div>
+                        <form action = "/users/<%= currentUser._id %>/cart/products/<%= item.product._id %>?_method=DELETE" method = "POST">
+                            <button class = "ui button delete" type="submit">Remove</button>
+                        </form>
                     </div>
-                  </div>
-                  
-                </h4></td>
-                <td>
-                    <div class="ui fluid search selection dropdown">
-                        <input type="hidden" name="country">
-                        <div class="default text">Quantity</div>
-                        <i class="dropdown icon"></i>
-                        <div class="menu">
-                        <div class="item" data-value="1">1</div>
-                        <div class="item" data-value="2">2</div>
-                        <div class="item" data-value="3">3</div>
-                        <div class="item" data-value="4">4</div>
-                        </div>
-                    </div>
-                </td>
-                <td>69bux</td>
-              </tr>
-              <tr>
-                <td>
-                  <h4 class="ui image header">
-                    <span class="delete"><a><i class="far fa-trash-alt"></i></a></span> 
-                    <img src="./pictures/pic1.jpeg" class="ui tiny rounded image">
-                    <div class="content">
-                      Lindsay
-                      <div class="sub header">White Supremacist
-                    </div>
-                  </div>
-                  
-                </h4></td>
-                <td>
-                    <div class="ui fluid search selection dropdown">
-                        <input type="hidden" name="country">
-                        <div class="default text">Quantity</div>
-                        <i class="dropdown icon"></i>
-                        <div class="menu">
-                        <div class="item" data-value="1">1</div>
-                        <div class="item" data-value="2">2</div>
-                        <div class="item" data-value="3">3</div>
-                        <div class="item" data-value="4">4</div>
-                        </div>
-                    </div>
-                </td>
-                <td>69bux</td>
-              </tr>
-              <tr>
-                <td>
-                  <h4 class="ui image header">
-                    <span class="delete"><a><i class="far fa-trash-alt"></i></a></span> 
-                    <img src="/pictures/pic3.jpeg" alt="nice img" class="ui tiny rounded image">
-                    <div class="content">
-                      Markiplier
-                      <div class="sub header">timing bot
-                    </div>
-                  </div>
-                  
-                </h4>
-                
-            </td>
-                <td>
-                    <div class="ui fluid search selection dropdown">
-                        <input type="hidden" name="country">
-                        <div class="default text">Quantity</div>
-                        <i class="dropdown icon"></i>
-                        <div class="menu">
-                        <div class="item" data-value="1">1</div>
-                        <div class="item" data-value="2">2</div>
-                        <div class="item" data-value="3">3</div>
-                        <div class="item" data-value="4">4</div>
-                        </div>
-                    </div>
-                </td>
-                <td>69bux</td>
-              </tr>
-            </tbody>
-          </table>
-        <div class="amount">
-            <p class="subtotal">Sub-Total : </p>
-            <p class="delivery">Delivery Charge :</p>
+                </div>
+                <div class = "d-none item-id"><%= item.product._id %></div>
+            </div>
         </div>
-        <div class="ui divider"></div>
-        <div class="ui divider"></div>
-        <div class="total">
-            <p class="total">Total : </p>
-            <button class="ui btn inverted red button">Checkout</button>
-        </div>
-    </div>
-    </div>
-    <script>
-        $('.ui.selection.dropdown')
-        .dropdown({
-            
-        });
-    </script>
-</body>
-</html> -->
+    <% }) %>
+</div>
 
-<h1>
-	Cart
-</h1>
+<div class = "d-none" id = "user-id"><%= currentUser._id %></div>
 
-<% cart.forEach(function(item){%>
-	<div>
-		<li><%=item.product.name%></li>
-		<img src="<%=item.product.image%>">
-        <li>Rs <%=item.product.price%></li>
-        <li>Qty: <%=item.quantity%></li>
-	</div>
-	<form id="delete-form" action="/users/<%= currentUser._id %>/cart/products/<%=item.product._id%>?_method=DELETE" method="POST">
-		<input type="submit" class="btn btn-xs btn-danger" value="Delete">
-    </form>
-<%})%>
+<script src = "/scripts/edit.js"></script>
 
-<form action="/users/<%= currentUser._id %>/cart/checkout" method="POST">
-    <button type="submit">Proceed to checkout</button>
-</form>
-
-<a href="/products">Back</a>
+<%- include("../partials/footer"); %>

@@ -1,0 +1,135 @@
+body
+{
+    color: #555B6E;
+}
+
+body::before
+{
+    background-image: url("/images/background.jpg");
+}
+
+.form-container 
+{ 
+    background-color: rgb(255, 255, 255);
+    padding: 3rem;
+    border-radius: 1rem;
+
+    width: 55%;
+
+    margin: 4rem auto;
+
+    animation: render 1s ease-out;
+
+    box-shadow: 0 0.5rem 1rem rgba( 0 , 0 , 0 , 0.5);
+}
+
+.review.form-container
+{
+    margin-top: 10rem;
+}
+
+.ui.form .field .form-input
+{
+    color: #555B6E;
+
+    background-color: rgba( 255 , 255 , 255);    
+    border-radius: 0.5rem;
+
+    transition: all 0.2s;
+
+    /* font-size: 2rem; */
+}
+
+.ui.form .field .form-input:focus
+{
+    background-color: rgba( 255 , 255 , 255); 
+    border: 0.1rem solid #000000;
+    color: #000000;
+    border-radius: 0.5rem;
+}
+
+.ui.form textarea
+{
+    resize: none;
+
+    color: #555B6E;
+}
+
+.field .form-input.display:focus
+{
+    border: none;
+    background-color: rgb(255, 255, 255);
+}
+
+.field .form-input.display
+{
+    border: none;
+    background-color: rgb(255, 255, 255);
+
+    font-family: 'Roboto', sans-serif;
+    font-size: 2.5rem;
+    text-align: center;
+
+    width: min-content;
+
+    pointer-events: none;
+}
+
+.ui.form .field label
+{
+    font-size: 2rem;
+}
+
+.image
+{
+    background-image: url("/images/googlePay.jpg");
+    background-size: cover;
+
+    height: 50rem;
+    width: 35rem;
+}
+
+.footer-container
+{
+    margin-top: 4rem;
+}
+
+.phone
+{
+    display: none;
+}
+
+@media only screen and (max-width: 992px) 
+{
+    .form-container
+    {
+        width: 75%;
+    }
+}
+
+
+@media only screen and (max-width: 768px) 
+{
+    .form-container
+    {
+        width: 75%;
+    }
+
+    .other
+    {
+        display: none;
+    }
+
+    .phone
+    {
+        display: flex;
+    }
+}
+
+@media only screen and (max-width: 576px) 
+{
+    .form-container
+    {
+        width: 90%;
+    }
+}

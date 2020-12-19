@@ -10,7 +10,7 @@ const router = express.Router({mergeParams: true});
 
 //New 
 
-router.get("/new", middleware.isLoggedIn,
+router.get("/new", middleware.isLoggedIn, middleware.hasBoughtProduct,
 	(req, res) =>
 	{
 		//Find product
@@ -36,35 +36,49 @@ router.post("/", middleware.isLoggedIn,
 	(req, res) =>
 	{
 		//Find the product
-		Product.findById(req.params.id,
-			(err, product) =>
-			{
-				if(err)
-				{
-					console.log(err);
-					res.redirect("back");
-				}
-				else
-				{
-					//Create the review
-					Review.create(req.body.review,
-						(err, review) =>
-						{
-							//Add the username and id
-							review.author.id = req.user._id;
+        Product.findById(req.params.id).populate("reviews").exec
+        (
+            (err, product) =>
+            {
+                if(err)
+                {
+                    console.log(err);
+                    res.redirect("back");
+                }
+                else
+                {
+                    //Create the review
+                    Review.create(req.body.review,
+                        (err, review) =>
+                        {
+                            //Add the username and id
+                            review.author.id = req.user._id;
                             review.author.username = req.user.username;
+
+                            product.reviews.push(review);
+
+                            let totalRating = 0, averageRating = 0.0;
+                            const noOfReviews = product.reviews.length;
+
+                            product.reviews.forEach(review => 
+                                {
+                                    totalRating += review.rating;
+                                }
+                            );
+
+                            averageRating = Math.round((totalRating / noOfReviews) * 10) / 10;
+                            product.averageRating = averageRating;
                             
-							//Save this to the database
-							review.save();
-							product.reviews.push(review);
-							product.save();
-							res.redirect("/products/" + product._id);
-						}
-					)
-				}
-			}
-		);
-	}
+                            //Save to the database
+                            review.save();
+                            product.save();
+                            res.redirect("/products/" + product._id);
+                        }
+                    )
+                }
+            }
+        )
+    }
 )
 
 //Edit route

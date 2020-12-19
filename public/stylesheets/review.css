@@ -1,0 +1,51 @@
+body
+{
+    color: #555B6E;
+}
+
+body::before
+{
+    background-image: url("background.jpg");
+}
+
+.form-container 
+{
+    background-color: rgba(255, 255, 255);
+    padding: 5rem;
+    border-radius: 1rem;
+
+    width: 55rem;
+
+    margin: 10rem auto;
+
+    animation: render 1s ease-out;
+
+    box-shadow: 0 0.5rem 1rem rgba( 0 , 0 , 0 , 0.5);
+}
+
+.ui.form .field .form-input
+{
+    color: #555B6E;
+
+    background-color: rgba( 255 , 255 , 255);    
+    border-radius: 0.5rem;
+
+    transition: all 0.2s;
+
+    /* font-size: 2rem; */
+}
+
+.ui.form .field .form-input:focus
+{
+    background-color: rgba( 255 , 255 , 255); 
+    border: 0.1rem solid #000000;
+    color: #000000;
+    border-radius: 0.5rem;
+}
+
+.ui.form textarea
+{
+    resize: none;
+
+    color: #555B6E;
+}

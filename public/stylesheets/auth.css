@@ -1,0 +1,76 @@
+body
+{
+    color: #FAF9F9;
+}
+
+body::before
+{
+    background-image: url("/images/form_landscape.jpg");
+
+    opacity: 1;
+}
+
+.navbar
+{
+    background-color: #FAF9F9;
+}
+
+.form-container 
+{
+    background-color: rgba(0, 0, 0, 0.25);
+    padding: 5rem;
+    border-radius: 1rem;
+
+    width: fit-content;
+
+    margin: auto;
+    margin-top: 12.5%;
+
+    animation: render 1s ease-out;
+
+    margin-bottom: 2rem;
+}
+
+.ui.form .field .form-input
+{
+    color: #dee1eb;
+
+    background-color: rgba( 0 , 0 , 0 , 0.5);    
+    border-radius: 0.5rem;
+
+    transition: all 0.2s;
+
+    /* font-size: 2rem; */
+}
+
+.ui.form .field .form-input:focus
+{
+    background-color: rgba( 0 , 0 , 0 , 0.5);
+    border: 0.1rem solid #FAF9F9;
+    color: #FAF9F9;
+    border-radius: 0.5rem;
+}
+
+.ui.form .field .label
+{
+    text-align: left;
+    margin-bottom: 2rem;
+
+    font-weight: 800;
+    /* font-size: 2rem; */
+    color: #FAF9F9;
+    letter-spacing: 0.25rem;
+}
+
+@media only screen and (max-width: 576px) 
+{
+    body::before
+    {
+        background-image: url("/images/form_portrait.jpg");
+    }
+
+    .form-container
+    {
+        margin-top: 60%;
+    }
+}

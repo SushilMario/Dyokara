@@ -18,61 +18,113 @@ router.get("/",
 
 //New 
 
-router.get("/register",
+router.get("/login",
     (req, res) => 
     {
-        res.render("user/register");
+        res.render("user/login");
+    }
+)
+
+//Redirect to google
+
+router.get("/google", passport.authenticate
+    (
+        'google',
+        {
+            scope: ['profile']
+        }
+    )
+)
+
+//Handle redirect from google
+
+router.get("/google/redirect", passport.authenticate('google'),
+    (req, res) =>
+    {
+        if(!req.user.phoneNumber)
+        {
+            res.redirect("/login/details");
+        }
+        else
+        {
+            res.redirect("/products");
+        }
     }
 )
 
 //Create 
 
-router.post("/register",
+router.get("/login/details",
     (req, res) =>
     {
-        var newUser = new User({ username: req.body.username });
+        if(req.user.phoneNumber && req.user.shippingAddress)
+        {
+            res.redirect("/products");
+        }
+        res.render("user/detailsNew");
+    }
+)
 
-        User.register(newUser, req.body.password,
+router.post("/login/details",
+    (req, res) =>
+    {
+        const {phoneNumber, shippingAddress} = req.body;
+
+        User.findById(req.user.id,
             (err, user) =>
             {
                 if(err) 
                 {
-                    res.redirect("/register");
+                    res.redirect("/login");
                 }
                 else 
                 {
-                    passport.authenticate("local")(req, res,
-                        () =>
-                        {
-                            res.redirect("/products");
-                        }
-                    )
+                    user.phoneNumber = phoneNumber;
+                    user.shippingAddress = shippingAddress;
+
+                    user.save();
+
+                    res.redirect("/products");
                 }
             }
         )
     }
 )
 
-//Login
+//Edit details
 
-//Form 
-
-router.get("/login",
+router.get("/login/details/edit", middleware.isLoggedIn,
     (req, res) =>
     {
-        res.render("user/login");
+        res.render("user/detailsEdit");
     }
 )
 
-//Authenticate
+//Update details
 
-router.post("/login", passport.authenticate("local",
+router.put("/login/details/edit", middleware.isLoggedIn,
+    (req, res) =>
     {
-        successRedirect: "/products",
-        failureRedirect: "/login"
+        const {phoneNumber, shippingAddress} = req.body;
+
+        User.findById(req.user.id,
+            (err, user) =>
+            {
+                if(err) 
+                {
+                    res.redirect("/login");
+                }
+                else 
+                {
+                    user.phoneNumber = phoneNumber;
+                    user.shippingAddress = shippingAddress;
+                    user.save();
+
+                    res.redirect("/products");
+                }
+            }
+        )
     }
-), (req, res) =>
-   {}
 )
 
 //Logout

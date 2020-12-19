@@ -1,19 +1,43 @@
 // var mongoose = require("mongoose"),
 // 
-const        passport = require("passport"),
-passportLocalMongoose = require("passport-local-mongoose"),
-             mongoose = require("mongoose");
+const   passport = require("passport"),
+        mongoose = require("mongoose");
 
 let UserSchema = new mongoose.Schema
 (
     {
         username: String,
-        password: String,
+        googleId: String,
+        phoneNumber: String,
+        shippingAddress: String,
+        bankAccountNo: String,
+
         isAdmin:
         {
             type: Boolean,
             default: false
         },
+
+        currentOrder:
+        {
+            items:
+            [
+                {
+                    product:
+                    {
+                        type: mongoose.Schema.Types.ObjectId,
+                        ref: "Product"
+                    },
+                    quantity:
+                    {
+                        type: Number,
+                        default: 1
+                    }
+                }
+            ],
+            total: Number
+        },
+
         cart:
         [
             {
@@ -29,6 +53,7 @@ let UserSchema = new mongoose.Schema
                 }
             }
         ],
+
 		wishlist:
         [
             {
@@ -43,10 +68,16 @@ let UserSchema = new mongoose.Schema
                     default: 1
                 }
             }
+        ],
+
+        previousOrders:
+        [
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "Order"
+            }
         ]
     }
 );
-
-UserSchema.plugin(passportLocalMongoose);
 
 module.exports = mongoose.model("User", UserSchema);

@@ -162,7 +162,7 @@ router.post("/products/:product_id/move", middleware.isLoggedIn,
     (req,res) =>
     {
         User.findById(req.params.id,
-            (err,user) =>
+            (err, user) =>
             {
                 if(err)
                 {
@@ -180,7 +180,7 @@ router.post("/products/:product_id/move", middleware.isLoggedIn,
                             };
                             user.cart.push(item);
                             middleware.delete(user, "wishlist", foundProduct);
-                            res.redirect(`/users/${req.params.id}/cart`);
+                            res.redirect(`/users/${req.params.id}/wishlist`);
                         }
                     )
                 }

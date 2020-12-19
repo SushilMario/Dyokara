@@ -1,12 +1,104 @@
-<h1>
-	Checkout page 
-</h1>
+<%- include("../partials/header"); %>
 
-<% order.forEach(function(item){%>
-	<div>
-		<li><%=item.product.name%></li>
-		<img src="<%=item.product.image%>">
-        <li>Rs <%=item.product.price%></li>
-        <li>Qty: <%=item.quantity%></li>
+<link rel="stylesheet" href="/stylesheets/checkout.css"/>
+
+<%- include("../partials/navbar"); %>
+
+<div class="container initial-container">
+    <div class="bag">
+        <div class = "heading">
+            <span>Your items</span>
+        </div>
+        <% order.forEach(item => { %>
+            <div class = "item">
+                <div style = "background-image: url('<%= item.product.images[0].url %>');" class = "item-image"></div>
+                <div class="item-details">
+                    <div class = "item-name"><%= item.product.name %></div>
+                    <div>
+                        <div class = "item-sub_details">
+                            <div class = "item-size">
+                                Size: <span class="semi-bold"><%= item.product.size %></span>
+                            </div>
+    
+                            <div class = "item-quantity">
+                                Quantity: <span class="semi-bold"><%= item.quantity %></span>
+                            </div>
+                        </div>
+    
+                        <div class = "item-sub_details">
+                            <div class = "item-colour">
+                                Colour: <span class="semi-bold"><%= item.product.colour %></span>
+                            </div>
+    
+                            <div class = "item-price">
+                                Item price: <span class="semi-bold">Rs <%= item.product.price %></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <% }) %>
     </div>
-<%})%>
+
+    <div class="payment">
+        <div class="payment-heading mb-4">Only one more step!</div>
+                
+        <div class="payment-list">
+            <table class="table table-borderless payment-table">
+                <thead>
+                    <tr>
+                        <th class = "text-left" scope="col">Name</th>
+                        <th scope="col">Item Price</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% order.forEach(item => { %>
+                        <tr>
+                            <td class = "text-left"><%= item.product.name %></td>
+                            <td><%= item.product.price %></td>
+                            <td><%= item.quantity %></td>
+                            <td class = "semi-bold"><%= item.product.price * item.quantity %></td>
+                        </tr>
+                    <% }) %>
+                    <!-- </tr>
+                        <hr class = "payment-line">
+                    </tr> -->
+                    </tr>
+                        <td class = "text-left payment-line-top">Subtotal</td>
+                        <td class = "payment-line-top"></td>
+                        <td class = "payment-line-top"></td>
+                        <td class = "semi-bold payment-line-top"><%= total - deliveryCharge %></td>
+                    </tr>
+                    </tr>
+                        <td class = "text-left">Delivery</td>
+                        <td></td>
+                        <td></td>
+                        <td class = "semi-bold"><%= deliveryCharge %></td>
+                    </tr>
+                    </tr>
+                        <td class = "text-left payment-line-top payment-line-bottom">Total</td>
+                        <td class = "payment-line-top payment-line-bottom"></td>
+                        <td class = "payment-line-top payment-line-bottom"></td>
+                        <td class = "semi-bold payment-line-top payment-line-bottom"><%= total %></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <table class="table table-borderless payment-table">
+                <tbody>
+                    
+                </tbody>
+            </table>
+
+            
+        </div>
+        <div class = "payment-gateway">
+            <a href = "/payments/edit/gpay" class="ui button pay">Google Pay</a>
+            <a href = "/payments/edit/directTransfer" class="ui button pay">Direct Transfer</a>
+        </div>
+    </div>
+</div>
+
+<%- include("../partials/footer"); %>

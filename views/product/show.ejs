@@ -1,161 +1,203 @@
-<!-- <!DOCTYPE html>
-<link rel="stylesheet" href="style_prod_page.css" />
-jQuery 1.8 or later, 33 KB
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
- 
+<%- include("../partials/header"); %>
 
- Fotorama from CDNJS, 19 KB -->
-<!-- <link  href="https://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.css" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js"></script>
+<link rel="stylesheet" href="/stylesheets/show.css"/>
 
-<title>Product page</title>
-<body>
-<div class="container-1">
-    <div class="box-1">
-      <div class="fotorama">
-        <img src="pictures/sample7.jpg" alt="imgnotfound" class="ImageBorder" style='border:1px solid #000000'>
-        <img src="https://s.fotorama.io/2.jpg"alt="imgnotfound">
-      </div> -->
-      <!-- 300 x 500 -->
-<!--       
-    </div>
-    <div class="box-2">
-      <p><h1>Visit the DYOKARA Store
-      </h1></p>
-    
-    <p>Ikea ADDE Chair Black<br> Indoor/Outdoor Back Rest
-        </b></p>
-        
-        <div class="ui star rating" data-rating="3" data-max-rating="5"></div>
-        <p>  456 ratings |
-            58 Replies
-        </p><br><hr><br>
+<%- include("../partials/navbar"); %>
 
-        <p>Price: 
-         ₹ 1,145.00 
-        FREE Delivery </p></b>
-        <p>incluive of all taxes</p>
-        <p>Delivery By: 
-        <b>Sep 5 - 7</b></p>
-        <button class="ui circular home icon button" >
-            <i class="home icon"></i>
-          </button>
-          <button class="ui circular box icon button" >
-            <i class="box icon"></i>
-          </button>
-          <button class="ui circular shipping fast icon button" >
-            <i class="shipping fast icon"></i>
-          </button><br>
-          <p><br>
-             No-Contact
-                10 days Postal<br>
-                Delivery
-                    ReplacementDelivered<br>
-          </p>
-          <hr>
-          <p>
-              <div>
-            <b>Product details </b><br><br>
-            <b>Product Dimensions :</b>
-            47 x 39 x 77 cm<br><br>
-            <b>Item Weight : </b>
-            250 Grams<br><br>
-            <b>Included Components :</b>
-            Entire Chair with Frame<br><br>
-            <b>Is Discontinued By Manufacturer :</b>
-            No<br><br>
-            <b>Item part number : </b>
-            902.191.79<br><br>
-            <b>ASIN :</b>
-            B07FVPYYZ9<br><br>
-            <hr>
-          </p>
-          
-
-        </p> -->
-<!--           
-    </div>
-    </div>
-    <div class="box-3">
-      
-      <p>
-        Share
-        <button class="ui  instagram icon button" onclick="window.location.href='http://www.instagram.com'">
-          <i class="instagram icon"></i>
-      </button>&emsp;
-      <button class="ui  facebook icon button" onclick="window.location.href='https://www.facebook.com/'">
-        <i class="facebook icon"></i>
-    </button>&emsp;
-    
-      </p>
-      
-      <div class="ui left floated compact segment">
-    <form class="form-inputs" action="/add_to_cart" method="POST">
-      <div class="orange_button">
-      <br><button  type="submit" class="ui orange button">
-        <i class="cart arrow down icon"></i>Add to Cart&emsp;&nbsp;&nbsp;</button></div><br>
-         </form> 
-         <form class="form-inputs" action="/buy_now" method="POST">
-        <div class="yellow_button">
-          <button  type="submit" class="ui yellow button">
-            &emsp;&emsp;<i class="play icon"></i>Buy Now&nbsp;&emsp;&emsp;</button><br><br></form>
-            <i class="lock icon"></i>Secure transaction<br>
-            <i class="map marker alternate icon"></i>Select delivery location<br>
-        </div>  
+<div class="container intial-container product-showcase">
+    <div id = "productCarousel" class = "carousel slide" data-ride = "carousel" data-interval = "false">
+        <!-- <ol class="carousel-indicators">
+            <li data-target="#productCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#productCarousel" data-slide-to="1"></li>
+            <li data-target="#productCarousel" data-slide-to="2"></li>
+        </ol> -->
+        <div class="carousel-inner w-100 h-100">
+            <% images.forEach((image, i) => { %>
+                <div class = "carousel-item w-100 h-100 <%= (i == 0) ? 'active' : 'not-active' %>">
+                    <img src = "<%= image.url %>" class = "" alt="..."> 
+                </div>
+            <% }) %>
         </div>
+        <a class="carousel-control-prev" href="#productCarousel" role="button" data-slide="prev">
+            <span class = "carousel-control-icon" aria-hidden="true"><i class="fas fa-arrow-left"></i></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#productCarousel" role="button" data-slide="next">
+            <span class = "carousel-control-icon" aria-hidden="true"><i class="fas fa-arrow-right"></i></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+
+    <div class= "product-overview">
+        <div class = "product-header d-flex justify-content-between mb-3 align-items-center pl-1.5">
+            <div class = "product-name overflow w-25"><%= product.name %></div>
+
+            <% if(product.averageRating != 0.0){ %>
+                <div class = "product-rating pb-3"><%= product.averageRating %> <i class="fas fa-star"></i></div>
+            <% } %>
+            
+            <% if(currentUser){ %>
+                <% if(currentUser.isAdmin){ %>
+                    <div class = "action-container">
+                        <a href = "/products/<%= product._id %>/edit" class="icon-button"><i class="icon-button fas fa-edit"></i></a>
+                        <a href = "/products/<%= product._id %>/confirm" class="icon-button"><i class="icon-button far fa-trash-alt"></i></a>
+                    </div>
+                <% } %>
+            <% } %>
+        </div>
+        <div class = "product-details">
+            <table class="table table-borderless product-table">
+                <tbody>
+                    <tr>
+                        <td>Price</td>
+                        <td class = "product-details-separator text-center">:</td>
+                        <td class = "product-details-value text-right">Rs <%= product.price %></td>
+                    </tr>
+                    <tr>
+                        <td>Colour</td>
+                        <td class = "product-details-separator text-center">:</td>
+                        <td class = "product-details-value text-right"><%= product.colour %></td>
+                    </tr>
+                    <tr>
+                        <td>Size</td>
+                        <td class = "product-details-separator text-center">:</td>
+                        <td class = "product-details-value text-right"><%= product.size %></td>
+                    </tr>
+                    <tr>
+                        <td>Number of units</td>
+                        <td class = "product-details-separator text-center">:</td>
+                        <td class = "product-details-value text-right"><%= product.noOfUnits %></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <% if(currentUser){ %>
+            <div class = "product-quantity mb-4">
+                <span>How many?</span>
+                <input class = "form-control-lg" type = "number" id = "quantity" value = "1" min = "1" max = "4">
+            </div>
     
-      </div>
-  </div>
-
-  </div>
-  <script>
-    $('.ui.rating')
-    .rating({
-      initialRating: 3,
-      maxRating: 5
-    });
-  </script>
-</body>
-</html>  -->
-
-<div>
-	<h1>
-		<%=product.name%>
-	</h1>
-	<img src="<%= product.image %>" height = 300>
-	<li>$<%=product.price%></li>
+            <div class="product-links center">
+                <form class = "product-form" action="/products/<%= product._id %>/checkout" method="POST">
+                    <input type = "number" name = "quantity" class = "d-none form-quantity" min = "1" max = "4">
+                    <button type = "submit" class="ui button submitButton">Buy Now</button>
+                </form>
+            </div>
+    
+            <div class="product-links">
+                <form class = "product-form" action = "/users/<%= currentUser._id %>/cart/products/<%= product._id %>" method = "POST">
+                    <input type = "number" name = "quantity" class = "d-none form-quantity" min = "1" max = "4">
+                    <button type = "submit" class="ui button submitButton">Add to cart</button>
+                </form>
+    
+                <form class = "product-form" action = "/users/<%= currentUser._id %>/wishlist/products/<%= product._id %>" method = "POST">
+                    <input type = "number" name = "quantity" class = "d-none form-quantity" min = "1" max = "4">
+                    <button type = "submit" class="ui button submitButton">Save to wishlist</button>
+                </form>
+            </div>
+        <% }else{ %>
+            <div>Sign in to unlock purchases</div>
+            <div>
+                <a href = "/login" class="ui button">Sign In</a>
+            </div>
+        <% } %>
+    </div>
 </div>
-<br/>
-<br/>
 
-<h2>Reviews</h2>
+<div class = "container product-variations">
+    <div class="product-variations-section">
+        <% for(let i = 0; i < sizeList.length; i++){ %>
+            <% const modelNumber = product.productNumber + `${i+1}` + `${colourNumber}`; %>
+            <a href = "/products/models/<%= modelNumber %>" class = "<%= ((i + 1) === sizeNumber) ? 'selected' : 'not-selected' %> product-variations-item">
+                <%= sizeList[i] %>
+            </a>
+        <% } %>
+    </div>
+    <div class="product-variations-section">
+        <% for(let i = 0; i < colourList.length; i++){ %>
+            <% const modelNumber = product.productNumber + `${sizeNumber}` + `${i+1}`; %>
+            <a href = "/products/models/<%= modelNumber %>" class = "<%= ((i + 1) === colourNumber) ? 'selected' : 'not-selected' %> product-variations-item">
+                <%= colourList[i] %>
+            </a>
+        <% } %>  
+    </div>
+</div>
 
-<% product.reviews.forEach(function(review){%>
-	<p><strong><%= review.author.username%></strong> - <%= review.text%></p>
-<%})%>
+<div class="third container">
+    <div class = "box product-description">
+        <div class = "product-description-heading">
+            Description
+        </div>
+        <hr class = "line">
+        <div class = "text-center"><%= product.description %></div>
+    </div>
 
-<form action="/users/<%=currentUser._id%>/cart/products/<%=product._id%>" method="POST">
-	<button type="submit">Add to cart</button>
-</form>
+    <div class="product-specifications text-center">
+        <div class = "box header">
+            <span>Specifications</span>
+        </div>
 
-<br/>
+        <div class="box table-box">
+            <table class="table table-borderless product-table">
+                <thead>
+                    <tr class = "table-row">
+                        <th scope="col" class = "table-row-element">Type</th>
+                        <th scope="col" class = "table-row-element">Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for(let key in product.specifications){ %>
+                        <% if(product.specifications[key] && product.specifications.hasOwnProperty(key) && key !== '$init'){ %>
+                            <tr class = "table-row">
+                                <td class = "table-row-element"><%= key %></td>
+                                <td class = "table-row-element"><%= product.specifications[key] %></td>
+                            </tr>
+                        <% } %>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+    </div>
 
-<form action="/products/<%= product._id %>/checkout" method="POST">
-    <button type="submit">Buy now</button>
-</form>
+    <div class="product-reviews">
+        <div class = "box header mb-3">
+            <span>Customer Reviews</span>
+        </div>
 
-<br/>
-<a href="/products/<%=product._id%>/reviews/new">Review</a>
-<br/>
+        <% if(hasBoughtProduct){ %>
+            <div class = "my-5">
+                <a class = "ui button review" href="/products/<%=product._id%>/reviews/new">Write a review</a>
+            </div>
+        <% } %>
 
-<form action="/users/<%=currentUser._id%>/wishlist/products/<%=product._id%>" method="POST">
-	<button type="submit">Add to Wishlist</button>
-</form>
+        <% product.reviews.forEach(review =>{ %>
+            <div class = "box product-review">
+                <div class = "mb-3">
+                    <span class = "product-review-author mr-4"><%= review.author.username %></span>
+                    <span class = "product-review-rating"><%= review.rating %> <i class="fas fa-star"></i></span>
+                </div>
+                <div class = "product-review-content"><%= review.text %></div>
+            </div>
+        <% }) %>
+    </div>
+</div>
 
+<div class = "space"></div>
 
-<a href="/users/<%= currentUser._id%>/wishlist/products/<%=product._id%>">Wishlist</a>
+<script src = "/scripts/showQuantity.js"></script>
 
-<br/>
-<a href="/products">Back</a>
+<script>
+     const submitButtons = document.querySelectorAll(".submitButton");
+
+    for (let index = 0; index < submitButtons.length; index++) 
+    {
+        submitButtons[index].onclick = function ()
+        {
+            console.log("Clicked");
+            deleteForms[index].submit();
+        }
+    }
+</script>
+
+<%- include("../partials/footer"); %>

@@ -1,3 +1,32 @@
-<h1>
-	edit
-</h1>
+<%- include("../partials/header"); %>
+
+<link rel="stylesheet" href="/stylesheets/form.css"/>
+<link rel="stylesheet" href="/stylesheets/app.css"/>
+
+<%- include("../partials/navbar"); %>
+
+<div class="container">
+    <div class="form-container">
+        <h1 class = "form-heading mb-5">Edit Product</h1>
+        <form action = "/products/<%= product._id %>?_method=PUT" method = "POST" class = "ui form">
+            <div class="field">
+                <label class = "label" for = "name">Name</label>
+                <input class = "form-input" type="text" name="product[name]" id = "name" value = "<%= product.name %>" required>
+            </div>
+
+            <div class="field">
+                <label for="price">Price</label>
+                <input type="text" name = "product[price]" class="form-input" value = "<%= product.price %>" id="price">
+            </div>
+    
+            <div class="field">
+                <label for="description">Detailed Description (1 paragraph)</label>
+                <textarea class="form-input" name = "product[description]" id = "description" required><%= product.description %></textarea>
+            </div>
+
+            <button class = "ui button submit" type="submit">Save</button>
+        </form>
+    </div>
+</div>
+
+<%- include("../partials/footer"); %>

@@ -1,54 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
-        <link rel="stylesheet" href="/stylesheets/landing.css">
-        <title>Dyokara</title>
+<%- include("./partials/header"); %>    
+        
     </head>
 
     <body>
-        <div class="landing-page">
-            <section class="skew-images">
-                <div class="tile one">
-                    <img src="/images/bowl.jpg" alt="img" class="image">
-                </div>
-                <div class="tile two">
-                    <img src="/images/clock.jpg" alt="img" class="image">
-                </div>
-                <div class="tile three">
-                    <img src="/images/cup.jpg" alt="img" class="image">
-                </div>
-                <div class="tile four">
-                    <img src="/images/wooden-wall-clock.jpg" alt="img" class="image">
-                </div>
-                <div class="tile five">
-                    <img src="/images/wanderdyo.save.jpg" alt="img" class="image">
-                </div>
-                <div class="tile six">
-                    <img src="/images/wood-decoration.jpg" alt="img" class="image">
-                </div>
-                <div class="tile seven">
-                    <img src="/images/wood-face.jpg" alt="img" class="image">
-                </div>
-            </section>
-            <div class="landing-logo">
-                <img src="/images/logo.jpg" alt="logo">
-            </div>
-            <div class="landing-hero">
-                <p id="first">Decorate your living space with </p>
-                <p>sophisticated artifacts. <span id="emph">Stand Out.</span></p><p id="second">Imbue life in your home. Get started now with Dyokora.</p>
+        <link rel = "stylesheet" href = "/stylesheets/landing.css">
 
-            </div>
-            <div class="buttons">
-                <button id="explore">Explore Products</button>
-                <a href = "/register" id="sign">Sign Up      <i class="fas arrow fa-long-arrow-alt-right"></i></a href = "/register">
+        <div class = "landing-container">
+            <div class = "logo"></div>
+            <div class = "button-container">
+                <a class = "ui button" href = "/products">Products</a>
+                <a class = "ui button" href = "/login">Sign Up / Login</a>
             </div>
         </div>
     </body>
 </html>
-
-
-<!-- <a href="/register">Sign Up</a>
-<a href="/login">Login</a> -->

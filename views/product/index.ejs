@@ -1,195 +1,47 @@
-<!-- <!DOCTYPE html>
-<link rel="stylesheet" href="style_products.css" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+<%- include("../partials/header"); %>
 
-<title>Products</title>
-<body>
+<link rel="stylesheet" href="/stylesheets/index.css">
 
+<%- include("../partials/navbar"); %>
 
+<div class="container initial-container">
+    <% if(currentUser){ %>
+        <% if(currentUser.isAdmin){ %>
+            <div class = "mb-5 text-right">
+                <a href = "/products/new" class="ui button">New</a>
+            </div>
+        <% } %>
+    <% } %>
+    <div class="row">
+        <% if(products.length){ %>
+            <% products.forEach(product => { %>
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="product">
+                        <div>
+                            <a href='/products/<%= product._id %>'>
+                                <img class="product-image" src = "<%= product.images[1].url %>">
+                            </a>
+                        </div>
+                
+                        <div class = "product-details">
+                            <div class = "product-name bold"><%= product.name %></div>
+                
+                            <div class = "product-price bold">Rs <%= product.price %></div>
+                        </div>
+        
+                        <div class = "product-details">
+                            <div class = "product-size"><%= product.size %></div>
+                
+                            <div class = "product-colour"><%= product.colour %></div>
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
 
-<div class="container-1">
-    <div class="box-main">
-    <p><h1><b><font face = "WildWest" size = "6.5">
-        Perfect for Stargazers &
-    <p>the wide-eyed dreamers.</p>
-    </font></h1></b></p>
+        <% }else{ %>
+            <div class = "col-12 text-center display-4">We don't have any products yet</div>
+        <% } %>
     </div>
-</div>   
+</div>
 
-
-
-<div class="container-2">
-
-    <div class="box-1">
-        <div class="ui card">
-            <a class="image" href="/clock">
-              <img src="pictures/sample9.jpg">
-            </a>
-            <div class="content">
-              <a class="header" href="/clock" style="text-align:center;">Rustic wooden clock</a>
-            </div>
-          </div>
-    </div>
-
-    <div class="box-2">   
-        <div class="ui card">
-            <a class="image" href="/keychain">
-              <img src="pictures/sample10.jpg">
-            </a>
-            <div class="content">
-              <a class="header" href="/keychain" style="text-align:center;">Home Keychain hanger</a>
-            </div>
-          </div>
-    </div>  
-
-    <div class="box-3">  
-        <div class="ui card">
-            <a class="image" href="/hanger">
-              <img src="pictures/sample11.png">
-            </a>
-            <div class="content">
-              <a class="header" href="/hanger" style="text-align:center;">Dual coloured hanger</a>
-            </div>
-          </div> 
-    </div> 
-</div> 
-
-
-
-<div class="container-3">
-
-    <div class="box-4">
-        <div class="ui card">
-            <a class="image" href="/key-hanger">
-              <img src="pictures/sample12.jpg">
-            </a>
-            <div class="content">
-              <a class="header" href="/key-hanger" style="text-align:center;">Home key hanger </a>
-            </div>
-          </div>
-    </div>
-
-    <div class="box-5">   
-        <div class="ui card">
-            <a class="image" href="/rustic-key-hanger">
-              <img src="pictures/sample13.jpg">
-            </a>
-            <div class="content">
-              <a class="header" href="/rustic-key-hanger" style="text-align:center;">Home Keychain hanger</a>
-            </div>
-          </div>
-    </div>  
-
-    <div class="box-6">  
-        <div class="ui card">
-            <a class="image" href="/wanderlust">
-              <img src="pictures/sample14.jpg">
-            </a>
-            <div class="content">
-              <a class="header" href="/wanderlust" style="text-align:center;">Wanderlust Boards</a>
-            </div>
-          </div> 
-    </div> 
-</div> 
-
-
-
-<div class="container-4">
-
-    <div class="box-7">
-        <div class="ui card">
-            <a class="image" href="/decor-board">
-              <img src="pictures/sample15.jpg">
-            </a>
-            <div class="content">
-              <a class="header" href="/decor-board" style="text-align:center;">Home decor boards</a>
-            </div>
-          </div>
-    </div>
-
-    <div class="box-8">   
-        <div class="ui card">
-            <a class="image" href="/pizza">
-              <img src="pictures/sample16.jpg">
-            </a>
-            <div class="content">
-              <a class="header" href="/pizza" style="text-align:center;">Pizza tray</a>
-            </div>
-          </div>
-    </div>  
-
-    <div class="box-9">  
-        <div class="ui card">
-            <a class="image" href="/rustic-tray">
-              <img src="pictures/sample17.jpg">
-            </a>
-            <div class="content">
-              <a class="header" href="/rustic-tray" style="text-align:center;">Rustic tray</a>
-            </div>
-          </div> 
-    </div> 
-</div> 
-
-
-
-<div class="container-5">
-
-    <div class="box-10">
-        <div class="ui card">
-            <a class="image" href="/plant-triangle-hanger">
-              <img src="pictures/sample18.jpg">
-            </a>
-            <div class="content">
-              <a class="header" href="/plant-triangle-hanger" style="text-align:center;">Triangular Plant hangers</a>
-            </div>
-          </div>
-    </div>
-
-    <div class="box-11">   
-        <div class="ui card">
-            <a class="image" href="/plant-rectangle-hanger">
-              <img src="pictures/sample19.jpg">
-            </a>
-            <div class="content">
-              <a class="header" href="/plant-rectangle-hanger" style="text-align:center;">Rectangular Plant hangers</a>
-            </div>
-          </div>
-    </div>  
-
-    <div class="box-12">  
-        <div class="ui card">
-            <a class="image" href="/coaster">
-              <img src="pictures/sample20.jpg">
-            </a>
-            <div class="content">
-              <a class="header" href="/coaster" style="text-align:center;">Wooden coasters</a>
-            </div>
-          </div> 
-    </div> 
-</div> 
-
-
-
-
-</body>
-</html> -->
-
-
-<h1>index</h1>
-<a class="topright" href="/users/<%=currentUser._id%>/cart">Cart</a>
-<br/>
-<a class="topright" href="/users/<%=currentUser._id%>/wishlist">Wishlist</a>
-<br/>
-<a href="/products/new">Add product</a>
-<br/>
-<a href="/logout">Logout</a>
-
-
-<%products.forEach(function(product){%>
-	<div>
-		<li><%=product.name%></li>
-		<img src="<%=product.image%>">
-		<a href="/products/<%=product._id%>">View item</a>
-	</div>
-<%})%>
+<%- include("../partials/footer"); %>

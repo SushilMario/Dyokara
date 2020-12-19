@@ -1,0 +1,251 @@
+.initial-container
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.bag
+{
+    width: 45rem;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.heading
+{
+    font-size: 4rem;
+    font-weight: 700;
+    letter-spacing: 1rem;
+
+    text-align: center;
+
+    border-radius: 0.5rem;
+    box-shadow: 0 1rem 2rem rgba( 0 , 0 , 0 , 0.5);
+
+    letter-spacing: 1.5rem;
+    padding: 0 3.5rem;
+    padding-left: 5rem;
+
+    height: 6rem;
+
+    /* background-color: rgba(255, 255, 255, 0.25); */
+    background-color: #FAF9F9;
+
+    margin-bottom: 4rem;
+}
+
+.item
+{
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+
+    height: 12rem;
+    width: 100%;
+    padding: 1rem;
+    margin-bottom: 2rem;
+
+    /* background-color: rgb(255, 255, 255, 0.5); */
+
+    background-color: rgb(250, 249, 249, 1);
+
+    letter-spacing: 0.1rem;
+
+    border-radius: 0.5rem;
+    box-shadow: 0 1rem 2rem rgba( 0 , 0 , 0 , 0.5);
+}
+
+.item-image
+{
+    height: 10rem;
+    width: 10rem;
+    /* width: 60%; */
+    background-image: url("./cup.jpg");
+    background-size: cover;
+    background-position: center;
+
+    border-radius: 0.5rem;
+}
+
+.item-details
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    width: 32rem;
+
+    font-size: 2rem;
+}
+
+.item-name
+{
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 700;
+
+    max-width: 30rem;
+
+    white-space: nowrap;      /*keep text on one line */
+    overflow: hidden;         /*prevent text from being shown outside the border */
+    text-overflow: ellipsis;  /*cut off text with an ellipsis*/
+}
+
+.item-sub_details
+{
+    display: flex;
+    justify-content: space-between;
+}
+
+.payment
+{
+    width: 45rem;
+    padding: 1rem 3.5rem;
+
+    padding-bottom: 3rem;
+
+    margin-top: 10rem;
+
+    position: relative;
+    text-align: left;
+
+    font-size: 2rem;
+
+    border-radius: 0.5rem;
+
+    /* background-color: rgb(255, 255, 255, 0.5); */
+
+    background-color: #FAF9F9;
+
+    box-shadow: 0 1rem 2rem rgba( 0 , 0 , 0 , 0.5);
+}
+
+.payment-heading
+{
+    font-size: 3rem;
+    font-weight: 700;
+
+    padding-left: 0.5rem;
+
+    letter-spacing: 0.1rem;
+}
+
+.payment-address
+{
+    font-size: 2rem;
+
+    padding-left: 1.5rem;
+}
+
+.head 
+{
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.payment-table
+{
+    text-align: center;
+    font-size: 2rem;
+}
+
+.payment-list-item
+{
+    margin: 0 2rem;
+
+    display: flex;
+    justify-content: space-between;
+}
+
+.payment-line-top
+{
+    border-top: 0.2rem solid #555B6E !important;
+    margin: 0.5rem 0;
+}
+
+.payment-line-bottom
+{
+    border-bottom: 0.2rem solid #555B6E !important;
+    margin: 0.5rem 0;
+}
+
+.payment-total
+{
+    font-size: 2rem;
+}
+
+table .payment-charges
+{
+    text-align: left;
+    padding-left: 2rem;
+}
+
+.payment-gateway
+{
+    display: flex;
+    justify-content: space-between;
+}
+
+.ui.button.pay
+{
+    display: block;
+    width: fit-content;
+
+    font-size: 1.5rem;
+    padding: 1rem 2rem;
+    margin-right: 0;
+
+    box-shadow: 0 1rem 2rem rgba( 0 , 0 , 0 , 0.5);
+}
+
+@keyframes render
+{
+    0%
+    {
+        opacity: 0;
+    }
+    100%
+    {
+        opacity: 1;
+    }
+}
+
+@media only screen and (max-width: 992px) 
+{
+    .initial-container
+    {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .payment
+    {
+        margin-top: 4rem;
+    }
+}
+
+@media only screen and (max-width: 768px) 
+{
+    html 
+    {
+        font-size: 9px;
+    }
+    body
+    {
+        justify-content: center;
+    }
+    .payment
+    {
+        width: 47rem;
+    }
+}
+
+@media only screen and (max-width: 576px) 
+{
+    html 
+    {
+        font-size: 8.5px;
+    }
+}

@@ -1,0 +1,59 @@
+<%- include("../partials/header"); %>
+
+<link rel="stylesheet" href="/stylesheets/order.css">
+
+<%- include("../partials/navbar"); %>
+
+<div class="container initial-container">
+    <% if(orders.length != 0){ %>
+        <div class = "order order-header">
+            <div class="order-details">
+                <span class = "order-field">Order Number</span>
+                <span class = "order-field">Phone Number</span>
+            </div>
+    
+            <div class="order-details">
+                <span class = "order-field">Account Number</span>
+                <span class = "order-field">Total Amount</span>
+            </div>
+    
+            <div class="order-status">
+                <span class = "order-field">Confirm</span>
+                <span class = "order-field">Delete</span>
+            </div>
+        </div>
+
+        <% orders.forEach(order => { %>
+            <% if(!order.confirmed){ %>
+                <div class = "order">
+                    <div class="order-details number">
+                        <span class = "order-field"><%= order.orderNumber %></span>
+                        <span class = "order-field"><%= order.customer.phoneNumber %></span>
+                    </div>
+            
+                    <div class="order-details number">
+                        <% if(order.customer.accountNo){ %>
+                            <span class = "order-field">order.customer.accountNo</span>
+                        <% }else{ %>
+                            <span class = "order-field">None</span>
+                        <% } %>
+                        <span class = "order-field">Rs <%= order.total %></span>
+                    </div>
+            
+                    <div class="order-status">
+                        <form action = "/orders/<%= order._id %>?_method=PUT" method = "POST" class = "order-status-form order-field">
+                            <button type="submit" class = "ui button order-status"><i class = "fas fa-check"></i></button>
+                        </form>
+                        <form action = "/orders/<%= order._id %>?_method=DELETE" method = "POST" class = "order-status-form order-field">
+                            <button type="submit" class = "ui button order-status"><i class="fas fa-trash-alt"></i></button>
+                        </form>
+                    </div>
+                </div>
+            <% } %>
+        <% }) %>
+    <% }else{ %>
+        <div class = "col-12 text-center display-4">No pending orders!</div>
+    <% } %>
+</div>
+
+<%- include("../partials/footer"); %>

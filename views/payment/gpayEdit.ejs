@@ -1,0 +1,47 @@
+<%- include("../partials/header"); %>
+
+<link rel="stylesheet" href="/stylesheets/form.css">
+<link rel="stylesheet" href="/stylesheets/app.css">
+
+<%- include("../partials/navbar"); %>
+
+<div class="container initial-container">
+    <div class="form-container">
+        <h1 class = "form-heading mb-5">
+            <p>
+                Verify details 
+            </p>
+            <p>
+                for transaction
+            </p>
+        </h1>
+
+        <!-- <% if(currentUser){ %> -->
+            <form action="/payments/edit/gpay?_method=PUT" method="POST" class="ui form">
+                <div class="field">
+                    <label class = "label" for = "phoneNumber">Phone Number</label>
+                    <input class = "form-input" type="text" name="phoneNumber" id = "phoneNumber" value = "<%= currentUser.phoneNumber %>" required>
+                </div>
+                <div class="field">
+                    <label class = "label" for = "shippingAddress">Shipping Address</label>
+                    <textarea class="form-input" name = "shippingAddress" id = "shippingAddress" rows="5" required><%= currentUser.shippingAddress %></textarea>
+                </div>
+                <button class = "ui button submit" type="submit">Proceed</button>
+            </form>
+        <!-- <% }else{ %>
+            <form action="/login/details/edit/phone" method="POST" class="ui form">
+                <div class="field">
+                    <label class = "label" for = "phoneNumber">Phone Number</label>
+                    <input class = "form-input" type="text" name="phoneNumber" id = "phoneNumber" value = "<%= currentUser.phoneNumber %>" required>
+                </div>
+                <div class="field">
+                    <label class = "label" for = "shippingAddress">Phone Number</label>
+                    <input class = "form-input" type="text" name="shippingAddress" id = "shippingAddress" value = "<%= currentUser.shippingAddress %>" required>
+                </div>
+                <button class = "ui button submit" type="submit">Submit</button>
+            </form>
+        <% } %> -->
+    </div>
+</div>
+
+<%- include("../partials/footer"); %>

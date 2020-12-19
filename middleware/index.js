@@ -9,15 +9,16 @@ middlewareObj.isLoggedIn =
 	if(req.isAuthenticated())
 	{
 		return next();
-	}
-	res.redirect("/login");
+    }
+    req.flash("error", "You must be logged in to do that");
+	res.redirect("/auth/login");
 }
 
 middlewareObj.isAdmin = function(req, res, next) 
 {
     if (req.isAuthenticated()) 
     {
-        const userId = req.user._id;
+        const userId = req.user.id;
 
         User.findById(userId,
             (err, user) =>
@@ -35,6 +36,7 @@ middlewareObj.isAdmin = function(req, res, next)
                     }
                     else 
                     {
+                        req.flash("error", "You aren't authorized to do that!");
                         res.redirect("back");
                     }
                 }
@@ -101,6 +103,85 @@ middlewareObj.delete =
         user[group].splice(index,1);
         user.save();
     }
+}
+
+//Sorting function
+middlewareObj.compareValues = function(key, order = 'asc') 
+{
+    return function innerSort(a, b) 
+    {
+        const varA = (typeof a[key] === 'string')
+        ? a[key].toUpperCase() : a[key];
+        const varB = (typeof b[key] === 'string')
+        ? b[key].toUpperCase() : b[key];
+
+        let comparison = 0;
+        if (varA > varB)
+        {
+            comparison = 1;
+        } 
+        else if (varA < varB) 
+        {
+            comparison = -1;
+        }
+        return (
+            (order === 'desc') ? (comparison * -1) : comparison
+        );
+    };
+}
+
+//Stringify number
+middlewareObj.stringify = function(num, len)
+{
+    let stringifiedNum = `${num}`;
+    for(let i = stringifiedNum.length; i < len; i++)
+    {
+        stringifiedNum = "0" + stringifiedNum;
+    }
+    
+    return stringifiedNum;
+}
+
+//Has bought product
+middlewareObj.hasBoughtProduct = (req, res, next) =>
+{
+    let checker = false;
+    const userId = req.user.id;
+
+    User.findById(req.user.id).populate("previousOrders").exec(
+        (err, foundUser) =>
+        {
+            if(err)
+            {
+                res.send("Error!");
+            }
+            else
+            {
+                const productID = req.params.id;
+                
+                for(let order of foundUser.previousOrders)
+                {
+                    for(let id of order.productIDs)
+                    {
+                        if(id.equals(productID))
+                        {
+                            checker = true;
+                            break;
+                        } 
+                    }
+                }
+
+                if(checker)
+                {
+                    return next();
+                }
+                else
+                {
+                    res.redirect("back");
+                }
+            }
+        }
+    )
 }
 
 module.exports = middlewareObj;

@@ -3,7 +3,8 @@ const mongoose = require("mongoose");
 var reviewSchema = new mongoose.Schema
 (
 	{
-		text: String,
+        text: String,
+        rating: Number,
 		author: 
 		{
 			id:

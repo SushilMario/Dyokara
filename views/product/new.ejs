@@ -1,17 +1,99 @@
-<h1>New product</h1>
-<a href="/products">Back</a>
-<form action="/products" method="POST">
-    <div>
-        <label>Name</label>
-        <input type="text" name="name" placeholder="Product name" required>
+<%- include("../partials/header"); %>
+
+<link rel="stylesheet" href="/stylesheets/form.css"/>
+<link rel="stylesheet" href="/stylesheets/app.css"/>
+
+<%- include("../partials/navbar"); %>
+
+<div class="container">
+    <div class="form-container">
+        <h1 class = "form-heading mb-5">New Product</h1>
+        <form action = "/products" method = "POST" enctype = "multipart/form-data" class = "ui form">
+            <div class="field">
+                <label class = "label" for = "name">Name</label>
+                <input class = "form-input" type="text" name="product[name]" id = "name" required>
+            </div>
+
+            <div class="field">
+                <label for="price">Price</label>
+                <input type="text" name = "product[price]" class="form-input" id="price required">
+            </div>
+    
+            <div class="field">
+                <label for="colour">Colour</label>
+                <input type="text" name = "product[colour]" class="form-input" id="colour" required>
+            </div>
+    
+            <div class="field">
+                <label for="size">Size</label>
+                <input type="text" name = "product[size]" class="form-input" id="size" placeholder="Small / Medium / Large" required>
+            </div>
+    
+            <div class="field">
+                <label for="noOfItems">Number of units</label>
+                <input type="number" name = "product[noOfUnits]" class="form-input" id="noOfUnits" value = "1" min = "1">
+            </div>
+    
+            <div class="field">
+                <label for="productNumber">Product Number</label>
+                <input type="text" name = "product[productNumber]" class="form-input" id="productNumber" required>
+            </div>
+    
+            <div class="field">
+                <label for="modelNumber">Model Number</label>
+                <input type="text" name = "product[modelNumber]" class="form-input" id="modelNumber" required>
+            </div>
+    
+            <div class="field">
+                <label for="category">Category</label>
+                <input type="text" name = "product[category]" class="form-input" id="category" required>
+            </div>
+    
+            <div class="field">
+                <label for="description">Detailed Description (1 paragraph)</label>
+                <textarea class="form-input" name = "product[description]" id = "description" required></textarea>
+            </div>
+    
+            <div class="field">
+                <label for="image_uploads">Choose 5 correctly named images to upload (PNG, JPG)</label>
+                <input type="file" id="image_uploads" name="images" multiple required>
+            </div>
+            
+            <!-- <h1>Specifications Entry</h1> -->
+    
+            <div class="field">
+                <label for="dimensions">Dimensions</label>
+                <input type="text" name = "product[dimensions]" class="form-input" id="dimensions" placeholder="Height x Width">
+            </div>
+    
+            <div class="field">
+                <label for="wood">Type of Wood</label>
+                <input type="text" name = "product[wood]" class="form-input" id="wood">
+            </div>
+            
+            <div class="field">
+                <label for="shape">Shape</label>
+                <input type="text" name = "product[shape]" class="form-input" id="shape">
+            </div>
+    
+            <div class="field">
+                <label for="mount">Mount Mechanism</label>
+                <input type="text" name = "product[mount]" class="form-input" id="mount">
+            </div>
+    
+            <div class="field">
+                <label for="finish">Type of Finish</label>
+                <input type="text" name = "product[finish]" class="form-input" id="finish">
+            </div>
+    
+            <div class="field">
+                <label for="weight">Weight (in kg)</label>
+                <input type="text" name = "product[weight]" class="form-input" id="weight">
+            </div>
+
+            <button class = "ui button submit" type="submit">Create</button>
+        </form>
     </div>
-    <div>
-        <label>Image</label>
-        <input type="text" name="image" placeholder="Product image" required>
-    </div>
-	<div>
-		<label>Price</label>
-		<input type="text" name="price" placeholder="price" required>
-	</div>
-    <button type="submit">Submit</button>
-</form>
+</div>
+
+<%- include("../partials/footer"); %>

@@ -1,0 +1,25 @@
+<%- include("../partials/header"); %>
+
+<link rel="stylesheet" href="/stylesheets/form.css">
+<link rel="stylesheet" href="/stylesheets/auth.css">
+
+<%- include("../partials/navbar"); %>
+
+<div class="container">
+    <div class="form-container">
+        <h1 class = "form-heading mb-5">Some additional details</h1>
+        <form action="/login/details/edit?_method=PUT" method="POST" class="ui form">
+            <div class="field">
+                <label class = "label" for = "phoneNumber">Phone Number</label>
+                <input class = "form-input" type="text" name="phoneNumber" id = "phoneNumber" placeholder="Your mobile number" value = "<%= currentUser.phoneNumber %>" required>
+            </div>
+            <div class="field">
+                <label class = "label" for = "shippingAddress">Shipping Address</label>
+                <textarea class="form-input" name = "shippingAddress" id = "shippingAddress" rows="5" required><%= currentUser.shippingAddress %></textarea>
+            </div>
+            <button class = "ui button submit mt-3" type="submit">Submit</button>
+        </form>
+    </div>
+</div>
+
+<%- include("../partials/footer"); %>

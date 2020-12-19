@@ -1,34 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Dyokara</title>
+<%- include("../partials/header"); %>
 
-        <link href="https://fonts.googleapis.com/css2?family=Baskervville&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
-        <link rel="stylesheet" href="/stylesheets/form.css">
-    </head>
-    <body>
-        <div class="form-container">
-            <h1 class = "form-heading">Welcome back!</h1>
-            <form action="/login" method="POST" class="ui form">
-                <div class="field">
-                    <label class = "label">Username</label>
-                    <input class = "form-input" type="text" name="username" placeholder="Your username" required>
-                </div>
-                <div class="field">
-                    <label class = "label">Password</label>
-                    <input class = "form-input" type="password" name="password" placeholder="Your password" required>
-                </div>
-                <a class="ui button" type="submit">Submit</a>
-            </form>
+<link rel="stylesheet" href="/stylesheets/form.css">
+<link rel="stylesheet" href="/stylesheets/auth.css">
+
+<%- include("../partials/navbar"); %>
+
+<div class="container">
+    <div class="form-container">
+        <h1 class = "form-heading mb-5">Welcome to Dyokara!</h1>
+        <div class="display-container">
+            <a href="/google" class="ui button login google plus"><i class="fab fa-google-plus-g"></i>  Sign in with Google</a>
+            <!-- <a href="/facebook" class="ui button login facebook"><i class="fab fa-facebook-f"></i>  Sign in with Facebook</a>
+            <a href="/twitter" class="ui button login twitter"><i class="fab fa-twitter"></i>  Sign in with Twitter</a> -->
         </div>
-    </body>
-</html>
+    </div>
+</div>
 
-<!-- <h1>Login</h1>
-<form action="/login" method="POST">
+<%- include("../partials/footer"); %>
+
+<!-- <h1>Sign Up</h1>
+<form action="/register" method="POST">
     <div>
         <label>Username</label>
         <input type="text" name="username" placeholder="Your username" required>

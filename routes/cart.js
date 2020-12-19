@@ -86,9 +86,10 @@ router.post("/products/:product_id", middleware.isLoggedIn,
 router.put("/products/:product_id", middleware.isLoggedIn,
 	(req, res) =>
 	{
-        const quantity = req.body.quantity;
+        const {quantity} = req.body;
+
         Product.findById(req.params.product_id,
-			(err, product) =>
+			(err, foundProduct) =>
 			{
 				if(err)
 				{
@@ -97,7 +98,7 @@ router.put("/products/:product_id", middleware.isLoggedIn,
 				else
 				{
 					User.findById(req.params.id,
-                        (err, user) =>
+                        async(err, user) =>
                         {
                             if(err)
                             {
@@ -118,8 +119,7 @@ router.put("/products/:product_id", middleware.isLoggedIn,
                                 {
                                     user.cart[index].quantity = quantity;
                                 }
-                                user.save();
-                                res.redirect(`/users/${req.params.id}/cart`);
+                                await user.save();
                             }
                         }
                     );	
@@ -175,8 +175,23 @@ router.post("/checkout", middleware.isLoggedIn,
                     {
                         user.cart.pop();
                     }
+
+                    let orderWeight = 0, deliveryCharge = 0, total = 0;
+                    order.forEach(item => 
+                        {
+                            orderWeight += parseFloat(item.product.specifications["Weight (in kg)"]) * item.quantity;
+                            total += item.product.price * item.quantity;
+                        }
+                    );
+
+                    deliveryCharge = Math.ceil(orderWeight) * 50;
+                    total += deliveryCharge;
+
+                    user.currentOrder.items = order;
+                    user.currentOrder.total = total;
+
                     user.save();
-                    res.render("user/checkout", {order: order});
+                    res.render("user/checkout", {order: order, deliveryCharge: deliveryCharge, total: total});
                 }
             }   
         );
