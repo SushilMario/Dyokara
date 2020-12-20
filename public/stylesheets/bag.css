@@ -270,6 +270,7 @@
     .bag-heading
     {
         width: 100%;
+        height: fit-content;
         margin-bottom: 4rem;
     }
 
@@ -290,9 +291,10 @@
     {
         flex-wrap: wrap;
 
-        justify-content: space-between;
+        justify-content: space-around;
+        align-items: flex-start;
 
-        width: 65%;
+        width: 75%;
     }
 
     .item-details-container
@@ -301,18 +303,18 @@
 
         width: 15rem;
 
-        justify-content: space-around;
+        justify-content: center;
     }
 
     .item-final-container
     {
         height: 30%;
-        width: 100%;
+        width: 90%;
 
         /* padding-bottom: 2.5%; */
 
         flex-direction: row;
-        justify-content: space-between;
+        justify-content: space-around;
         align-items: flex-end;
     }
 

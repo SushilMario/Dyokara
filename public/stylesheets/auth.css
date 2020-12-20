@@ -74,6 +74,11 @@ body::before
         height: 6rem;
     }
 
+    .navbar-light .navbar-nav .nav-link 
+    {
+        color: #FAF9F9;
+    }
+
     .form-container
     {
         margin-top: 35%;
