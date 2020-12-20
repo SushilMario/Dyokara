@@ -16,7 +16,7 @@ const storage = new CloudinaryStorage
         cloudinary,
         params:
         {
-            folder: 'Dyokara',
+            folder: 'Products',
             allowedFormats: ['jpg', 'png']
         }
     }

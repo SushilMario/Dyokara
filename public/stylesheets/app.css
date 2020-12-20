@@ -5,7 +5,7 @@ body
 
 body::before
 {
-    background-image: url("/images/background.jpg");
+    background-image: url("https://res.cloudinary.com/dyokara/image/upload/v1608442821/App/background_wmvmkh.jpg");
 }
 
 .form-container 
@@ -82,7 +82,7 @@ body::before
 
 .image
 {
-    background-image: url("/images/googlePay.jpg");
+    background-image: url("https://res.cloudinary.com/dyokara/image/upload/v1608443067/App/googlePay_wbwufl.jpg");
     background-size: cover;
 
     height: 50rem;

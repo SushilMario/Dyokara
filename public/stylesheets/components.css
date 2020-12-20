@@ -42,7 +42,7 @@ body::before
     z-index: -1;
 
     display: block;
-    background-image: url("/images/background.jpg");
+    background-image: url("https://res.cloudinary.com/dyokara/image/upload/v1608442821/App/background_wmvmkh.jpg");
     background-repeat: repeat;
     background-position: bottom;
     background-size: cover;

@@ -5,7 +5,7 @@ body
 
 body::before
 {
-    background-image: url("/images/form_landscape.jpg");
+    background-image: url("https://res.cloudinary.com/dyokara/image/upload/v1608442982/App/form_landscape_gdcp7e.jpg");
 
     opacity: 1;
 }
@@ -66,7 +66,7 @@ body::before
 {
     body::before
     {
-        background-image: url("/images/form_portrait.jpg");
+        background-image: url("https://res.cloudinary.com/dyokara/image/upload/v1608443046/App/form_portrait_sn87mh.jpg");
     }
 
     .form-container
