@@ -171,15 +171,19 @@
             </div>
         <% } %>
 
-        <% product.reviews.forEach(review =>{ %>
-            <div class = "box product-review">
-                <div class = "mb-3">
-                    <span class = "product-review-author mr-4"><%= review.author.username %></span>
-                    <span class = "product-review-rating"><%= review.rating %> <i class="fas fa-star"></i></span>
+        <% if(product.reviews.length !== 0){ %>
+            <% product.reviews.forEach(review =>{ %>
+                <div class = "box product-review">
+                    <div class = "mb-3">
+                        <span class = "product-review-author mr-4"><%= review.author.username %></span>
+                        <span class = "product-review-rating"><%= review.rating %> <i class="fas fa-star"></i></span>
+                    </div>
+                    <div class = "product-review-content"><%= review.text %></div>
                 </div>
-                <div class = "product-review-content"><%= review.text %></div>
-            </div>
-        <% }) %>
+            <% }) %>
+        <% }else{ %>
+            This product hasn't been reviewed, yet
+        <% } %>
     </div>
 </div>
 
