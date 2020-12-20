@@ -1,5 +1,5 @@
 const navbarToggler = document.querySelector(".navbar-toggler");
-const navbarLinkToggler = document.querySelector("nav-link dropdown-toggle");
+const navbarLinkToggler = document.querySelector(".nav-link.dropdown-toggle");
 
 const initialContainer = document.querySelector(".initial-container");
 
