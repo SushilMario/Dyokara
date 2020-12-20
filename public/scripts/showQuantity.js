@@ -7,9 +7,9 @@ actualInput.addEventListener
     "change",
     () =>
     {
-        if(parseInt(actualInput.value) > 4)
+        if(parseInt(actualInput.value) > 10)
         {
-            actualInput.value = 4;
+            actualInput.value = 10;
         }
     }
 )
