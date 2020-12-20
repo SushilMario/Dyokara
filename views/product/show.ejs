@@ -80,19 +80,19 @@
     
             <div class="product-links center">
                 <form class = "product-form" action="/products/<%= product._id %>/checkout" method="POST">
-                    <input type = "number" name = "quantity" class = "d-none form-quantity" min = "1" max = "4">
+                    <input type = "number" name = "quantity" class = "d-none form-quantity" min = "1" max = "10">
                     <button type = "submit" class="ui button submitButton">Buy Now</button>
                 </form>
             </div>
     
             <div class="product-links">
                 <form class = "product-form" action = "/users/<%= currentUser._id %>/cart/products/<%= product._id %>" method = "POST">
-                    <input type = "number" name = "quantity" class = "d-none form-quantity" min = "1" max = "4">
+                    <input type = "number" name = "quantity" class = "d-none form-quantity" min = "1" max = "10">
                     <button type = "submit" class="ui button submitButton">Add to cart</button>
                 </form>
     
                 <form class = "product-form" action = "/users/<%= currentUser._id %>/wishlist/products/<%= product._id %>" method = "POST">
-                    <input type = "number" name = "quantity" class = "d-none form-quantity" min = "1" max = "4">
+                    <input type = "number" name = "quantity" class = "d-none form-quantity" min = "1" max = "10">
                     <button type = "submit" class="ui button submitButton">Save to wishlist</button>
                 </form>
             </div>
