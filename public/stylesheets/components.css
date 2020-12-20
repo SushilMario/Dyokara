@@ -184,7 +184,7 @@ body::before
 
 .initial-container
 {
-    transition: all 0.155s;
+    transition: all 0.2s;
     transition-timing-function: linear;
 }
 
