@@ -30,31 +30,34 @@ router.get("/",
                 {
                     let productList = [];
 
-                    products.sort(middleware.compareValues("Model Number"));
-
-                    const finalProductNumber = parseInt(products[products.length - 1].productNumber);
-                    
-                    for(let index = 1; index <= finalProductNumber; index++) 
+                    if(products.length !== 0)
                     {
-                        const modelNumber = parseInt(`${index}11`);
+                        products.sort(middleware.compareValues("Model Number"));
 
-                        await Product.findOne({modelNumber: modelNumber},
-                            async(err, foundProduct) =>
-                            {
-                                if(err)
+                        const finalProductNumber = parseInt(products[products.length - 1].productNumber);
+                        
+                        for(let index = 1; index <= finalProductNumber; index++) 
+                        {
+                            const modelNumber = parseInt(`${index}11`);
+
+                            await Product.findOne({modelNumber: modelNumber},
+                                async(err, foundProduct) =>
                                 {
-                                    req.flash("error", "Products not found!");
-                                    res.redirect("/");
-                                }
-                                else
-                                {
-                                    if(foundProduct)
+                                    if(err)
                                     {
-                                        await productList.push(foundProduct);
+                                        req.flash("error", "Products not found!");
+                                        res.redirect("/");
                                     }
-                                }
-                            }    
-                        )
+                                    else
+                                    {
+                                        if(foundProduct)
+                                        {
+                                            await productList.push(foundProduct);
+                                        }
+                                    }
+                                }    
+                            )
+                        }
                     }
 
                     if(!req.user)
