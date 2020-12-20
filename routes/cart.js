@@ -33,7 +33,7 @@ router.get("/", middleware.isLoggedIn,
 router.post("/products/:product_id", middleware.isLoggedIn,  
 	(req, res) =>
 	{
-        const quantity = req.body.quantity;
+        const quantity = parseInt(req.body.quantity);
         Product.findById(req.params.product_id,
 			(err, foundProduct) =>
 			{
@@ -86,7 +86,7 @@ router.post("/products/:product_id", middleware.isLoggedIn,
 router.put("/products/:product_id", middleware.isLoggedIn,
 	(req, res) =>
 	{
-        const {quantity} = req.body;
+        const quantity = parseInt(req.body.quantity);
 
         Product.findById(req.params.product_id,
 			(err, foundProduct) =>
