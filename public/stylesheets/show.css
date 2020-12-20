@@ -64,6 +64,8 @@
 .icon-button
 {
     font-size: 2.5rem;
+    display: flex;
+    padding-bottom: 1rem;
     color: #FFD6BA;
 
     cursor: pointer;
@@ -108,6 +110,7 @@
     font-family: 'Roboto', sans-serif;
 
     margin-top: 1.2rem;
+    width: 10%;
 }
 
 .product-name

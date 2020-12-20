@@ -33,7 +33,7 @@
             <div class = "product-name overflow w-25"><%= product.name %></div>
 
             <% if(product.averageRating != 0.0){ %>
-                <div class = "product-rating pb-3"><%= product.averageRating %> <i class="fas fa-star"></i></div>
+                <div class = "product-rating d-flex justify-content-around align-items-center pb-3"><%= product.averageRating %>  <i class="fas fa-star d-inline"></i></div>
             <% } %>
             
             <% if(currentUser){ %>
