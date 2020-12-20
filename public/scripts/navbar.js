@@ -2,6 +2,7 @@ const navbarToggler = document.querySelector(".navbar-toggler");
 const navbarLinkToggler = document.querySelector(".nav-link.dropdown-toggle");
 
 const initialContainer = document.querySelector(".initial-container");
+const body = document.querySelector("body");
 
 navbarToggler.addEventListener("click",
     () =>
@@ -13,6 +14,6 @@ navbarToggler.addEventListener("click",
 navbarLinkToggler.addEventListener("click",
     () =>
     {
-        initialContainer.classList.toggle("opacify");
+        body.classList.toggle("opacify");
     }
 )
