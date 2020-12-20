@@ -69,6 +69,11 @@ body::before
         background-image: url("https://res.cloudinary.com/dyokara/image/upload/v1608443046/App/form_portrait_sn87mh.jpg");
     }
 
+    .navbar
+    {
+        height: 5.5rem;
+    }
+
     .form-container
     {
         margin-top: 60%;
