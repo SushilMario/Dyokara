@@ -1,5 +1,5 @@
 const navbarToggler = document.querySelector(".navbar-toggler");
-const navbarLinkToggler = document.querySelector(".nav-link.dropdown-toggle");
+const navbarDropdown = document.querySelector(".nav-item.dropdown");
 
 const initialContainer = document.querySelector(".initial-container");
 
@@ -10,16 +10,16 @@ navbarToggler.addEventListener("click",
     }
 )
 
-navbarLinkToggler.addEventListener("show.bs.dropdown",
+navbarDropdown.addEventListener("show.bs.dropdown",
     () =>
     {
         initialContainer.classList.add("opacify");
     }
 )
 
-navbarLinkToggler.addEventListener("hide.bs.dropdown",
+navbarDropdown.addEventListener("hide.bs.dropdown",
     () =>
     {
-        initialContainer.classList.add("opacify");
+        initialContainer.classList.remove("opacify");
     }
 )
