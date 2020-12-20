@@ -110,7 +110,7 @@
     font-family: 'Roboto', sans-serif;
 
     margin-top: 1.2rem;
-    width: 10%;
+    width: 8%;
 }
 
 .product-name
@@ -413,7 +413,7 @@ input.form-control-lg
 {
     i.fas
     {
-        display: block;
+        display: inline-block;
     }
 
     .product-overview
