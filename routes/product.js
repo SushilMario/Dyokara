@@ -57,6 +57,11 @@ router.get("/",
                         )
                     }
 
+                    if(!req.user)
+                    {
+                        req.flash("success", "Sign in to unlock purchases!");
+                    }
+
                     res.render("product/index",{products: productList});
                 }
             }

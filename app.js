@@ -14,7 +14,8 @@ const  express        = require("express"),
        GoogleStrategy = require("passport-google-oauth20"),
        flash          = require("connect-flash"),
        nodemailer     = require("nodemailer"),
-       mongoSanitize  = require('express-mongo-sanitize');
+       mongoSanitize  = require('express-mongo-sanitize'),
+       MongoStore     = require('connect-mongo')(session);
 
 //Routes
 
@@ -28,7 +29,7 @@ const productRoutes  = require("./routes/product"),
 
 // DB url
 
-const dbURL = process.env.DB_URL;
+const dbURL = process.env.DB_URL || "mongodb://localhost/dyokara";
 
 //Models
 
@@ -42,7 +43,7 @@ mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 mongoose.set('useUnifiedTopology', true);
-mongoose.connect("mongodb://localhost/dyokara");
+mongoose.connect(dbURL);
 
 //App setup
 
@@ -69,6 +70,15 @@ app.use(flash());
 //     )
 // );
 
+// const store = new MongoStore
+// (
+//     {
+//         url: dbURL,
+//         secret: 'Living in style!',
+//         touchAfter: 24 * 60 * 60
+//     }
+// )
+
 app.use(cookieSession
     (
         {
@@ -77,6 +87,8 @@ app.use(cookieSession
         }
     )
 )
+
+
 
 //Passport setup
 

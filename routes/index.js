@@ -84,6 +84,7 @@ router.post("/login/details",
 
                     user.save();
 
+                    req.flash("success", `Welcome to Dyokara, ${user.username}!`);
                     res.redirect("/products");
                 }
             }
