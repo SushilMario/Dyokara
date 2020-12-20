@@ -60,18 +60,24 @@ for(let i = 0; i < quantityInputs.length; i++)
         const productId = itemIds[i].textContent;
         const userId = userIdElement.textContent;
 
-        if(target.value)
+        const number = parseInt(target.value);
+
+        if(target.value && typeof number === "number")
         {
-            fetch(`/users/${userId}/cart/products/${productId}`, 
-                { 
-                    method: 'PUT',  
-                    body: JSON.stringify({quantity: target.value}),
-                    headers: 
-                    {
-                        'Content-Type': 'application/json'
+            if(number !== 0)
+            {
+                fetch(`/users/${userId}/cart/products/${productId}`, 
+                    { 
+                        method: 'PUT',  
+                        body: JSON.stringify({quantity: target.value}),
+                        headers: 
+                        {
+                            'Content-Type': 'application/json'
+                        }
                     }
-                }
-            ) 
+                ) 
+            }
+            
         }
     }
 )
