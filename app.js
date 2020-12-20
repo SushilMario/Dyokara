@@ -14,8 +14,7 @@ const  express        = require("express"),
        GoogleStrategy = require("passport-google-oauth20"),
        flash          = require("connect-flash"),
        nodemailer     = require("nodemailer"),
-       mongoSanitize  = require('express-mongo-sanitize'),
-       MongoStore     = require('connect-mongo')(session);
+       mongoSanitize  = require('express-mongo-sanitize');
 
 //Routes
 
