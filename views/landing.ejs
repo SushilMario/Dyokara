@@ -9,7 +9,9 @@
             <div class = "logo"></div>
             <div class = "button-container">
                 <a class = "ui button" href = "/products">Products</a>
-                <a class = "ui button" href = "/login">Sign Up / Login</a>
+                <% if(!currentUser){ %>
+                    <a class = "ui button" href = "/login">Sign Up / Login</a>
+                <% } %>
             </div>
         </div>
     </body>

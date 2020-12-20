@@ -28,9 +28,8 @@ const productRoutes  = require("./routes/product"),
 
 // DB url
 
-const dbURL = process.env.DB_URL;
-
-// const dbURL = "mongodb://localhost/dyokara";
+// const dbURL = process.env.DB_URL;
+const dbURL = "mongodb://localhost/dyokara";
 
 //Models
 

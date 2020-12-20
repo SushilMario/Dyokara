@@ -97,7 +97,7 @@ router.put("/products/:product_id", middleware.isLoggedIn,
 				}
 				else
 				{
-					User.findById(req.params.id,
+					User.findById(req.user.id,
                         async(err, user) =>
                         {
                             if(err)
