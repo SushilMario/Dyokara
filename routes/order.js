@@ -45,7 +45,7 @@ router.put("/:id", middleware.isAdmin,
                 }
                 else
                 {
-                    User.findById(req.user._id,
+                    User.findById(order.customer,
                         async(err, user) =>
                         {
                             if(err)

@@ -10,9 +10,16 @@ navbarToggler.addEventListener("click",
     }
 )
 
-navbarLinkToggler.addEventListener("click",
+navbarLinkToggler.addEventListener("show.bs.dropdown",
     () =>
     {
-        initialContainer.classList.toggle("opacify");
+        initialContainer.classList.add("opacify");
+    }
+)
+
+navbarLinkToggler.addEventListener("hide.bs.dropdown",
+    () =>
+    {
+        initialContainer.classList.add("opacify");
     }
 )
