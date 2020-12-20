@@ -63,7 +63,7 @@ router.post("/products/:product_id", middleware.isLoggedIn,
                                 }
                                 if(index >= 0)
                                 {
-                                    user.cart[index].quantity += 1;
+                                    user.cart[index].quantity += quantity;
                                 }
                                 else
                                 {
