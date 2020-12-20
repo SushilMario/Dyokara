@@ -200,6 +200,11 @@ body::before
     text-overflow: ellipsis;  /*cut off text with an ellipsis*/
 }
 
+.opacify
+{
+    opacity: 0.25;
+}
+
 /* Button */
 
 .ui.button

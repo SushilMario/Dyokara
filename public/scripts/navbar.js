@@ -13,6 +13,6 @@ navbarToggler.addEventListener("click",
 navbarLinkToggler.addEventListener("click",
     () =>
     {
-        initialContainer.classList.toggle("move-down");
+        initialContainer.classList.toggle("opacify");
     }
 )
