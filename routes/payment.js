@@ -178,6 +178,8 @@ router.get("/:mode", middleware.isLoggedIn,
                                                         {
                                                             console.log(err);
                                                         }
+
+                                                        console.log(data);
                                                     }
                                                 );
 

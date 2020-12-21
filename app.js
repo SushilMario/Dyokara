@@ -201,45 +201,45 @@ app.use
 
 // Create tracking object
 
-const primaryTrack = 
-{
-    name: "primary",
-    currentOrderNumber: 1
-};
+// const primaryTrack = 
+// {
+//     name: "primary",
+//     currentOrderNumber: 1
+// };
 
-Tracking.deleteMany({name: "primary"},
-    (err) =>
-    {
-        if(err)
-        console.log(err);
-        else
-        console.log("Deleted!");
-    }
-)
+// Tracking.deleteMany({name: "primary"},
+//     (err) =>
+//     {
+//         if(err)
+//         console.log(err);
+//         else
+//         console.log("Deleted!");
+//     }
+// )
 
-Tracking.create(primaryTrack,
-    (err, track) =>
-    {
-        if(err)
-        {
-            console.log("Primary track could not be created");
-        }
-        else
-        {
-            console.log("Primary track created!");
-        }
-    }    
-)
+// Tracking.create(primaryTrack,
+//     (err, track) =>
+//     {
+//         if(err)
+//         {
+//             console.log("Primary track could not be created");
+//         }
+//         else
+//         {
+//             console.log("Primary track created!");
+//         }
+//     }    
+// )
 
-Order.deleteMany({},
-    (err) =>
-    {
-        if(err)
-        console.log(err);
-        else
-        console.log("Deleted!");
-    }
-)
+// Order.deleteMany({},
+//     (err) =>
+//     {
+//         if(err)
+//         console.log(err);
+//         else
+//         console.log("Deleted!");
+//     }
+// )
 
 //The routes
 
