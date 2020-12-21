@@ -1,2 +1,2 @@
-The site can be found at 
+The web app can be reached at 
 http://dyokara.herokuapp.com
