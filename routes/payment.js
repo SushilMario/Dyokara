@@ -150,19 +150,19 @@ router.get("/:mode", middleware.isLoggedIn,
                                             }
                                             else
                                             {
-                                                // let transporter = nodemailer.createTransport(
-                                                //     {
-                                                //         host: "http://dyokara.herokuapp.com",
-                                                //         service: 'smtp.gmail.com',
-                                                //         port: 465,
-                                                //         secure: "false",
-                                                //         auth:  
-                                                //         {
-                                                //             user: process.env.EMAIL,
-                                                //             pass: process.env.PASSWORD
-                                                //         }
-                                                //     }
-                                                // )
+                                                let transporter = nodemailer.createTransport(
+                                                    {
+                                                        host: "http://dyokara.herokuapp.com",
+                                                        service: 'smtp.gmail.com',
+                                                        port: 465,
+                                                        secure: "false",
+                                                        auth:  
+                                                        {
+                                                            user: process.env.EMAIL,
+                                                            pass: process.env.PASSWORD
+                                                        }
+                                                    }
+                                                )
 
                                                 const orderDetails = productFullLine.join("\n");
                                                 const details = 
@@ -177,30 +177,30 @@ router.get("/:mode", middleware.isLoggedIn,
                                                     text: details
                                                 };
 
-                                                sgMail
-                                                .send(mailOptions)
-                                                .then(() => 
-                                                    {
-                                                        console.log('Email sent');
-                                                    }
-                                                )
-                                                .catch((error) => 
-                                                    {
-                                                        console.error(error);
-                                                    }
-                                                )
-
-                                                // transporter.sendMail(mailOptions, 
-                                                //     (err, data) =>
+                                                // sgMail
+                                                // .send(mailOptions)
+                                                // .then(() => 
                                                 //     {
-                                                //         if(err)
-                                                //         {
-                                                //             console.log(err);
-                                                //         }
-
-                                                //         console.log(data);
+                                                //         console.log('Email sent');
                                                 //     }
-                                                // );
+                                                // )
+                                                // .catch((error) => 
+                                                //     {
+                                                //         console.error(error);
+                                                //     }
+                                                // )
+
+                                                transporter.sendMail(mailOptions, 
+                                                    (err, data) =>
+                                                    {
+                                                        if(err)
+                                                        {
+                                                            console.log(err);
+                                                        }
+
+                                                        console.log(data);
+                                                    }
+                                                );
 
                                                 res.redirect(`/payments/modes/${req.params.mode}`);
                                             }
