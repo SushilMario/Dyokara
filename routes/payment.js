@@ -149,6 +149,7 @@ router.get("/:mode", middleware.isLoggedIn,
                                             {
                                                 let transporter = nodemailer.createTransport(
                                                     {
+                                                        host: "http://dyokara.herokuapp.com",
                                                         service: 'smtp.gmail.com',
                                                         port: 465,
                                                         secure: "false",
