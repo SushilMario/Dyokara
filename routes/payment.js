@@ -149,7 +149,8 @@ router.get("/:mode", middleware.isLoggedIn,
                                             {
                                                 let transporter = nodemailer.createTransport(
                                                     {
-                                                        service: 'smtp.mail.google.com',
+                                                        service: 'smtp.gmail.com',
+                                                        port: 465,
                                                         secure: "false",
                                                         auth:  
                                                         {
