@@ -2,7 +2,7 @@ const express = require("express"),
    nodemailer = require("nodemailer"),
        sgMail = require('@sendgrid/mail');
 
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+// sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 //Models
 const Product = require("../models/Product.js");
