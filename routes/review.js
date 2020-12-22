@@ -45,7 +45,7 @@ router.post("/", middleware.isLoggedIn,
                     console.log(err);
                     res.redirect("back");
                 }
-                else
+                else if(product)
                 {
                     //Create the review
                     Review.create(req.body.review,
@@ -75,6 +75,11 @@ router.post("/", middleware.isLoggedIn,
                             res.redirect("/products/" + product._id);
                         }
                     )
+                }
+                else
+                {
+                    req.flash("error", "Product does not exist");
+                    res.redirect("/products");
                 }
             }
         )

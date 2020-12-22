@@ -27,7 +27,7 @@
             <% if(!order.confirmed){ %>
                 <div class = "order">
                     <div class="order-details number">
-                        <span class = "order-field"><%= order.orderNumber %></span>
+                        <a href = "/orders/<%= order._id %>" class = "order-field"><%= order.orderNumber %></a>
                         <span class = "order-field"><%= order.customer.phoneNumber %></span>
                     </div>
             

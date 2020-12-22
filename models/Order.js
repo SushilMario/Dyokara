@@ -10,6 +10,26 @@ let OrderSchema = new mongoose.Schema
             ref: "User"
         }, 
         total: Number,
+        items:
+        [
+            {
+                product: 
+                {
+                    type: mongoose.Schema.Types.ObjectId,
+                    ref: "Product"
+                },
+                quantity:
+                {
+                    type: Number,
+                    default: 1
+                },
+                customisation:
+                {
+                    type: String,
+                    default: "None"
+                }
+            }
+        ],
         productIDs: [],
         confirmed:
         {

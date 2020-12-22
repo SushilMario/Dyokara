@@ -31,6 +31,44 @@ router.get("/", middleware.isAdmin,
     }
 );
 
+//Show 
+
+router.get("/:id", middleware.isAdmin,
+    (req, res) =>
+    {
+        Order.findById(req.params.id).populate(
+                {
+                    path: 'customer items',
+                    populate: 
+                    {
+                        path: 'product'
+                    }
+                }
+            ).exec
+            (
+                (err, order) =>
+                {
+                    if(err)
+                    {
+                        console.log(err);
+                        res.redirect("/orders");
+                    }
+
+                    else if(order)
+                    {
+                        res.render("order/show", {order: order});
+                    }
+
+                    else
+                    {
+                        req.flash("error", "This order does not exist");
+                        res.redirect("/orders");
+                    }
+                }
+        )
+    }
+)
+
 //Update
 
 router.put("/:id", middleware.isAdmin,

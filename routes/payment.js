@@ -1,6 +1,4 @@
-const express = require("express"),
-   nodemailer = require("nodemailer"),
-       sgMail = require('@sendgrid/mail');
+const express = require("express");
 
 // sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
@@ -101,10 +99,10 @@ router.get("/:mode", middleware.isLoggedIn,
                     if(user.currentOrder)
                     {
                         const newOrder = {};
-                        const productFullLine = [];
                         const productIDs = [];
                         let orderNumber = 0;
-
+                        let item = {};
+                        const items = [];
                         let total = 0;
 
                         // Generation of a new 8 digit order number
@@ -128,10 +126,12 @@ router.get("/:mode", middleware.isLoggedIn,
                                             const {product, quantity} = item;
                                             const {name, price, colour, size, _id} = product;
 
-                                            let productLine = `${name} (${colour}) (${size}) - ${price} X ${quantity} = ${price * quantity}`;
-                                            productFullLine.push(productLine);
-
                                             productIDs.push(_id);
+
+                                            item.product = _id;
+                                            item.quantity = quantity;
+
+                                            items.push(item);
                                         }
                                     );
 
@@ -140,6 +140,8 @@ router.get("/:mode", middleware.isLoggedIn,
                                     newOrder.orderNumber = middleware.stringify(currentOrderNumber, 8);
 
                                     newOrder.productIDs = productIDs;
+
+                                    newOrder.items = items;
 
                                     Order.create(newOrder,
                                         (err, order) =>
@@ -150,32 +152,32 @@ router.get("/:mode", middleware.isLoggedIn,
                                             }
                                             else
                                             {
-                                                let transporter = nodemailer.createTransport(
-                                                    {
-                                                        host: "http://dyokara.herokuapp.com",
-                                                        service: 'smtp.gmail.com',
-                                                        port: 465,
-                                                        secure: "false",
-                                                        auth:  
-                                                        {
-                                                            user: process.env.EMAIL,
-                                                            pass: process.env.PASSWORD
-                                                        }
-                                                    }
-                                                )
+                                                // let transporter = nodemailer.createTransport(
+                                                //     {
+                                                //         host: "http://dyokara.herokuapp.com",
+                                                //         service: 'smtp.gmail.com',
+                                                //         port: 465,
+                                                //         secure: "false",
+                                                //         auth:  
+                                                //         {
+                                                //             user: process.env.EMAIL,
+                                                //             pass: process.env.PASSWORD
+                                                //         }
+                                                //     }
+                                                // )
 
-                                                const orderDetails = productFullLine.join("\n");
-                                                const details = 
-                                                `Bill Amount: Rs ${user.currentOrder.total}\nMobile Number: ${user.phoneNumber}\nShipping Address: ${user.shippingAddress}\n\nOrder :-\n\n${orderDetails}
-                                                `;
+                                                // const orderDetails = productFullLine.join("\n");
+                                                // const details = 
+                                                // `Bill Amount: Rs ${user.currentOrder.total}\nMobile Number: ${user.phoneNumber}\nShipping Address: ${user.shippingAddress}\n\nOrder :-\n\n${orderDetails}
+                                                // `;
 
-                                                const mailOptions = 
-                                                {
-                                                    from: `${process.env.EMAIL}`,
-                                                    to: `${process.env.EMAIL}`,
-                                                    subject: `Order ${order.orderNumber}`,
-                                                    text: details
-                                                };
+                                                // const mailOptions = 
+                                                // {
+                                                //     from: `${process.env.EMAIL}`,
+                                                //     to: `${process.env.EMAIL}`,
+                                                //     subject: `Order ${order.orderNumber}`,
+                                                //     text: details
+                                                // };
 
                                                 // sgMail
                                                 // .send(mailOptions)
@@ -190,17 +192,17 @@ router.get("/:mode", middleware.isLoggedIn,
                                                 //     }
                                                 // )
 
-                                                transporter.sendMail(mailOptions, 
-                                                    (err, data) =>
-                                                    {
-                                                        if(err)
-                                                        {
-                                                            console.log(err);
-                                                        }
+                                                // transporter.sendMail(mailOptions, 
+                                                //     (err, data) =>
+                                                //     {
+                                                //         if(err)
+                                                //         {
+                                                //             console.log(err);
+                                                //         }
 
-                                                        console.log(data);
-                                                    }
-                                                );
+                                                //         console.log(data);
+                                                //     }
+                                                // );
 
                                                 res.redirect(`/payments/modes/${req.params.mode}`);
                                             }

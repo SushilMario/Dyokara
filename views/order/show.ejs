@@ -1,0 +1,66 @@
+<%- include("../partials/header"); %>
+
+<link rel="stylesheet" href="/stylesheets/orderDisplay.css"/>
+
+<%- include("../partials/navbar"); %>
+
+<div class="container initial-container">
+    <div class="bag">
+        <div class = "heading">
+            <span><%= order.orderNumber %></span>
+        </div>
+        <% order.items.forEach(item => { %>
+            <% console.log(item); %>
+            <div class = "item">
+                <div style = "background-image: url('<%= item.product.images[0].url %>');" class = "item-image"></div>
+                <div class="item-details">
+                    <div class = "item-name"><%= item.product.name %></div>
+                    <div>
+                        <div class = "item-sub_details">
+                            <div class = "item-size">
+                                Size: <span class="semi-bold"><%= item.product.size %></span>
+                            </div>
+    
+                            <div class = "item-quantity">
+                                Quantity: <span class="semi-bold"><%= item.quantity %></span>
+                            </div>
+                        </div>
+    
+                        <div class = "item-sub_details">
+                            <div class = "item-colour">
+                                Colour: <span class="semi-bold"><%= item.product.colour %></span>
+                            </div>
+    
+                            <div class = "item-price">
+                                Item price: <span class="semi-bold">Rs <%= item.product.price %></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+
+    <div class="payment">
+        <div class="payment-heading mb-4 pl-0">Customer details</div>
+                
+        <section>Name: <%= order.customer.username %></section>
+        <section>Phone Number: <%= order.customer.phoneNumber %></section>
+        <section>Account Number: <% (order.customer.bankAccountNo) ? order.customer.bankAccountNo : "Not specified" %></section>
+        <section>
+            <p>Shipping Address: </p>
+            <p><%= order.customer.shippingAddress %></p>
+        </section>
+
+        <div class = "payment-gateway">
+            <form action = "/orders/<%= order._id %>?_method=PUT" method = "POST">
+                <button type="submit" class = "ui button pay">Confirm</button>
+            </form>
+            <form action = "/orders/<%= order._id %>?_method=DELETE" method = "POST">
+                <button type="submit" class = "ui button pay">Cancel</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<%- include("../partials/footer"); %>

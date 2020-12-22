@@ -201,7 +201,7 @@ router.get("/:id",
                 {
                     res.send("Error");
                 }
-                else
+                else if(foundProduct)
                 {
                     const productNumber = foundProduct["Product Number"];
 
@@ -295,6 +295,11 @@ router.get("/:id",
                             }
                         }
                     );
+                }
+                else
+                {
+                    req.flash("error", "Product does not exist");
+                    res.redirect("/products");
                 }
             }
         );
