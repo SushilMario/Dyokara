@@ -107,18 +107,18 @@
 
 <div class = "container product-variations">
     <div class="product-variations-section">
-        <% for(let i = 0; i < sizeList.length; i++){ %>
-            <% const modelNumber = product.productNumber + `${i+1}` + `${colourNumber}`; %>
-            <a href = "/products/models/<%= modelNumber %>" class = "<%= ((i + 1) === sizeNumber) ? 'selected' : 'not-selected' %> product-variations-item">
-                <%= sizeList[i] %>
+        <% for(let i = 0; i < lineup.sizeList.length; i++){ %>
+            <% const modelNumber = `${product.productNumber}${i+1}${product.colourNumber}`; %>
+            <a href = "/products/models/<%= modelNumber %>" class = "<%= ((i + 1) === product.sizeNumber) ? 'selected' : 'not-selected' %> product-variations-item">
+                <%= lineup.sizeList[i] %>
             </a>
         <% } %>
     </div>
     <div class="product-variations-section">
-        <% for(let i = 0; i < colourList.length; i++){ %>
-            <% const modelNumber = product.productNumber + `${sizeNumber}` + `${i+1}`; %>
-            <a href = "/products/models/<%= modelNumber %>" class = "<%= ((i + 1) === colourNumber) ? 'selected' : 'not-selected' %> product-variations-item">
-                <%= colourList[i] %>
+        <% for(let i = 0; i < lineup.variations[product.sizeNumber - 1].colours; i++){ %>
+            <% const modelNumber = `${product.productNumber}${product.sizeNumber}${i+1}`; %>
+            <a href = "/products/models/<%= modelNumber %>" class = "<%= ((i + 1) === product.colourNumber) ? 'selected' : 'not-selected' %> product-variations-item">
+                <%= lineup.variations[product.sizeNumber - 1].colours[i] %>
             </a>
         <% } %>  
     </div>

@@ -36,7 +36,9 @@ let ProductSchema = new mongoose.Schema
 
             productNumber: Number,
             category: String,
-            modelNumber: Number,
+            modelNumber: String,
+            sizeNumber: String,
+            colourNumber: String,
 
             reviews:
             [

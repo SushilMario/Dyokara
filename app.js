@@ -89,8 +89,6 @@ app.use(cookieSession
     )
 )
 
-
-
 //Passport setup
 
 app.use(passport.initialize());
@@ -160,34 +158,6 @@ passport.use(new GoogleStrategy
     )
 );
 
-//Nodemailer setup
-
-let transporter = nodemailer.createTransport( 
-    {
-        service: "Gmail",
-        auth: 
-        {
-            XOAuth2: 
-            {
-                user: process.env.EMAIL,
-                clientId: process.env.CLIENTID,
-                clientSecret: process.env.CLIENTSECRET,
-            }
-        }
-    }
-);
-
-// let transporter = nodemailer.createTransport(
-//     {
-//         service: 'gmail',
-//         auth:  
-//         {
-//             user: ,
-//             pass: process.env.PASSWORD
-//         }
-//     }
-// )
-
 //Use on all routes
 
 app.use
@@ -203,11 +173,12 @@ app.use
 
 // Create tracking object
 
-// const primaryTrack = 
-// {
-//     name: "primary",
-//     currentOrderNumber: 1
-// };
+const primaryTrack = 
+{
+    name: "primary",
+    currentOrderNumber: 1,
+    currentProductNumber: 0
+};
 
 // Tracking.deleteMany({name: "primary"},
 //     (err) =>

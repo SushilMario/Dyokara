@@ -106,7 +106,7 @@ router.get("/:mode", middleware.isLoggedIn,
                         let total = 0;
 
                         // Generation of a new 8 digit order number
-
+                    
                         Tracking.findOne({name: "primary"},
                             async(err, track) =>
                             {

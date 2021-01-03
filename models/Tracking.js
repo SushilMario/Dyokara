@@ -4,7 +4,9 @@ let TrackingSchema = new mongoose.Schema
 (
     {
         name: String,
-        currentOrderNumber: Number
+        currentOrderNumber: Number,
+        currentProductNumber: Number,
+        categories: [String]
     }
 );
 

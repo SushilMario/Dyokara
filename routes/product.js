@@ -11,6 +11,8 @@ const router = express.Router();
 const {storage} = require("../cloudinary");
 const middleware = require("../middleware");
 const User = require("../models/User.js");
+const Tracking = require("../models/Tracking.js");
+const Line_up = require("../models/Line_up.js");
 const upload = multer({storage});
 
 //Index
@@ -18,52 +20,55 @@ const upload = multer({storage});
 router.get("/", 
     (req, res) =>
     {	
-        Product.find({},
-            async(err, products) =>
+        Tracking.findOne({name: "primary"},
+            (err, track) =>
             {
                 if(err)
                 {
-                    req.flash("error", "Products not found!");
-                    res.redirect("/");
+                    res.send(err);
                 }
                 else
                 {
-                    let productList = [];
-
-                    if(products.length !== 0)
-                    {
-                        products.sort(middleware.compareValues("Model Number"));
-
-                        const finalProductNumber = parseInt(products[products.length - 1].productNumber);
-                        
-                        for(let index = 1; index <= finalProductNumber; index++) 
+                    Product.find({sizeNumber: 1, colourNumber: 1},
+                        (err, productList) =>
                         {
-                            const modelNumber = parseInt(`${index}11`);
+                            if(err)
+                            {
+                                res.send(err);
+                            }
+                            else
+                            {
+                                const productDisplay = {};
 
-                            await Product.findOne({modelNumber: modelNumber},
-                                async(err, foundProduct) =>
+                                if(productList.length !== 0)
                                 {
-                                    if(err)
-                                    {
-                                        req.flash("error", "Products not found!");
-                                        res.redirect("/");
-                                    }
-                                    else
-                                    {
-                                        if(foundProduct)
+                                    track.categories.forEach
+                                    (
+                                        category =>
                                         {
-                                            await productList.push(foundProduct);
-                                        }
-                                    }
-                                }    
-                            )
-                        }
-                    }
+                                            productDisplay[category] = [];
 
-                    res.render("product/index",{products: productList});
+                                            productList.forEach
+                                            (
+                                                product =>
+                                                {
+                                                    if(product.category.equals(category))
+                                                    {
+                                                        productDisplay[category].push(product);
+                                                    }
+                                                }
+                                            )
+                                        }
+                                    )
+                                }
+
+                                res.render("product/index",{productDisplay: productDisplay});
+                            }
+                        }    
+                    )
                 }
             }
-        );
+        )
     }
 )
 
@@ -94,7 +99,19 @@ router.get("/",
 router.get("/new", middleware.isAdmin,
     (req, res) =>
     {
-        res.render("product/new");
+        Tracking.findOne({name: "primary"},
+            (err, track) =>
+            {
+                if(err)
+                {
+                    res.send("Error! Please try again");
+                }
+                else
+                {
+                    res.render("product/new", {currentProductNumber: track.currentProductNumber});
+                }
+            }
+        )
     }
 )
 
@@ -119,7 +136,6 @@ router.post("/", upload.array('images', 5), middleware.isAdmin,
         product.price = parseInt(productModel.price);
         product.noOfItems = parseInt(productModel.price);
         product.productNumber = parseInt(productModel.productNumber);
-        product.modelNumber = parseInt(productModel.modelNumber);
         product.category = productModel.category;
         product.specifications["Dimensions"] = productModel.dimensions;
         product.specifications["Finish"] = productModel.finish;
@@ -170,21 +186,145 @@ router.post("/", upload.array('images', 5), middleware.isAdmin,
 
         product.images = images;
 
-        Product.create
-        (
-            product,
-            (err, product) =>  
+        Tracking.findOne({name: "primary"}, 
+            async(err, track) =>
             {
                 if(err)
                 {
-                    res.send("Error");
+                    res.send("Error! Please try again!");
                 }
                 else
                 {
-                    res.redirect("/products");
+                    if(track.currentProductNumber < product.productNumber)
+                    {
+                        track.currentProductNumber += 1;
+                        product.productNumber = track.currentProductNumber;
+
+                        if(!track.categories.includes(product.category))
+                        {
+                            track.categories.push(product.category);
+                        }
+
+                        await track.save();
+
+                        product.colourNumber = product.sizeNumber = 1;
+
+                        const lineup = 
+                        {
+                            productNumber: 0,
+                            sizeList: [],
+                            colourList: [],
+                            variations: 
+                            [
+                                {
+                                    size: "",
+                                    colours: []
+                                }
+                            ]
+                        };
+
+                        lineup.productNumber = product.productNumber;
+                        lineup.sizeList.push(product.size);
+                        lineup.variations[product.sizeNumber].size = product.size;
+                        lineup.variations[product.sizeNumber].colours.push(product.colour);
+
+                        Line_up.create(lineup, 
+                            (err, newLineup) =>
+                            {
+                                if(err)
+                                {
+                                    res.send("Error!");
+                                }
+                                else
+                                {
+                                    product.modelNumber = parseInt(`${product.productNumber}${product.sizeNumber}${product.colourNumber}`)
+
+                                    Product.create
+                                    (
+                                        product,
+                                        (err, product) =>  
+                                        {
+                                            if(err)
+                                            {
+                                                res.send("Error");
+                                            }
+                                            else
+                                            {
+                                                res.redirect("/products");
+                                            }
+                                        }
+                                    );
+                                }
+                            }     
+                        )
+                    }
+                    else
+                    {
+                        Line_up.findOne({productNumber: product.productNumber},
+                            async(err, foundLineup) =>
+                            {
+                                if(err)
+                                {
+                                    res.send("Error!");
+                                }
+                                else
+                                {
+                                    const sizeCheck = foundLineup.sizeList.indexOf(product.size);
+
+                                    if(sizeCheck > -1)
+                                    {
+                                        product.sizeNumber = sizeCheck + 1;
+
+                                        const {colours} = foundLineup.variations[sizeCheck];
+
+                                        const colourCheck = colours.indexOf(product.colour);
+
+                                        if(colourCheck > -1)
+                                        {
+                                            req.flash("error", "Cannot create duplicate product!");
+                                            res.redirect("/products");
+                                        }
+                                        else
+                                        {
+                                            foundLineup.variations[sizeCheck].colours.push(product.colour);
+                                            product.colourNumber = foundLineup.variations[sizeCheck].colours.length;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        foundLineup.sizeList.push(product.size);
+
+                                        foundLineup.variations[foundLineup.sizeList.length - 1].size = product.size;
+                                        foundLineup.variations[foundLineup.sizeList.length - 1].colours.push(product.colour);
+
+                                        product.sizeNumber = foundLineup.sizeList.length;
+                                        product.colourNumber = 1;
+                                    }
+
+                                    await foundLineup.save();
+
+                                    Product.create
+                                    (
+                                        product,
+                                        (err, product) =>  
+                                        {
+                                            if(err)
+                                            {
+                                                res.send("Error");
+                                            }
+                                            else
+                                            {
+                                                res.redirect("/products");
+                                            }
+                                        }
+                                    );
+                                }
+                            }    
+                        )
+                    }
                 }
             }
-        );
+        )
     }
 )
 
@@ -203,49 +343,17 @@ router.get("/:id",
                 }
                 else if(foundProduct)
                 {
-                    const productNumber = foundProduct["Product Number"];
+                    const {productNumber} = foundProduct;
 
-                    Product.find({"Product Number": productNumber},
-                        (err, productList) =>
+                    Line_up.find({productNumber: productNumber},
+                        (err, foundLineup) =>
                         {
                             if(err)
                             {
                                 res.send("Error");
                             }
-
                             else
                             {
-                                productList.sort(middleware.compareValues("Model Number"));
-
-                                const sizeList = [];
-                                const colourList = [];
-
-                                //Last product in the last, model number has total no of sizes and colours
-
-                                const finalModelNumber = `${productList[productList.length - 1].modelNumber}`;
-
-                                const noOfColours = parseInt(finalModelNumber[finalModelNumber.length - 1]);
-                                const noOfSizes = parseInt(finalModelNumber[finalModelNumber.length - 2]);
-
-                                //Getting the list of unique sizes
-
-                                for(let index = 0; index < productList.length; index += noOfColours) 
-                                {
-                                    sizeList.push(productList[index].size);
-                                }
-
-                                //Getting the list of unique colours
-
-                                for(let index = 0; index < noOfColours; index++) 
-                                {
-                                    colourList.push(productList[index].colour);
-                                }
-
-                                const modelNumber = `${foundProduct.modelNumber}`;
-                                
-                                const colourNumber = parseInt(modelNumber[modelNumber.length - 1]); //Extracting last digit
-                                const sizeNumber = parseInt(modelNumber[modelNumber.length - 2]);
-
                                 let hasBoughtProduct = false;
 
                                 const images = [];
@@ -282,7 +390,7 @@ router.get("/:id",
                                                     }
                                                 }
 
-                                                res.render("product/show", {product: foundProduct, images: images, sizeList: sizeList, colourList: colourList, sizeNumber: sizeNumber, colourNumber: colourNumber, hasBoughtProduct: hasBoughtProduct});
+                                                res.render("product/show", {product: foundProduct, images: images, lineup: foundLineup, hasBoughtProduct: hasBoughtProduct});
                                             }
                                         }
                                     )
@@ -290,7 +398,7 @@ router.get("/:id",
 
                                 else
                                 {
-                                    res.render("product/show", {product: foundProduct, images: images, sizeList: sizeList, colourList: colourList, sizeNumber: sizeNumber, colourNumber: colourNumber, hasBoughtProduct: hasBoughtProduct});
+                                    res.render("product/show", {product: foundProduct, images: images, lineup: foundLineup, hasBoughtProduct: hasBoughtProduct});
                                 }
                             }
                         }
@@ -311,9 +419,9 @@ router.get("/:id",
 router.get("/models/:modelNumber",
     (req, res) =>
     {
-        const modelNo = parseInt(req.params.modelNumber);
+        const modelNumber = parseInt(req.params.modelNumber);
 
-        Product.findOne({modelNumber: modelNo},
+        Product.findOne({modelNumber: modelNumber},
             (err, foundProduct) =>
             {
                 if(err)

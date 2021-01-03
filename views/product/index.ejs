@@ -13,31 +13,36 @@
         <% } %>
     <% } %>
     <div class="row">
-        <% if(products.length !== 0){ %>
-            <% products.forEach(product => { %>
-                <div class="col-6 col-md-4 col-lg-3">
-                    <div class="product">
-                        <div>
-                            <a href='/products/<%= product._id %>'>
-                                <img class="product-image" src = "<%= product.images[1].url %>">
-                            </a>
-                        </div>
-                
-                        <div class = "product-details">
-                            <div class = "product-name bold"><%= product.name %></div>
-                
-                            <div class = "product-price bold">Rs <%= product.price %></div>
-                        </div>
-        
-                        <div class = "product-details">
-                            <div class = "product-size"><%= product.size %></div>
-                
-                            <div class = "product-colour"><%= product.colour %></div>
+        <% if(productDisplay){ %>
+            <% for(const category in productDisplay) { %>
+                <div class = "box header">
+                    <span><%= category %></span>
+                </div>
+
+                <% productDisplay[category].forEach(product => { %>
+                    <div class="col-6 col-md-4 col-lg-3">
+                        <div class="product">
+                            <div>
+                                <a href='/products/<%= product._id %>'>
+                                    <img class="product-image" src = "<%= product.images[1].url %>">
+                                </a>
+                            </div>
+                    
+                            <div class = "product-details">
+                                <div class = "product-name bold"><%= product.name %></div>
+                    
+                                <div class = "product-price bold">Rs <%= product.price %></div>
+                            </div>
+            
+                            <div class = "product-details">
+                                <div class = "product-size"><%= product.size %></div>
+                    
+                                <div class = "product-colour"><%= product.colour %></div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            <% }) %>
-
+                <% }) %>
+            <% } %>
         <% }else{ %>
             <div class = "col-12 text-center display-4">We don't have any products yet</div>
         <% } %>
