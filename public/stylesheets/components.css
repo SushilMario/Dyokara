@@ -212,6 +212,11 @@ body::before
     opacity: 0.25;
 }
 
+.ui.form .field.hide
+{
+    display: none;
+}
+
 /* Box */
 
 .header
@@ -242,6 +247,12 @@ body::before
     background-color: #FAF9F9;
 
     margin-bottom: 4rem;
+}
+
+.input-heading
+{
+    font-weight: 700;
+    color: #000000;
 }
 
 /* Button */

@@ -17,10 +17,10 @@
                 </li>
                 <% if(currentUser){ %>
                     <li class="nav-item">
-                        <a class="nav-link" href = "/users/<%= currentUser._id %>/cart">Cart</a>
+                        <a class="nav-link" href = "/users/<%= currentUser._id %>/cart">Cart(<%= currentUser.cart.length %>)</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href = "/users/<%= currentUser._id %>/wishlist">Wishlist</a>
+                        <a class="nav-link" href = "/users/<%= currentUser._id %>/wishlist">Wishlist(<%= currentUser.wishlist.length %>)</a>
                     </li>
                 <% } %>
             </ul>

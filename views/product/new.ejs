@@ -8,7 +8,27 @@
 <div class="container">
     <div class="form-container">
         <h1 class = "form-heading mb-5">New Product</h1>
+
+        <% if(currentProductNumber !== 0){ %>
+            <form action = "/products/preFill" method = "GET" enctype = "multipart/form-data" class = "ui form mb-5">
+                <h2 class = "form-heading mb-3">Pre-fill</h2>
+                <div class="field">
+                    <label class = "label" for = "name">Product Number</label>
+                    <input class = "form-input" type="text" name="product[preProductNumber]" id = "preProductNumber" value = "<%= currentProductNumber %>" required>
+                </div>
+
+                <button class = "ui button submit py-3" type="submit">Fill</button>
+            </form>
+        <% } %>
+
         <form action = "/products" method = "POST" enctype = "multipart/form-data" class = "ui form">
+            <h2 class = "form-heading mb-3">Entry</h2>
+
+            <div class="field">
+                <label for="productNumber">Product Number</label>
+                <input type="text" name = "product[productNumber]" class="form-input" id="productNumber" value = "<%= currentProductNumber + 1 %>" required>
+            </div>
+            
             <div class="field">
                 <label class = "label" for = "name">Name</label>
                 <input class = "form-input" type="text" name="product[name]" id = "name" required>
@@ -16,7 +36,12 @@
 
             <div class="field">
                 <label for="price">Price</label>
-                <input type="text" name = "product[price]" class="form-input" id="price required">
+                <input type="text" name = "product[price]" class="form-input" id="price" required>
+            </div>
+
+            <div class="field">
+                <label for="size">Size</label>
+                <input type="text" name = "product[size]" class="form-input" id="size" placeholder="Small / Medium / Large" required>
             </div>
     
             <div class="field">
@@ -25,23 +50,18 @@
             </div>
     
             <div class="field">
-                <label for="size">Size</label>
-                <input type="text" name = "product[size]" class="form-input" id="size" placeholder="Small / Medium / Large" required>
-            </div>
-    
-            <div class="field">
                 <label for="noOfItems">Number of units</label>
                 <input type="number" name = "product[noOfUnits]" class="form-input" id="noOfUnits" value = "1" min = "1">
             </div>
     
             <div class="field">
-                <label for="productNumber">Product Number</label>
-                <input type="text" name = "product[productNumber]" class="form-input" id="productNumber" value = "<%= currentProductNumber + 1 %>" required>
-            </div>
-    
-            <div class="field">
                 <label for="category">Category</label>
                 <input type="text" name = "product[category]" class="form-input" id="category" required>
+            </div>
+
+            <div class="field">
+                <label for="categoryByline">Category Byline</label>
+                <input type="text" name = "product[categoryByline]" class="form-input" id="categoryByline" required>
             </div>
     
             <div class="field">
@@ -52,6 +72,41 @@
             <div class="field">
                 <label for="image_uploads">Choose 5 correctly named images to upload (PNG, JPG)</label>
                 <input type="file" id="image_uploads" name="images" multiple required>
+            </div>
+
+            <h2 class = "input-heading">In Production?</h2>
+
+            <div class="grouped fields production">
+                <div class="field">
+                    <div class="ui radio checkbox">
+                        <input type="radio" name="product[production]" checked tabindex="0" class="hidden" value = "Yes" id = "production_yes">
+                        <label for="production_yes">Yes</label>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="ui radio checkbox">
+                        <input type="radio" name="product[production]" tabindex="0" class="hidden" value = "No" id = "production_no">
+                        <label for="production_no">No</label>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class = "input-heading">In Stock?</h2>
+
+            <div class="grouped fields stock">
+                <div class="field">
+                    <div class="ui radio checkbox">
+                        <input type="radio" name="product[stock]" checked tabindex="0" class="hidden" value = "Yes" id = "stock_yes">
+                        <label for="stock_yes">Yes</label>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="ui radio checkbox">
+                        <input type="radio" name="product[stock]" tabindex="0" class="hidden" value = "No" id = "stock_no">
+                        <label for="stock_no">No</label>
+                    </div>
+                </div>
             </div>
             
             <!-- <h1>Specifications Entry</h1> -->

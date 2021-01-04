@@ -21,10 +21,15 @@ router.get("/new", middleware.isLoggedIn, middleware.hasBoughtProduct,
 				{
 					console.log(err);
 				}
-				else
+				else if(product)
 				{
 					res.render("review/new", {product: product});
-				}
+                }
+                else
+                {
+                    req.flash("error", "Product does not exist");
+                    res.redirect("/products");
+                }
 			}
 		);	
 	}
@@ -146,7 +151,7 @@ router.delete("/:review_id", middleware.isReviewOwner,
 			{
 				if(err)
 				{
-					console.log(err);
+					req.flash("error", `${err}`);
 					res.redirect("back");
 				}
 				else

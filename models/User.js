@@ -32,6 +32,11 @@ let UserSchema = new mongoose.Schema
                     {
                         type: Number,
                         default: 1
+                    },
+                    customisation:
+                    {
+                        type: String,
+                        default: "None"
                     }
                 }
             ],
@@ -50,6 +55,11 @@ let UserSchema = new mongoose.Schema
                 {
                     type: Number,
                     default: 1
+                },
+                customisation:
+                {
+                    type: String,
+                    default: "None"
                 }
             }
         ],
@@ -66,6 +76,11 @@ let UserSchema = new mongoose.Schema
                 {
                     type: Number,
                     default: 1
+                },
+                customisation:
+                {
+                    type: String,
+                    default: "None"
                 }
             }
         ],

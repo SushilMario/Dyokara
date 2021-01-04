@@ -34,6 +34,8 @@ router.post("/products/:product_id", middleware.isLoggedIn,
 	(req, res) =>
 	{
         const quantity = parseInt(req.body.quantity);
+        const customisation = parseInt(req.body.customisation);
+
         Product.findById(req.params.product_id,
 			(err, foundProduct) =>
 			{
@@ -41,7 +43,7 @@ router.post("/products/:product_id", middleware.isLoggedIn,
 				{
 					console.log(err);
 				}
-				else
+				else if(foundProduct && foundProduct.stock.equals("Yes"))
 				{
 					User.findById(req.params.id,
                         (err, user) =>
@@ -55,8 +57,8 @@ router.post("/products/:product_id", middleware.isLoggedIn,
                                 let index = -1;
                                 for(let i = 0; i < user.cart.length; i++)
                                 {
-                                    const {product} = user.cart[i];
-                                    if(product.equals(foundProduct._id))
+                                    const {product, cartCustomisation} = user.cart[i];
+                                    if(product.equals(foundProduct._id) && customisation.equals(cartCustomisation))
                                     {
                                         index = i;
                                     }
@@ -67,7 +69,7 @@ router.post("/products/:product_id", middleware.isLoggedIn,
                                 }
                                 else
                                 {
-                                    const newItem = {quantity: quantity, product: foundProduct._id};
+                                    const newItem = {quantity: quantity, customisation: customisation, product: foundProduct._id};
                                     user.cart.push(newItem);
                                 }
                                 user.save();
@@ -75,7 +77,12 @@ router.post("/products/:product_id", middleware.isLoggedIn,
                             }
                         }
                     );	
-				}
+                }
+                else
+                {
+                    req.flash("error", "Product does not exist!");
+                    res.redirect("/products");
+                }
 			}
 		);
 	}
@@ -95,7 +102,7 @@ router.put("/products/:product_id", middleware.isLoggedIn,
 				{
 					console.log(err);
 				}
-				else
+				else if(foundProduct)
 				{
 					User.findById(req.user.id,
                         async(err, user) =>
@@ -123,7 +130,12 @@ router.put("/products/:product_id", middleware.isLoggedIn,
                             }
                         }
                     );	
-				}
+                }
+                else
+                {
+                    req.flash("error", "Product not found");
+                    res.redirect("/products");
+                }
 			}
 		);
 	}
@@ -135,7 +147,7 @@ router.delete("/products/:product_id", middleware.isLoggedIn,
     (req,res) =>
     {
         User.findById(req.params.id,
-            (err,user) =>
+            (err, user) =>
             {
                 if(err)
                 {
@@ -144,10 +156,23 @@ router.delete("/products/:product_id", middleware.isLoggedIn,
                 else
                 {
                     Product.findById(req.params.product_id,
-                        (err,foundProduct) =>
+                        (err, foundProduct) =>
                         {
-                            middleware.delete(user, "cart", foundProduct);
-                            res.redirect(`/users/${req.params.id}/cart`);
+                            if(err)
+                            {
+                                req.flash("error", `${err}`);
+                                res.redirect("/products");
+                            }
+                            else if(foundProduct)
+                            {
+                                middleware.delete(user, "cart", foundProduct);
+                                res.redirect(`/users/${req.params.id}/cart`);
+                            }
+                            else
+                            {
+                                req.flash("error", "Product not found");
+                                res.redirect("/products");
+                            }
                         }
                     )
                 }

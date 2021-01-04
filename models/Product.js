@@ -9,6 +9,8 @@ let ProductSchema = new mongoose.Schema
             size: String,
             noOfUnits: Number,
             description: String,
+            production: String,
+            stock: String,
 
             images:
             [

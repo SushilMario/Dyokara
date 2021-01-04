@@ -2,6 +2,12 @@ const forms = document.querySelectorAll(".product-form");
 const actualInput = document.getElementById("quantity");
 const formalInputs = document.querySelectorAll(".form-quantity");
 
+const customisationActual = document.querySelectorAll(".customisation input[type='radio']");
+const customisationFormal = document.querySelectorAll(".form-customisation");
+const customText = document.getElementById("customText");
+
+//Validation and displaying / hiding
+
 actualInput.addEventListener
 (
     "change",
@@ -14,6 +20,25 @@ actualInput.addEventListener
     }
 )
 
+for(let i = 0; i < customisationActual.length; i++) 
+{
+    customisationActual[i].addEventListener("change", 
+        (e) =>
+        {
+            if(customisationActual[i].value === "Custom")
+            {
+                customText.classList.remove("hide");
+            }
+            else
+            {
+                customText.classList.add("hide");
+            }
+        }
+    )
+}
+
+//Submitting
+
 for(let i = 0; i < forms.length; i++)
 {
     forms[i].addEventListener
@@ -22,6 +47,7 @@ for(let i = 0; i < forms.length; i++)
         () =>
         {
             formalInputs[i].value = actualInput.value;
+            customisationFormal[i] = customisationActual.value;
         }
     )
 }

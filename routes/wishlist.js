@@ -34,6 +34,8 @@ router.post("/products/:product_id", middleware.isLoggedIn,
 	(req, res) =>
 	{
         const quantity = req.body.quantity;
+        const customisation = req.body.quantity;
+
         Product.findById(req.params.product_id,
 			(err, foundProduct) =>
 			{
@@ -41,7 +43,7 @@ router.post("/products/:product_id", middleware.isLoggedIn,
 				{
 					console.log(err);
 				}
-				else
+				else if(foundProduct)
 				{
 					User.findById(req.params.id,
                         (err, user) =>
@@ -55,27 +57,33 @@ router.post("/products/:product_id", middleware.isLoggedIn,
                                 let index = -1;
                                 for(let i = 0; i < user.wishlist.length; i++)
                                 {
-                                    const {product} = user.wishlist[i];
-                                    if(product.equals(foundProduct._id))
+                                    const {product, wishlistCustomisation} = user.wishlist[i];
+                                    if(product.equals(foundProduct._id) && customisation.equals(wishlistCustomisation))
                                     {
                                         index = i;
                                     }
                                 }
                                 if(index >= 0)
                                 {
-                                    user.wishlist[index].quantity += 1;
+                                    user.wishlist[index].quantity += quantity;
                                 }
                                 else
                                 {
-                                    const newItem = {quantity: quantity, product: foundProduct._id};
+                                    const newItem = {quantity: quantity, customisation: customisation, product: foundProduct._id};
                                     user.wishlist.push(newItem);
                                 }
+
                                 user.save();
                                 res.redirect(`/users/${req.params.id}/wishlist`);
                             }
                         }
                     );	
-				}
+                }
+                else
+                {
+                    req.flash("error", "Product not found");
+                    res.redirect("/products");
+                }
 			}
 		);
 	}
@@ -173,13 +181,34 @@ router.post("/products/:product_id/move", middleware.isLoggedIn,
                     Product.findById(req.params.product_id,
                         (err,foundProduct) =>
                         {
-                            const item = 
+                            const newItem = 
                             {
                                 product: foundProduct._id,
-                                quantity: 1
+                                quantity: 1,
+                                customisation: None
                             };
-                            user.cart.push(item);
-                            middleware.delete(user, "wishlist", foundProduct);
+
+                            const check = false;
+
+                            user.wishlist.forEach
+                            (
+                                item => 
+                                {
+                                    if(foundProduct._id.equals(item.product._id))
+                                    {
+                                        check = true;
+                                        newItem.quantity = item.quantity;
+                                        newItem.customisation = item.customisation;
+                                    }
+                                }
+                            );
+                            
+                            if(check)
+                            {
+                                user.cart.push(newItem);
+                                middleware.delete(user, "wishlist", foundProduct);
+                            }
+                            
                             res.redirect(`/users/${req.params.id}/wishlist`);
                         }
                     )

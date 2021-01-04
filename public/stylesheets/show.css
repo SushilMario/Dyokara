@@ -228,12 +228,12 @@ input.form-control-lg
     cursor: default;
 }
 
-.product-description, .product-specifications, .product-reviews
+.product-section
 {
     margin-bottom: 8rem;
 }
 
-.product-description-heading
+.product-heading
 {
     text-align: center;
     font-size: 3rem;

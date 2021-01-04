@@ -130,6 +130,7 @@ router.get("/:mode", middleware.isLoggedIn,
 
                                             item.product = _id;
                                             item.quantity = quantity;
+                                            item.customisation = customisation;
 
                                             items.push(item);
                                         }
@@ -152,58 +153,6 @@ router.get("/:mode", middleware.isLoggedIn,
                                             }
                                             else
                                             {
-                                                // let transporter = nodemailer.createTransport(
-                                                //     {
-                                                //         host: "http://dyokara.herokuapp.com",
-                                                //         service: 'smtp.gmail.com',
-                                                //         port: 465,
-                                                //         secure: "false",
-                                                //         auth:  
-                                                //         {
-                                                //             user: process.env.EMAIL,
-                                                //             pass: process.env.PASSWORD
-                                                //         }
-                                                //     }
-                                                // )
-
-                                                // const orderDetails = productFullLine.join("\n");
-                                                // const details = 
-                                                // `Bill Amount: Rs ${user.currentOrder.total}\nMobile Number: ${user.phoneNumber}\nShipping Address: ${user.shippingAddress}\n\nOrder :-\n\n${orderDetails}
-                                                // `;
-
-                                                // const mailOptions = 
-                                                // {
-                                                //     from: `${process.env.EMAIL}`,
-                                                //     to: `${process.env.EMAIL}`,
-                                                //     subject: `Order ${order.orderNumber}`,
-                                                //     text: details
-                                                // };
-
-                                                // sgMail
-                                                // .send(mailOptions)
-                                                // .then(() => 
-                                                //     {
-                                                //         console.log('Email sent');
-                                                //     }
-                                                // )
-                                                // .catch((error) => 
-                                                //     {
-                                                //         console.error(error);
-                                                //     }
-                                                // )
-
-                                                // transporter.sendMail(mailOptions, 
-                                                //     (err, data) =>
-                                                //     {
-                                                //         if(err)
-                                                //         {
-                                                //             console.log(err);
-                                                //         }
-
-                                                //         console.log(data);
-                                                //     }
-                                                // );
-
                                                 res.redirect(`/payments/modes/${req.params.mode}`);
                                             }
                                         }    

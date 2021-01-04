@@ -1,0 +1,109 @@
+<%- include("../partials/header"); %>
+
+<link rel="stylesheet" href="/stylesheets/form.css"/>
+<link rel="stylesheet" href="/stylesheets/app.css"/>
+
+<%- include("../partials/navbar"); %>
+
+<div class="container">
+    <div class="form-container">
+        <h1 class = "form-heading mb-5">New Product</h1>
+
+        <% if(currentProductNumber !== 0){ %>
+            <form action = "/products/preFill" method = "GET" class = "ui form mb-5">
+                <h2 class = "form-heading mb-3">Pre-fill</h2>
+                <div class="field">
+                    <label class = "label" for = "name">Product Number</label>
+                    <input class = "form-input" type="text" name="product[preProductNumber]" id = "preProductNumber" value = "<%= product.productNumber %>" required>
+                </div>
+
+                <button class = "ui button submit py-3" type="submit">Fill</button>
+            </form>
+        <% } %>
+
+        <form action = "/products" method = "POST" enctype = "multipart/form-data" class = "ui form">
+            <h2 class = "form-heading mb-3">Entry</h2>
+
+            <div class="field">
+                <label for="productNumber">Product Number</label>
+                <input type="text" name = "product[productNumber]" class="form-input" id="productNumber" value = "<%= product.productNumber %>" disabled required>
+            </div>
+            
+            <div class="field">
+                <label class = "label" for = "name">Name</label>
+                <input class = "form-input" type="text" name="product[name]" id = "name"  value = "<%= product.name %>"required>
+            </div>
+
+            <div class="field">
+                <label for="price">Price</label>
+                <input type="text" name = "product[price]" class="form-input" id="price"  value = "<%= product.price %>"required>
+            </div>
+    
+            <div class="field">
+                <label for="size">Size</label>
+                <input type="text" name = "product[size]" class="form-input" id="size" value = "<%= product.size %>"required>
+            </div>
+
+            <div class="field">
+                <label for="colour">Colour</label>
+                <input type="text" name = "product[colour]" class="form-input" id="colour"  value = "<%= product.colour %>"required>
+            </div>
+    
+            <div class="field">
+                <label for="noOfItems">Number of units</label>
+                <input type="number" name = "product[noOfUnits]" class="form-input" id="noOfUnits" value = "<%= product.noOfUnits %>" min = "1">
+            </div>
+    
+            <div class="field">
+                <label for="category">Category</label>
+                <input type="text" name = "product[category]" class="form-input" id="category"  value = "<%= product.category %>"required>
+            </div>
+    
+            <div class="field">
+                <label for="description">Detailed Description (1 paragraph)</label>
+                <textarea class="form-input" name = "product[description]" id = "description"  value = "<%= product.description %>"required></textarea>
+            </div>
+    
+            <div class="field">
+                <label for="image_uploads">Choose 5 correctly named images to upload (PNG, JPG)</label>
+                <input type="file" id="image_uploads" name="images" multiple required>
+            </div>
+            
+            <!-- <h1>Specifications Entry</h1> -->
+    
+            <div class="field">
+                <label for="dimensions">Dimensions</label>
+                <input type="text" name = "product[dimensions]" class="form-input" id="dimensions" value = "<%= product.specifications['Dimensions'] %>">
+            </div>
+    
+            <div class="field">
+                <label for="wood">Type of Wood</label>
+                <input type="text" name = "product[wood]" class="form-input" id="wood" value = "<%= product.specifications['Type of wood'] %>">
+            </div>
+            
+            <div class="field">
+                <label for="shape">Shape</label>
+                <input type="text" name = "product[shape]" class="form-input" id="shape" value = "<%= product.specifications['Shape'] %>">
+            </div>
+    
+            <div class="field">
+                <label for="mount">Mount Mechanism</label>
+                <input type="text" name = "product[mount]" class="form-input" id="mount" value = "<%= product.specifications['Mounting Mechanism'] %>">
+            </div>
+    
+            <div class="field">
+                <label for="finish">Type of Finish</label>
+                <input type="text" name = "product[finish]" class="form-input" id="finish" value = "<%= product.specifications['Finish'] %>">
+            </div>
+    
+            <div class="field">
+                <label for="weight">Weight (in kg)</label>
+                <input type="text" name = "product[weight]" class="form-input" id="weight" value = "<%= product.specifications['Weight (in kg)'] %>">
+            </div>
+
+            <button class = "ui button submit" type="submit">Create</button>
+        </form>
+    </div>
+</div>
+
+<%- include("../partials/footer"); %>

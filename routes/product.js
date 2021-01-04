@@ -38,23 +38,30 @@ router.get("/",
                             }
                             else
                             {
-                                const productDisplay = {};
+                                const productDisplay = [];
 
                                 if(productList.length !== 0)
                                 {
                                     track.categories.forEach
                                     (
-                                        category =>
+                                        (category, index) =>
                                         {
-                                            productDisplay[category] = [];
+                                            const currentCategory = 
+                                            {
+                                                name: category.name,
+                                                byline: category.byline,
+                                                products: []
+                                            };
+
+                                            productDisplay.push(currentCategory);
 
                                             productList.forEach
                                             (
                                                 product =>
                                                 {
-                                                    if(product.category.equals(category))
+                                                    if(product.category.equals(category.name) && product.production.equals("Yes"))
                                                     {
-                                                        productDisplay[category].push(product);
+                                                        productDisplay[index].products.push(product);
                                                     }
                                                 }
                                             )
@@ -115,6 +122,35 @@ router.get("/new", middleware.isAdmin,
     }
 )
 
+//Prefill new
+
+router.get("/preFill", middleware.isAdmin,
+    (req, res) =>
+    {
+        const {preProductNumber} = req.body.product;
+
+        Product.find({productNumber: preProductNumber, sizeNumber: 1, colourNumber: 1},
+            (err, foundProduct) =>
+            {
+                if(err)
+                {
+                    res.send("Error");
+                }
+                else if(foundProduct)
+                {
+                    res.render("product/newPreFill", {product: foundProduct});
+                }
+                else
+                {
+                    req.flash("error", "Invalid product number!");
+                    res.redirect("/products/new");
+                }
+            }
+        )
+    }
+)
+
+
 //Create 
 
 router.post("/", upload.array('images', 5), middleware.isAdmin,
@@ -137,12 +173,19 @@ router.post("/", upload.array('images', 5), middleware.isAdmin,
         product.noOfItems = parseInt(productModel.price);
         product.productNumber = parseInt(productModel.productNumber);
         product.category = productModel.category;
+        product.production = productModel.production;
+        product.stock = productModel.stock;
         product.specifications["Dimensions"] = productModel.dimensions;
         product.specifications["Finish"] = productModel.finish;
         product.specifications["Mounting Mechanism"] = productModel.mount;
         product.specifications["Type of wood"] = productModel.wood;
         product.specifications["Shape"] = productModel.shape;
         product.specifications["Weight (in kg)"] = productModel.weight;
+
+        if(product.production.equals("No"))
+        {
+            product.stock = "No";
+        }
 
         const allImages = req.files;
         let images = new Array(5);
@@ -200,9 +243,28 @@ router.post("/", upload.array('images', 5), middleware.isAdmin,
                         track.currentProductNumber += 1;
                         product.productNumber = track.currentProductNumber;
 
-                        if(!track.categories.includes(product.category))
+                        let categoryPresence = false;
+
+                        track.categories.forEach
+                        (
+                            category =>
+                            {
+                                if(category.name.equals(product.category))
+                                {
+                                    categoryPresence = true;
+                                }
+                            }
+                        )
+
+                        if(!categoryPresence)
                         {
-                            track.categories.push(product.category);
+                            const newCategory = 
+                            {
+                                name: product.category,
+                                byline: productModel.categoryByline
+                            }
+
+                            track.categories.push(newCategory);
                         }
 
                         await track.save();
@@ -390,7 +452,23 @@ router.get("/:id",
                                                     }
                                                 }
 
-                                                res.render("product/show", {product: foundProduct, images: images, lineup: foundLineup, hasBoughtProduct: hasBoughtProduct});
+                                                if(foundProduct.production.equals("No"))
+                                                {
+                                                    if(req.user.isAdmin)
+                                                    {
+                                                        res.render("product/show", {product: foundProduct, images: images, lineup: foundLineup, hasBoughtProduct: hasBoughtProduct});
+                                                    }
+                                                    else
+                                                    {
+                                                        req.flash("error", "You are not authorised to do that");
+                                                        res.redirect("/products");
+                                                    }
+                                                }
+
+                                                else
+                                                {
+                                                    res.render("product/show", {product: foundProduct, images: images, lineup: foundLineup, hasBoughtProduct: hasBoughtProduct});
+                                                }
                                             }
                                         }
                                     )
@@ -398,7 +476,17 @@ router.get("/:id",
 
                                 else
                                 {
-                                    res.render("product/show", {product: foundProduct, images: images, lineup: foundLineup, hasBoughtProduct: hasBoughtProduct});
+                                    if(foundProduct.production.equals("No"))
+                                    {
+                                        req.flash("error", "You are not authorised to do that");
+                                        res.redirect("/products");
+                                    }
+
+                                    else
+                                    {
+                                        res.render("product/show", {product: foundProduct, images: images, lineup: foundLineup, hasBoughtProduct: hasBoughtProduct});
+                                    }
+                                    
                                 }
                             }
                         }
@@ -421,6 +509,8 @@ router.get("/models/:modelNumber",
     {
         const modelNumber = parseInt(req.params.modelNumber);
 
+        const {productNumber, sizeNumber} = req.body.product;
+
         Product.findOne({modelNumber: modelNumber},
             (err, foundProduct) =>
             {
@@ -428,9 +518,30 @@ router.get("/models/:modelNumber",
                 {
                     res.send("Error!");
                 }
-                else
+                else if(foundProduct)
                 {
                     res.redirect("/products/" + foundProduct._id);
+                }
+                else
+                {
+                    Product.findOne({productNumber: productNumber, sizeNumber: sizeNumber, colourNumber: 1},
+                        (err, backupProduct) =>
+                        {
+                            if(err)
+                            {
+                                res.send(err);
+                            }
+                            else if(backupProduct)
+                            {
+                                res.redirect("/products/" + backupProduct._id);
+                            }
+                            else
+                            {
+                                req.flash("error", "Product does not exist");
+                                res.redirect("/products");
+                            }
+                        }    
+                    )
                 }
             }
         )
@@ -449,9 +560,14 @@ router.get("/:id/edit", middleware.isAdmin,
                 {
                     res.send("Error");
                 }
-                else
+                else if(foundProduct)
                 {
                     res.render("product/edit", {product: foundProduct});
+                }
+                else
+                {
+                    req.flash("error", "Product does not exist");
+                    res.redirect("/products/new");
                 }
             }
         )
@@ -472,11 +588,18 @@ router.put("/:id", middleware.isAdmin,
                     console.log(err);
                     res.redirect("/products/" + req.params.id + "/edit");
                 }
-                else
+                else if(foundProduct)
                 {
                     foundProduct.name = name;
                     foundProduct.price = price;
                     foundProduct.description = description;
+                    foundProduct.production = production;
+                    foundProduct.stock = stock;
+
+                    if(foundProduct.production.equals("No"))
+                    {
+                        foundProduct.stock = "No";
+                    }
 
                     Product.findByIdAndUpdate(req.params.id, foundProduct, 
                         (err, updatedProduct) =>
@@ -493,6 +616,11 @@ router.put("/:id", middleware.isAdmin,
                             }
                         }
                     )
+                }
+                else
+                {
+                    req.flash("error", "Product does not exist");
+                    res.redirect("/products/new");
                 }
             }    
         );
@@ -511,13 +639,15 @@ router.post("/:id/checkout", middleware.isLoggedIn,
 				{
 					console.log(err);
 				}
-				else
+				else if(product && product.stock.equals("Yes"))
 				{
                     const quantity = req.body.quantity;
+                    const customisation = req.body.customisation;
                     const item = 
                     {
                         product: product, 
-                        quantity: quantity
+                        quantity: quantity,
+                        customisation: customisation
                     };
                     const order = [];
                     order.push(item);
@@ -546,7 +676,12 @@ router.post("/:id/checkout", middleware.isLoggedIn,
                     )
 
 					res.render("user/checkout", {order: order, deliveryCharge: deliveryCharge, total: total});	
-				}
+                }
+                else
+                {
+                    req.flash("error", "Product does not exist");
+                    res.redirect("/products");
+                }
 			}
 		);
 	}

@@ -71,37 +71,6 @@
                 </tbody>
             </table>
         </div>
-
-        <% if(currentUser){ %>
-            <div class = "product-quantity mb-4">
-                <span>How many?</span>
-                <input class = "form-control-lg" type = "number" id = "quantity" value = "1" min = "1" max = "10">
-            </div>
-    
-            <div class="product-links center">
-                <form class = "product-form" action="/products/<%= product._id %>/checkout" method="POST">
-                    <input type = "number" name = "quantity" class = "d-none form-quantity" min = "1" max = "10">
-                    <button type = "submit" class="ui button submitButton">Buy Now</button>
-                </form>
-            </div>
-    
-            <div class="product-links">
-                <form class = "product-form" action = "/users/<%= currentUser._id %>/cart/products/<%= product._id %>" method = "POST">
-                    <input type = "number" name = "quantity" class = "d-none form-quantity" min = "1" max = "10">
-                    <button type = "submit" class="ui button submitButton">Add to cart</button>
-                </form>
-    
-                <form class = "product-form" action = "/users/<%= currentUser._id %>/wishlist/products/<%= product._id %>" method = "POST">
-                    <input type = "number" name = "quantity" class = "d-none form-quantity" min = "1" max = "10">
-                    <button type = "submit" class="ui button submitButton">Save to wishlist</button>
-                </form>
-            </div>
-        <% }else{ %>
-            <div>Sign in to unlock purchases</div>
-            <div>
-                <a href = "/login" class="ui button">Sign In</a>
-            </div>
-        <% } %>
     </div>
 </div>
 
@@ -109,9 +78,20 @@
     <div class="product-variations-section">
         <% for(let i = 0; i < lineup.sizeList.length; i++){ %>
             <% const modelNumber = `${product.productNumber}${i+1}${product.colourNumber}`; %>
-            <a href = "/products/models/<%= modelNumber %>" class = "<%= ((i + 1) === product.sizeNumber) ? 'selected' : 'not-selected' %> product-variations-item">
+            <form action = "/products/models/<%= modelNumber %>" method = "GET" class = "ui form">
+                <div class = "field d-none">
+                    <input class = "form-input" type="text" name="product[productNumber]" id = "productNumber" value = "<%= product.productNumber %>" required>
+                </div>
+
+                <div class = "field d-none">
+                    <input class = "form-input" type="text" name="product[sizeNumber]" id = "sizeNumber" value = "<%= product.sizeNumber %>" required>
+                </div>
+
+                <button class = "<%= ((i + 1) === product.sizeNumber) ? 'selected' : 'not-selected' %> product-variations-item" type="submit"><%= lineup.sizeList[i] %></button>
+            </form>
+            <!-- <a href = "" class = "<%= ((i + 1) === product.sizeNumber) ? 'selected' : 'not-selected' %> product-variations-item">
                 <%= lineup.sizeList[i] %>
-            </a>
+            </a> -->
         <% } %>
     </div>
     <div class="product-variations-section">
@@ -125,15 +105,80 @@
 </div>
 
 <div class="third container">
-    <div class = "box product-description">
-        <div class = "product-description-heading">
+    <div class = "box product-section">
+        <% if(currentUser && product.stock.equals("Yes")){ %>
+            <div class = "product-heading">Like what you see?</div>
+
+            <div class = "product-quantity mb-4">
+                <span>How many?</span>
+                <input class = "form-control-lg" type = "number" id = "quantity" value = "1" min = "1" max = "10">
+            </div>
+    
+            <div class="product-links center">
+                <form class = "product-form" action="/products/<%= product._id %>/checkout" method="POST">
+                    <input type = "text" name = "customisation" class = "d-none form-customisation">
+                    <input type = "number" name = "quantity" class = "d-none form-quantity" min = "1" max = "10">
+                    <button type = "submit" class="ui button submitButton">Buy Now</button>
+                </form>
+            </div>
+    
+            <div class="product-links mb-4">
+                <form class = "product-form" action = "/users/<%= currentUser._id %>/cart/products/<%= product._id %>" method = "POST">
+                    <input type = "text" name = "customisation" class = "d-none form-customisation">
+                    <input type = "number" name = "quantity" class = "d-none form-quantity" min = "1" max = "10">
+                    <button type = "submit" class="ui button submitButton">Add to cart</button>
+                </form>
+    
+                <form class = "product-form" action = "/users/<%= currentUser._id %>/wishlist/products/<%= product._id %>" method = "POST">
+                    <input type = "text" name = "customisation" class = "d-none form-customisation">
+                    <input type = "number" name = "quantity" class = "d-none form-quantity" min = "1" max = "10">
+                    <button type = "submit" class="ui button submitButton">Save to wishlist</button>
+                </form>
+            </div>
+
+            <h2 class = "text-center">Personalise</h2>
+
+            <div class = "text-center">Think it could do with a personal touch? Want to make it your own?</div>
+
+            <div class="inline fields customisation">
+                <label for = "customisation">Customisation: </label>
+                <div class="field">
+                    <div class="ui radio checkbox">
+                        <input type="radio" name = "customisation" checked tabindex="0" class="hidden" value = "None" id = "customisation_none">
+                        <label for="customisation_yes">Yes</label>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="ui radio checkbox">
+                        <input type="radio" name = "customisation" tabindex="0" class="hidden" value = "Custom" id = "customisation_custom">
+                        <label for="customisation_no">No</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hide text-center" id = "customText">
+                We'll contact you through the phone number associated with your account, to discuss what you have in mind.
+            </div>
+        <% }else if{  %>
+            <div>This item is currently out of stock</div>
+        <% }else{ %>
+            <div>Sign in to unlock purchases</div>
+            <div>
+                <a href = "/login" class="ui button">Sign In</a>
+            </div>
+        <% } %>
+    </div>
+
+    <div class = "box product-section">
+        <div class = "product-heading">
             Description
         </div>
         <hr class = "line">
         <div class = "text-center"><%= product.description %></div>
     </div>
 
-    <div class="product-specifications text-center">
+    <div class="product-section text-center">
         <div class = "box header">
             <span>Specifications</span>
         </div>
@@ -160,7 +205,7 @@
         </div>
     </div>
 
-    <div class="product-reviews">
+    <div class="product-section">
         <div class = "box header mb-3">
             <span>Customer Reviews</span>
         </div>

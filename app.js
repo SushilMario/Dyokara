@@ -173,12 +173,12 @@ app.use
 
 // Create tracking object
 
-const primaryTrack = 
-{
-    name: "primary",
-    currentOrderNumber: 1,
-    currentProductNumber: 0
-};
+// const primaryTrack = 
+// {
+//     name: "primary",
+//     currentOrderNumber: 1,
+//     currentProductNumber: 0
+// };
 
 // Tracking.deleteMany({name: "primary"},
 //     (err) =>

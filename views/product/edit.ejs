@@ -18,6 +18,41 @@
                 <label for="price">Price</label>
                 <input type="text" name = "product[price]" class="form-input" value = "<%= product.price %>" id="price">
             </div>
+
+            <h2 class = "input-heading">In Production?</h2>
+
+            <div class="grouped fields production">
+                <div class="field">
+                    <div class="ui radio checkbox">
+                        <input type="radio" name="product[production]" checked tabindex="0" class="hidden" value = "Yes" id = "production_yes">
+                        <label for="production_yes">Yes</label>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="ui radio checkbox">
+                        <input type="radio" name="product[production]" tabindex="0" class="hidden" value = "No" id = "production_no">
+                        <label for="production_no">No</label>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class = "input-heading">In Stock?</h2>
+
+            <div class="grouped fields stock">
+                <div class="field">
+                    <div class="ui radio checkbox">
+                        <input type="radio" name="product[stock]" checked tabindex="0" class="hidden" value = "Yes" id = "stock_yes">
+                        <label for="stock_yes">Yes</label>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="ui radio checkbox">
+                        <input type="radio" name="product[stock]" tabindex="0" class="hidden" value = "No" id = "stock_no">
+                        <label for="stock_no">No</label>
+                    </div>
+                </div>
+            </div>
     
             <div class="field">
                 <label for="description">Detailed Description (1 paragraph)</label>

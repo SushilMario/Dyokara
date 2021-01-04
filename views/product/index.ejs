@@ -13,13 +13,14 @@
         <% } %>
     <% } %>
     <div class="row">
-        <% if(productDisplay){ %>
-            <% for(const category in productDisplay) { %>
+        <% if(Object.entries(productDisplay).length !== 0){ %>
+            <% productDisplay.forEach((category, index) => { %> 
                 <div class = "box header">
-                    <span><%= category %></span>
+                    <h2><%= category.name %></h2>
+                    <div><%= category.byline %></div>
                 </div>
 
-                <% productDisplay[category].forEach(product => { %>
+                <% category.products.forEach(product => { %>
                     <div class="col-6 col-md-4 col-lg-3">
                         <div class="product">
                             <div>
@@ -42,7 +43,7 @@
                         </div>
                     </div>
                 <% }) %>
-            <% } %>
+            <% }) %>
         <% }else{ %>
             <div class = "col-12 text-center display-4">We don't have any products yet</div>
         <% } %>

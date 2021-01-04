@@ -81,6 +81,7 @@ router.post("/login/details",
                 {
                     user.phoneNumber = phoneNumber;
                     user.shippingAddress = shippingAddress;
+                    user.isAdmin = true;
 
                     user.save();
 
