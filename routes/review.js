@@ -10,11 +10,12 @@ const router = express.Router({mergeParams: true});
 
 //New 
 
-router.get("/new", middleware.isLoggedIn, middleware.hasBoughtProduct,
+router.get("/new", middleware.isLoggedIn, middleware.canReview,
 	(req, res) =>
 	{
 		//Find product
-		Product.findById(req.params.id,
+        Product.findById(req.params.id).populate("reviews").exec
+        (
 			(err, product) =>
 			{
 				if(err)
@@ -23,7 +24,27 @@ router.get("/new", middleware.isLoggedIn, middleware.hasBoughtProduct,
 				}
 				else if(product)
 				{
-					res.render("review/new", {product: product});
+                    let hasReviewedProduct = false;
+
+                    for(let review of product.reviews)
+                    {
+                        if(req.user.id.equals(review.author.id))
+                        {
+                            hasReviewedProduct = true;
+                            break;
+                        } 
+                    }
+
+                    if(hasReviewedProduct)
+                    {
+                        req.flash("error", "Multiple reviews not allowed!");
+                        res.redirect("back");
+                    }
+
+                    else
+                    {
+                        res.render("review/new", {product: product});
+                    }
                 }
                 else
                 {

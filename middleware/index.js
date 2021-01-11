@@ -142,8 +142,8 @@ middlewareObj.stringify = function(num, len)
     return stringifiedNum;
 }
 
-//Has bought product
-middlewareObj.hasBoughtProduct = (req, res, next) =>
+//Can review product
+middlewareObj.canReview = (req, res, next) =>
 {
     let checker = false;
     const userId = req.user.id;

@@ -102,19 +102,6 @@
     max-width: 30rem;
 }
 
-.item-details-name_link
-{
-    color: #555B6E;
-    text-decoration-line: underline;
-
-    transition: all 0.2s;
-}
-
-.item-details-name_link:hover
-{
-    opacity: 0.5;
-}
-
 .item-sub_details
 {
     display: flex;
@@ -139,6 +126,15 @@
     justify-content: space-between;
 }
 
+.ui.button
+{
+    font-size: 1.5rem;
+
+    width: 100%;
+
+    padding: 1rem;
+}
+
 .ui.button.checkout
 {
     font-family: 'Cormorant Garamond', serif;
@@ -153,9 +149,6 @@
 
     padding-top: 2rem;
     padding-bottom: 2rem;
-
-    background-color: #FFD6BA;
-    color: #555B6E; 
     
     transition: all 0.25s;
 
@@ -168,16 +161,7 @@
     color: #FFFFFF;
 }
 
-.ui.button
-{
-    font-size: 1.5rem;
-
-    width: 100%;
-
-    padding: 1rem;
-}
-
-.ui.button.checkout:hover
+/* .ui.button.checkout:hover
 {
     color:#555B6E;
     background-color: #FAF9F9; 
@@ -189,7 +173,7 @@
 {
     transform: translateY(-0.1rem);
     box-shadow: 0 1rem 2rem rgba( 0 , 0 , 0 , 0.5); 
-}
+} */
 
 @media only screen and (max-width: 992px) 
 {

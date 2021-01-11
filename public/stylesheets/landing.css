@@ -28,12 +28,12 @@ body::before
 
 .logo
 {
-    background-image: url("https://res.cloudinary.com/dyokara/image/upload/v1608443169/App/logo_qfl0r9.jpg");
+    background-image: url("https://res.cloudinary.com/dyokara/image/upload/v1610269490/App/logo1_ijmrsq.png");
     background-size: cover;
     background-position: center;
 
-    width: 38.08rem;
-    height: 11rem;
+    width: 30rem;
+    height: 7.5rem;
 
     margin: 0 auto;
     margin-bottom: 15rem;

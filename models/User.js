@@ -40,7 +40,8 @@ let UserSchema = new mongoose.Schema
                     }
                 }
             ],
-            total: Number
+            total: Number,
+            orderDate: Date
         },
 
         cart:

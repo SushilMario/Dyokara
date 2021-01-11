@@ -103,10 +103,10 @@ body::before
 
 .brand-image
 {
-    height: 4.5rem;
-    width: 16rem;
+    height: 3.5rem;
+    width: 14.5rem;
     
-    margin-top: 0.5rem;
+    margin-top: 0.75rem;
 }
 
 .center
@@ -180,6 +180,11 @@ body::before
     color: rgb(105, 0, 0);
 }
 
+.warning
+{
+    color: rgb(105, 0, 0);
+}
+
 /* Initial Container */
 
 .initial-container
@@ -189,6 +194,19 @@ body::before
 }
 
 /* Utilities */
+
+.link
+{
+    color: #555B6E;
+    text-decoration-line: underline;
+
+    transition: all 0.2s;
+}
+
+.link:hover
+{
+    opacity: 0.5;
+}
 
 .semi-bold
 {
@@ -212,9 +230,23 @@ body::before
     opacity: 0.25;
 }
 
-.ui.form .field.hide
+.hide
 {
     display: none;
+}
+
+.main-heading
+{
+    font-weight: 700;
+    font-size: 3rem;
+    text-align: center;
+}
+
+.sub-heading
+{
+    font-weight: 400;
+    font-size: 2rem;
+    text-align: center;
 }
 
 /* Box */
@@ -249,6 +281,13 @@ body::before
     margin-bottom: 4rem;
 }
 
+.header-box
+{
+    margin: 0 auto; 
+    margin-bottom: 3rem;
+    padding: 1rem 4rem;
+}
+
 .input-heading
 {
     font-weight: 700;
@@ -256,6 +295,50 @@ body::before
 }
 
 /* Button */
+
+.product-variations-section
+{
+    display: flex;
+    justify-content: space-around;
+    align-items: center; 
+    flex-wrap: wrap;
+
+    height: fit-content;
+    min-height: 6rem;
+
+    width: 45rem;
+}
+
+.product-variations-item
+{
+    width: 25%;
+    margin: 0 2.5%;
+    padding: 0.5rem 1rem;
+    background-color: rgb(255, 255, 255);
+
+    border-radius: 0.5rem;
+
+    text-align: center;
+    text-decoration: none;
+    color: #555B6E;
+
+    box-shadow: 0 0.5rem 1rem rgba( 0 , 0 , 0 , 0.5);
+
+    transition: all 0.2s;
+
+    margin-bottom: 2rem;
+}
+
+.product-variations-item:hover
+{   
+    text-decoration: none;
+    color: #FAF9F9;
+
+    background-color: #555B6E;
+    box-shadow: 0 1rem 2rem rgba( 0 , 0 , 0 , 0.5);
+
+    cursor: pointer;
+}
 
 .ui.button
 {
@@ -272,24 +355,25 @@ body::before
     background-color: #FFD6BA;
     color: #555B6E; 
     
-    transition: all 0.25s;
+    transition: all 0.2s;
 
-    box-shadow: 0 1rem 2rem rgba( 0 , 0 , 0 , 0.5); 
+    box-shadow: 0 0.5rem 1rem rgba( 0 , 0 , 0 , 0.5);
 }
 
 .ui.button:hover
 {
-    color:#555B6E;
-    background-color: #FAF9F9; 
-    transform: translateY(-0.3rem);
-    box-shadow: 0 2rem 4rem rgba( 0 , 0 , 0 , 0.5); 
+    background-color: #555B6E;
+    color: #FFD6BA;
+    
+    /* transform: translateY(-0.25rem); */
+    box-shadow: 0 1rem 2rem rgba( 0 , 0 , 0 , 0.5);
 }
 
-.ui.button:active
+/* .ui.button:active
 {
     transform: translateY(-0.1rem);
     box-shadow: 0 0.5rem 1rem rgba( 0 , 0 , 0 , 0.5); 
-}
+} */
 
 /* Footer */
 

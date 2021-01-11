@@ -1,7 +1,5 @@
 const express = require("express");
 
-// sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-
 //Models
 const Product = require("../models/Product.js");
 const User = require("../models/User.js");
@@ -123,7 +121,7 @@ router.get("/:mode", middleware.isLoggedIn,
 
                                     user.currentOrder.items.forEach(item => 
                                         {
-                                            const {product, quantity} = item;
+                                            const {product, quantity, customisation} = item;
                                             const {name, price, colour, size, _id} = product;
 
                                             productIDs.push(_id);
@@ -137,6 +135,8 @@ router.get("/:mode", middleware.isLoggedIn,
                                     );
 
                                     newOrder.total = user.currentOrder.total;
+
+                                    newOrder.orderDate = user.currentOrder.orderDate;
 
                                     newOrder.orderNumber = middleware.stringify(currentOrderNumber, 8);
 

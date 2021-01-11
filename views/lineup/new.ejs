@@ -1,0 +1,35 @@
+<%- include("../partials/header"); %>
+
+<link rel="stylesheet" href="/stylesheets/form.css"/>
+<link rel="stylesheet" href="/stylesheets/app.css"/>
+
+<%- include("../partials/navbar"); %>
+
+<div class="container">
+    <div class="form-container">
+        <h1 class = "form-heading mb-5">New Lineup</h1>
+
+        <form action = "/lineups" method = "POST" class = "ui form">
+            <div class="field">
+                <label for="productNumber">Lineup Number</label>
+                <input type="text" class="form-input" id="lineupNumber" value = "<%= currentLineupNumber + 1 %>" required disabled>
+                <input type="text" name = "lineup[lineupNumber]" class="d-none" value = "<%= currentLineupNumber + 1 %>">
+            </div>
+            
+            <div class="field">
+                <label class = "label" for = "name">Name</label>
+                <input class = "form-input" type="text" name="lineup[name]" id = "name" required>
+            </div>
+
+            <div class="field">
+                <label for="category">Category</label>
+                <input type="text" class="form-input" value = "<%= category.name %>" required disabled>
+                <input type="text" name = "lineup[category]" class="d-none" id="category" value = "<%= category.name %>">
+            </div>
+
+            <button class = "ui button submit" type="submit">Create</button>
+        </form>
+    </div>
+</div>
+
+<%- include("../partials/footer"); %>

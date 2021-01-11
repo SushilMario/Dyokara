@@ -6,9 +6,11 @@
 
 <div class="container initial-container">
     <div class="bag">
-        <div class = "heading">
-            <span><%= order.orderNumber %></span>
+        <div class = "box header-box w-100">
+            <div class = "main-heading"><%= order.orderNumber %></div>
+            <div class = "sub-heading"><%= order.orderDate.toDateString() %></div>
         </div>
+
         <% order.items.forEach(item => { %>
             <% console.log(item); %>
             <div class = "item">
@@ -36,6 +38,10 @@
                             </div>
                         </div>
                     </div>
+                    <div class = "item-customisation d-flex justify-content-between w-100">
+                        <span>Customisation: </span>
+                        <span class="semi-bold"><%= item.customisation %></span>
+                    </div>
                 </div>
             </div>
         <% }) %>
@@ -46,20 +52,22 @@
                 
         <section>Name: <%= order.customer.username %></section>
         <section>Phone Number: <%= order.customer.phoneNumber %></section>
-        <section>Account Number: <% (order.customer.bankAccountNo) ? order.customer.bankAccountNo : "Not specified" %></section>
+        <section>Account Number: <%= (order.customer.bankAccountNo) ? order.customer.bankAccountNo : "Not provided" %></section>
         <section>
-            <p>Shipping Address: </p>
-            <p><%= order.customer.shippingAddress %></p>
+            <p class = "mt-3">Shipping Address: </p>
+            <p class = "mt-1"><%= order.customer.shippingAddress %></p>
         </section>
 
-        <div class = "payment-gateway">
-            <form action = "/orders/<%= order._id %>?_method=PUT" method = "POST">
-                <button type="submit" class = "ui button pay">Confirm</button>
-            </form>
-            <form action = "/orders/<%= order._id %>?_method=DELETE" method = "POST">
-                <button type="submit" class = "ui button pay">Cancel</button>
-            </form>
-        </div>
+        <% if(!order.confirmed){ %>
+            <div class = "payment-gateway">
+                <form action = "/orders/<%= order._id %>?_method=PUT" method = "POST">
+                    <button type="submit" class = "ui button pay">Confirm</button>
+                </form>
+                <form action = "/orders/<%= order._id %>?_method=DELETE" method = "POST">
+                    <button type="submit" class = "ui button pay">Cancel</button>
+                </form>
+            </div>
+        <% } %> 
     </div>
 </div>
 

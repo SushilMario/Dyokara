@@ -1,0 +1,57 @@
+<%- include("../partials/header"); %>
+
+<link rel="stylesheet" href="/stylesheets/adminIndex.css">
+
+<%- include("../partials/navbar"); %>
+
+<div class="container initial-container">
+    <% if(categories.length != 0){ %>
+        <div class = "order order-header">
+            <div class="order-details">
+                <span class = "order-field">S. No</span>
+            </div>
+
+            <div class="order-details">
+                <span class = "order-field">Name</span>
+            </div>
+    
+            <div class="order-details">
+                <span class = "order-field">Lineups</span>
+            </div>
+    
+            <div class="order-status">
+                <span class = "order-field">Edit</span>
+            </div>
+        </div>
+
+        <% categories.forEach((category, index) => { %>
+            <div class = "order">
+                <div class="order-details number">
+                    <span class = "order-field"><%= index + 1 %>.</span>
+                </div>
+
+                <div class="order-details number">
+                    <a href = "/categories/<%= category._id %>" class = "order-field link"><%= category.name %></a>
+                </div>
+        
+                <div class="order-details number">
+                    <span class = "order-field"><%= category.lineups.length %></span>
+                </div>
+        
+                <div class="order-status">
+                    <form action = "/categories/<%= category._id %>?_method=PUT" method = "POST" class = "order-status-form order-field">
+                        <button type="submit" class = "ui button order-status"><i class = "fas fa-edit"></i></button>
+                    </form>
+                </div>
+            </div>
+        <% }) %>
+    <% }else{ %>
+        <div class = "col-12 text-center display-4">No categories yet!</div>
+    <% } %>
+
+    <div class = "my-5">
+        <a href="/categories/new" class="ui button">New</a>
+    </div>
+</div>
+
+<%- include("../partials/footer"); %>

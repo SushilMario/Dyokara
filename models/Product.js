@@ -18,12 +18,6 @@ let ProductSchema = new mongoose.Schema
                     url: String,
                     filename: String,
                 }
-                // 0 small: String, CART
-                // 1 medium: String, INDEX
-
-                // 2 large1: String, SHOW
-                // 3 large2: String, SHOW
-                // 4 large3: String, SHOW
             ],
             
             specifications:
@@ -36,11 +30,11 @@ let ProductSchema = new mongoose.Schema
                 "Weight (in kg)": String
             },
 
+            lineupNumber: Number,
             productNumber: Number,
+            sizeNumber: Number,
+            colourNumber: Number,
             category: String,
-            modelNumber: String,
-            sizeNumber: String,
-            colourNumber: String,
 
             reviews:
             [

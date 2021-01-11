@@ -1,0 +1,48 @@
+<%- include("../partials/header"); %>
+
+<link rel="stylesheet" href="/stylesheets/form.css"/>
+<link rel="stylesheet" href="/stylesheets/app.css"/>
+
+<%- include("../partials/navbar"); %>
+
+<div class="container">
+    <div class="form-container">
+        <h1 class = "form-heading mb-5">Edit Lineup Production</h1>
+
+        <form action = "/lineups/<%= lineup._id %>/production?_method=PUT" method = "POST" class = "ui form">
+            <h2 class = "form-heading mb-3 warning">Warning: This applies to all products in this lineup!</h2>
+
+            <div class="field">
+                <label for="productNumber">Lineup Number</label>
+                <input type="text" name = "lineup[lineupNumber]" class="form-input" id="lineupNumber" value = "<%= lineup.LineupNumber %>" required disabled>
+            </div>
+            
+            <div class="field">
+                <label class = "label" for = "name">Name</label>
+                <input class = "form-input" type="text" name="lineup[name]" id = "name" value = "<%= lineup.name %>" required disabled>
+            </div>
+
+            <h2 class = "input-heading">In Production?</h2>
+
+            <div class="grouped fields production">
+                <div class="field">
+                    <div class="ui radio checkbox">
+                        <input type="radio" name="lineup[production]" checked tabindex="0" class="hidden" value = "Yes" id = "production_yes">
+                        <label for="production_yes">Yes</label>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="ui radio checkbox">
+                        <input type="radio" name="lineup[production]" tabindex="0" class="hidden" value = "No" id = "production_no">
+                        <label for="production_no">No</label>
+                    </div>
+                </div>
+            </div>
+
+            <button class = "ui button submit" type="submit">Save</button>
+        </form>
+    </div>
+</div>
+
+<%- include("../partials/footer"); %>

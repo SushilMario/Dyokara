@@ -7,16 +7,19 @@
 
 <div class="container">
     <div class="form-container">
-        <h1 class = "form-heading mb-5">Edit Product</h1>
-        <form action = "/products/<%= product._id %>?_method=PUT" method = "POST" class = "ui form">
+        <h1 class = "form-heading mb-5">New Product</h1>
+
+        <form action = "/products" method = "POST" enctype = "multipart/form-data" class = "ui form">
             <div class="field">
                 <label for="productNumber">Lineup Number</label>
-                <input type="text" name = "product[lineupNumber]" class="form-input" id="lineupNumber" value = "<%= product.lineupNumber %>" required disabled>
+                <input type="text" class="form-input" value = "<%= product.lineupNumber %>" required disabled>
+                <input type="text" name = "product[lineupNumber]" class="d-none" id="lineupNumber" value = "<%= product.lineupNumber %>">
             </div>
 
             <div class="field">
                 <label for="category">Category</label>
-                <input type="text" name = "product[category]" class="form-input" id="category" value = "<%= product.category %>" required disabled>
+                <input type="text" class="form-input" value = "<%= product.category %>" required disabled>
+                <input type="text" name = "product[category]" class="d-none" id="category" value = "<%= product.category %>">
             </div>
             
             <div class="field">
@@ -31,12 +34,12 @@
 
             <div class="field">
                 <label for="size">Size</label>
-                <input type="text" name = "product[size]" class="form-input" id="size" value = "<%= product.size %>" required disabled>
+                <input type="text" name = "product[size]" class="form-input" id="size" required>
             </div>
     
             <div class="field">
                 <label for="colour">Colour</label>
-                <input type="text" name = "product[colour]" class="form-input" id="colour" value = "<%= product.colour %>" required disabled>
+                <input type="text" name = "product[colour]" class="form-input" id="colour" required>
             </div>
     
             <div class="field">
@@ -48,17 +51,18 @@
                 <label for="description">Detailed Description (1 paragraph)</label>
                 <textarea class="form-input" name = "product[description]" id = "description" required><%= product.description %></textarea>
             </div>
+    
+            <div class="field">
+                <label for="image_uploads">Choose 5 correctly named images to upload (PNG, JPG)</label>
+                <input type="file" id="image_uploads" name="images" multiple required>
+            </div>
 
             <h2 class = "input-heading">In Production?</h2>
-
-            <div class="d-none" id = "production_status"><%= product.production %></div>
-
-            <div class="d-none" id = "stock_status"><%= product.stock %></div>
 
             <div class="grouped fields production">
                 <div class="field">
                     <div class="ui radio checkbox">
-                        <input type="radio" name="product[production]" tabindex="0" class="hidden" value = "Yes" id = "production_yes">
+                        <input type="radio" name="product[production]" checked tabindex="0" class="hidden" value = "Yes" id = "production_yes">
                         <label for="production_yes">Yes</label>
                     </div>
                 </div>
@@ -76,7 +80,7 @@
             <div class="grouped fields stock">
                 <div class="field">
                     <div class="ui radio checkbox">
-                        <input type="radio" name="product[stock]" tabindex="0" class="hidden" value = "Yes" id = "stock_yes">
+                        <input type="radio" name="product[stock]" checked tabindex="0" class="hidden" value = "Yes" id = "stock_yes">
                         <label for="stock_yes">Yes</label>
                     </div>
                 </div>
@@ -87,7 +91,9 @@
                     </div>
                 </div>
             </div>
-
+            
+            <!-- <h1>Specifications Entry</h1> -->
+    
             <div class="field">
                 <label for="dimensions">Dimensions</label>
                 <input type="text" name = "product[dimensions]" class="form-input" id="dimensions" value = "<%= product.specifications["Dimensions"] %>" placeholder="Height x Width">
@@ -118,33 +124,9 @@
                 <input type="text" name = "product[weight]" class="form-input" id="weight" value = "<%= product.specifications["Weight (in kg)"] %>">
             </div>
 
-            <button class = "ui button submit" type="submit">Save</button>
+            <button class = "ui button submit" type="submit">Create</button>
         </form>
     </div>
 </div>
-
-<script>
-    const stockStatus = document.getElementById("stock_status").innerText;
-    const stockRadioButtons = document.getElementsByName("product[stock]");
-
-    const productionStatus = document.getElementById("production_status").innerText;
-    const productionRadioButtons = document.getElementsByName("product[production]");
-
-    for(let index = 0; index < stockRadioButtons.length; index++) 
-    {
-        if(stockStatus === stockRadioButtons[index].value)
-        {
-            stockRadioButtons[index].checked = true;
-        }
-    }
-
-    for(let index = 0; index < productionRadioButtons.length; index++) 
-    {
-        if(productionStatus === productionRadioButtons[index].value)
-        {
-            productionRadioButtons[index].checked = true;
-        }
-    }
-</script>
 
 <%- include("../partials/footer"); %>

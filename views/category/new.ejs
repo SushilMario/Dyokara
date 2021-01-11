@@ -1,0 +1,28 @@
+<%- include("../partials/header"); %>
+
+<link rel="stylesheet" href="/stylesheets/form.css"/>
+<link rel="stylesheet" href="/stylesheets/app.css"/>
+
+<%- include("../partials/navbar"); %>
+
+<div class="container">
+    <div class="form-container">
+        <h1 class = "form-heading mb-5">New Category</h1>
+
+        <form action = "/categories" method = "POST" class = "ui form">
+            <div class="field">
+                <label class = "label" for = "name">Name</label>
+                <input class = "form-input" type="text" name="category[name]" id = "name" required>
+            </div>
+
+            <div class="field">
+                <label for="category">Byline</label>
+                <input type="text" name = "category[byline]" class="form-input" id="byline">
+            </div>
+
+            <button class = "ui button submit" type="submit">Create</button>
+        </form>
+    </div>
+</div>
+
+<%- include("../partials/footer"); %>

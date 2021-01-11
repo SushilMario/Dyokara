@@ -13,12 +13,13 @@ const  express        = require("express"),
        cookieSession  = require("cookie-session"),
        GoogleStrategy = require("passport-google-oauth20"),
        flash          = require("connect-flash"),
-       nodemailer     = require("nodemailer"),
        mongoSanitize  = require('express-mongo-sanitize');
 
 //Routes
 
-const productRoutes  = require("./routes/product"),
+const categoryRoutes = require("./routes/category"),
+      lineupRoutes   = require("./routes/lineup"),
+      productRoutes  = require("./routes/product"),
       reviewRoutes   = require("./routes/review"),
       cartRoutes     = require("./routes/cart"),
       wishlistRoutes = require("./routes/wishlist"),
@@ -37,6 +38,7 @@ const dbURL = "mongodb://localhost/dyokara";
 const User = require("./models/User");
 const Tracking = require("./models/Tracking");
 const Order = require("./models/Order");
+const Product = require("./models/Product");
 
 //Mongoose setup
 
@@ -171,14 +173,23 @@ app.use
     }
 )
 
-// Create tracking object
+// Create new tracking object
 
-// const primaryTrack = 
-// {
-//     name: "primary",
-//     currentOrderNumber: 1,
-//     currentProductNumber: 0
-// };
+// Tracking.findOne({name: "primary"},
+//     async(err, track) =>
+//     {
+//         if(err)
+//         {
+//             res.send(err);
+//         }
+//         else
+//         {
+//             track.currentOrderNumber = 1;
+//             await track.save();
+//             console.log("Updated");
+//         }
+//     }
+// )
 
 // Tracking.deleteMany({name: "primary"},
 //     (err) =>
@@ -189,6 +200,23 @@ app.use
 //         console.log("Deleted!");
 //     }
 // )
+
+// Product.deleteMany({name: "Clock"},
+//     (err) =>
+//     {
+//         if(err)
+//         console.log(err);
+//         else
+//         console.log("Deleted!");
+//     }
+// )
+
+// const primaryTrack = 
+// {
+//     name: "primary",
+//     currentOrderNumber: 1,
+//     currentLineupNumber: 0,
+// };
 
 // Tracking.create(primaryTrack,
 //     (err, track) =>
@@ -216,6 +244,8 @@ app.use
 
 //The routes
 
+app.use("/categories", categoryRoutes);
+app.use("/lineups", lineupRoutes);
 app.use("/products", productRoutes);
 app.use("/products/:id/reviews", reviewRoutes);
 app.use("/users/:id/cart", cartRoutes);

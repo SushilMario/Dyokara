@@ -1,0 +1,70 @@
+<%- include("../partials/header"); %>
+
+<link rel="stylesheet" href="/stylesheets/adminIndex.css">
+
+<%- include("../partials/navbar"); %>
+
+<div class="container initial-container">
+
+    <div class = "box header-box">
+        <div class = "main-heading">
+            <a class = "link" href = "/categories"><%= lineup.category %></a>
+        </div>
+        
+        <div class = "sub-heading">
+            <a class = "link" href = "/categories/<%= lineup.categoryID %>"><%= lineup.name %></a>
+        </div>
+    </div>
+
+    <% if(products.length != 0){ %>
+        <div class = "order order-header">
+            <div class="order-details">
+                <span class = "order-field">Product Number</span>
+            </div>
+
+            <div class="order-details">
+                <span class = "order-field">Name</span>
+            </div>
+    
+            <div class="order-details">
+                <span class = "order-field">Size</span>
+                <span class = "order-field">Colour</span>
+            </div>
+    
+            <div class="order-status">
+                <span class = "order-field">Edit</span>
+            </div>
+        </div>
+        
+        <% products.forEach(product => { %>
+            <div class = "order">
+                <div class="order-details number">
+                    <span class = "order-field"><%= product.productNumber %></span>
+                </div>
+
+                <div class="order-details number">
+                    <a href = "/products/<%= product._id %>" class = "order-field link"><%= product.name %></a>
+                </div>
+        
+                <div class="order-details number">
+                    <span class = "order-field"><%= product.size %></span>
+                    <span class = "order-field"><%= product.colour %></span>
+                </div>
+        
+                <div class="order-status">
+                    <a href = "/products/<%= product._id %>/edit" class="ui button order-status">
+                        <i class = "fas fa-edit"></i>
+                    </a>
+                </div>
+            </div>
+        <% }) %>
+    <% }else{ %>
+        <div class = "col-12 text-center display-4">No products yet!</div>
+    <% } %>
+
+    <div class = "my-5">
+        <a href="/lineups/<%= lineup._id %>/products/new" class="ui button">New</a>
+    </div>
+</div>
+
+<%- include("../partials/footer"); %>

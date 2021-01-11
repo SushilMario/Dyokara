@@ -1,4 +1,5 @@
 const express = require("express");
+const moment = require("moment");
 
 const Product = require("../models/Product.js");
 const User = require("../models/User.js");
@@ -6,6 +7,8 @@ const User = require("../models/User.js");
 const middleware = require("../middleware");
 
 const router = express.Router({mergeParams: true}); 
+
+moment().format();
 
 //Index
 
@@ -34,7 +37,7 @@ router.post("/products/:product_id", middleware.isLoggedIn,
 	(req, res) =>
 	{
         const quantity = parseInt(req.body.quantity);
-        const customisation = parseInt(req.body.customisation);
+        const currentCustomisation = req.body.customisation;
 
         Product.findById(req.params.product_id,
 			(err, foundProduct) =>
@@ -43,7 +46,7 @@ router.post("/products/:product_id", middleware.isLoggedIn,
 				{
 					console.log(err);
 				}
-				else if(foundProduct && foundProduct.stock.equals("Yes"))
+				else if(foundProduct && foundProduct.stock === "Yes")
 				{
 					User.findById(req.params.id,
                         (err, user) =>
@@ -57,8 +60,8 @@ router.post("/products/:product_id", middleware.isLoggedIn,
                                 let index = -1;
                                 for(let i = 0; i < user.cart.length; i++)
                                 {
-                                    const {product, cartCustomisation} = user.cart[i];
-                                    if(product.equals(foundProduct._id) && customisation.equals(cartCustomisation))
+                                    const {product, customisation} = user.cart[i];
+                                    if(product.equals(foundProduct._id) && (customisation === currentCustomisation))
                                     {
                                         index = i;
                                     }
@@ -69,7 +72,7 @@ router.post("/products/:product_id", middleware.isLoggedIn,
                                 }
                                 else
                                 {
-                                    const newItem = {quantity: quantity, customisation: customisation, product: foundProduct._id};
+                                    const newItem = {quantity: quantity, customisation: currentCustomisation, product: foundProduct._id};
                                     user.cart.push(newItem);
                                 }
                                 user.save();
@@ -196,9 +199,11 @@ router.post("/checkout", middleware.isLoggedIn,
                 else
                 {
                     const order = user.cart.slice();
-                    for(let i = 0; i < user.cart.length; i++)
+                    const noOfItems = user.cart.length;
+                    for(let i = 0; i < noOfItems; i++)
                     {
                         user.cart.pop();
+                        console.log(i);
                     }
 
                     let orderWeight = 0, deliveryCharge = 0, total = 0;
@@ -214,6 +219,7 @@ router.post("/checkout", middleware.isLoggedIn,
 
                     user.currentOrder.items = order;
                     user.currentOrder.total = total;
+                    user.currentOrder.orderDate = moment();
 
                     user.save();
                     res.render("user/checkout", {order: order, deliveryCharge: deliveryCharge, total: total});

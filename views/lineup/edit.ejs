@@ -1,0 +1,33 @@
+<%- include("../partials/header"); %>
+
+<link rel="stylesheet" href="/stylesheets/form.css"/>
+<link rel="stylesheet" href="/stylesheets/app.css"/>
+
+<%- include("../partials/navbar"); %>
+
+<div class="container">
+    <div class="form-container">
+        <h1 class = "form-heading mb-5">Edit Lineup</h1>
+
+        <form action = "/lineups/<%= lineup._id %>?_method=PUT" method = "POST" class = "ui form">
+            <div class="field">
+                <label for="productNumber">Lineup Number</label>
+                <input type="text" name = "lineup[lineupNumber]" class="form-input" id="lineupNumber" value = "<%= lineup.LineupNumber %>" required disabled>
+            </div>
+            
+            <div class="field">
+                <label class = "label" for = "name">Name</label>
+                <input class = "form-input" type="text" name="lineup[name]" id = "name" value = "<%= lineup.name %>" required>
+            </div>
+
+            <div class="field">
+                <label for="category">Category</label>
+                <input type="text" name = "lineup[category]" class="form-input" id="category" value = "<%= lineup.category %>" required disabled>
+            </div>
+
+            <button class = "ui button submit" type="submit">Save</button>
+        </form>
+    </div>
+</div>
+
+<%- include("../partials/footer"); %>

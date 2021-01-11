@@ -1,0 +1,105 @@
+.container.initial-container
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.box.header-box.primary 
+{
+    width: 100%;
+}
+
+.box.header-box
+{
+    width: 60%;
+}
+
+.item
+{
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+
+    height: fit-content;
+    width: fit-content;
+    padding: 1rem;
+    margin-bottom: 2rem;
+
+    /* background-color: rgb(255, 255, 255, 0.5); */
+
+    background-color: rgb(250, 249, 249, 1);
+
+    letter-spacing: 0.1rem;
+
+    border-radius: 0.5rem;
+    box-shadow: 0 1rem 2rem rgba( 0 , 0 , 0 , 0.5);
+}
+
+.item-image
+{
+    height: 10rem;
+    width: 10rem;
+    /* width: 60%; */
+    background-size: cover;
+    background-position: center;
+
+    border-radius: 0.5rem;
+}
+.item-details
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    width: 32rem;
+    margin-left: 1rem;
+
+    font-size: 2rem;
+}
+.item-name
+{
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 700;
+
+    max-width: 100%;
+
+    white-space: nowrap;      /*keep text on one line */
+    overflow: hidden;         /*prevent text from being shown outside the border */
+    text-overflow: ellipsis;  /*cut off text with an ellipsis*/
+}
+.item-sub_details
+{
+    display: flex;
+    justify-content: space-between;
+}
+
+@media only screen and (max-width: 992px) 
+{
+    .box.header-box
+    {
+        width: 75%;
+    }
+}
+
+@media only screen and (max-width: 465px) 
+{
+    .box.header-box
+    {
+        width: 100%;
+    }
+
+    .item
+    {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 410px) 
+{
+    html
+    {
+        font-size: 8px;
+    }
+}

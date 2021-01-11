@@ -1,6 +1,6 @@
 <%- include("../partials/header"); %>
 
-<link rel="stylesheet" href="/stylesheets/order.css">
+<link rel="stylesheet" href="/stylesheets/adminIndex.css">
 
 <%- include("../partials/navbar"); %>
 
@@ -27,7 +27,7 @@
             <% if(!order.confirmed){ %>
                 <div class = "order">
                     <div class="order-details number">
-                        <a href = "/orders/<%= order._id %>" class = "order-field"><%= order.orderNumber %></a>
+                        <a href = "/orders/<%= order._id %>" class = "order-field link"><%= order.orderNumber %></a>
                         <span class = "order-field"><%= order.customer.phoneNumber %></span>
                     </div>
             
@@ -54,6 +54,10 @@
     <% }else{ %>
         <div class = "col-12 text-center display-4">No pending orders!</div>
     <% } %>
+
+    <div class = "mt-4">
+        <a href="/orders/archive" class="ui button">Archive</a>
+    </div>
 </div>
 
 <%- include("../partials/footer"); %>

@@ -1,3 +1,7 @@
+<%- include("../partials/header"); %>
+
+<link rel="stylesheet" href="/stylesheets/index.css">
+
 </head>
     
 <body>
@@ -12,8 +16,16 @@
 
         <div class="collapse navbar-collapse" id="navigation-container">
             <ul class="navbar-nav left">
-                <li class="nav-item">
-                    <a class="nav-link" href = "/products">Products</a>
+                <li class="nav-item dropdown" id = "navDropdown">
+                    <div class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Categories
+                    </div>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href = "/products">All</a>
+                        <% categories.forEach(category => { %>
+                            <a class="dropdown-item" href = "/products/categories/<%= category.name %>"><%= category.name %></a>
+                        <% }) %>
+                    </div>
                 </li>
                 <% if(currentUser){ %>
                     <li class="nav-item">
@@ -42,10 +54,9 @@
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item" href = "/logout">Log Out</a>
                             <a class="dropdown-item" href = "/login/details/edit">Edit Details</a>
-                            <a class="dropdown-item" href = "/previousOrders">Previous Orders</a>
                             <% if(currentUser.isAdmin){ %>
                                 <a class="dropdown-item" href = "/orders">Orders</a>
-                                <a class="dropdown-item" href = "/categories">Catalogue</a>
+                                <a class="dropdown-item" href = "/products/new">New Product</a>
                             <% } %>
                         </div>
                     </li>
@@ -71,3 +82,42 @@
         </div>
         <% } %>
     </div>
+
+    <div class="container initial-container">
+        <div class = "box header-box">
+            <div class = "main-heading"><%= foundCategory.name %></div>
+            <% if(foundCategory.byline !== ""){ %>
+                <div class = "sub-heading"><%= foundCategory.byline %></div>
+            <% } %>
+        </div>
+
+        <div class="row">
+            <% foundCategory.products.forEach(product => { %>
+                <div class="col-6 col-md-4 col-lg-3">
+                    <% if(product.production === "Yes"){ %>
+                        <div class="product">
+                            <div>
+                                <a href='/products/<%= product._id %>'>
+                                    <img class="product-image" src = "<%= product.images[0].url %>">
+                                </a>
+                            </div>
+                    
+                            <div class = "product-details">
+                                <div class = "product-name bold"><%= product.name %></div>
+                    
+                                <div class = "product-price bold">Rs <%= product.price %></div>
+                            </div>
+            
+                            <div class = "product-details">
+                                <div class = "product-size"><%= product.size %></div>
+                    
+                                <div class = "product-colour"><%= product.colour %></div>
+                            </div>
+                        </div>
+                    <% } %>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+
+<%- include("../partials/footer"); %>

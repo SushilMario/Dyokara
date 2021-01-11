@@ -34,7 +34,7 @@ router.post("/products/:product_id", middleware.isLoggedIn,
 	(req, res) =>
 	{
         const quantity = req.body.quantity;
-        const customisation = req.body.quantity;
+        const customisation = req.body.customisation;
 
         Product.findById(req.params.product_id,
 			(err, foundProduct) =>
@@ -43,7 +43,7 @@ router.post("/products/:product_id", middleware.isLoggedIn,
 				{
 					console.log(err);
 				}
-				else if(foundProduct)
+				else if(foundProduct && foundProduct.stock === "Yes")
 				{
 					User.findById(req.params.id,
                         (err, user) =>
@@ -185,10 +185,10 @@ router.post("/products/:product_id/move", middleware.isLoggedIn,
                             {
                                 product: foundProduct._id,
                                 quantity: 1,
-                                customisation: None
+                                customisation: "None"
                             };
 
-                            const check = false;
+                            let check = false;
 
                             user.wishlist.forEach
                             (

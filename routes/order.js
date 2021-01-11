@@ -31,6 +31,28 @@ router.get("/", middleware.isAdmin,
     }
 );
 
+//Index - Archive
+
+router.get("/archive", middleware.isAdmin,
+    (req, res) =>
+    {
+        Order.find({}).populate("customer").exec(
+            (err, orders) =>
+            {
+                if(err)
+                {
+                    res.send("Error");
+                }
+                else
+                {
+                    const sortedOrders = orders.sort(middleware.compareValues("orderNumber", "desc"));
+                    res.render("order/indexArchive",{orders: sortedOrders});
+                }
+            }
+        );
+    }
+);
+
 //Show 
 
 router.get("/:id", middleware.isAdmin,

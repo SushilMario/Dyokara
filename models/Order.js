@@ -10,6 +10,9 @@ let OrderSchema = new mongoose.Schema
             ref: "User"
         }, 
         total: Number,
+        orderNumber: String,
+        orderDate: Date, 
+
         items:
         [
             {

@@ -80,8 +80,6 @@ router.post("/login/details",
                 else 
                 {
                     user.phoneNumber = phoneNumber;
-                    user.shippingAddress = shippingAddress;
-                    user.isAdmin = true;
 
                     user.save();
 
@@ -122,6 +120,48 @@ router.put("/login/details/edit", middleware.isLoggedIn,
                     user.shippingAddress = shippingAddress;
                     user.save();
 
+                    res.redirect("/products");
+                }
+            }
+        )
+    }
+)
+
+//Previous orders
+
+router.get("/previousOrders", middleware.isLoggedIn,
+    (req, res) =>
+    {
+        User.findById(req.user.id).populate(
+            {
+                path: 'previousOrders',
+                populate: 
+                {
+                    path: 'items',
+                    populate: 
+                    {
+                        path: 'product'
+                    }
+                }
+            }
+        ).exec
+        (
+            (err, user) =>
+            {
+                if(err) 
+                {
+                    res.send(err);
+                }
+            
+                else if(user)
+                {
+                    const orders = user.previousOrders.sort(middleware.compareValues("orderNumber", "desc"));
+                    res.render("user/previousOrders", {orders: orders});
+                }
+
+                else
+                {
+                    req.flash("error", "User doesn't exist");
                     res.redirect("/products");
                 }
             }

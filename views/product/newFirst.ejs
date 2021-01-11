@@ -1,0 +1,132 @@
+<%- include("../partials/header"); %>
+
+<link rel="stylesheet" href="/stylesheets/form.css"/>
+<link rel="stylesheet" href="/stylesheets/app.css"/>
+
+<%- include("../partials/navbar"); %>
+
+<div class="container">
+    <div class="form-container">
+        <h1 class = "form-heading mb-5">New Product</h1>
+
+        <form action = "/products" method = "POST" enctype = "multipart/form-data" class = "ui form">
+            <div class="field">
+                <label for="productNumber">Lineup Number</label>
+                <input type="text" class="form-input" value = "<%= lineup.lineupNumber %>" required disabled>
+                <input type="text" name = "product[lineupNumber]" class="d-none" id="lineupNumber" value = "<%= lineup.lineupNumber %>">
+            </div>
+
+            <div class="field">
+                <label for="category">Category</label>
+                <input type="text" class="form-input" value = "<%= lineup.category %>" required disabled>
+                <input type="text" name = "product[category]" class="d-none" id="category" value = "<%= lineup.category %>">
+            </div>
+            
+            <div class="field">
+                <label class = "label" for = "name">Name</label>
+                <input class = "form-input" type="text" name="product[name]" id = "name" value = "<%= lineup.name %>" required>
+            </div>
+
+            <div class="field">
+                <label for="price">Price</label>
+                <input type="text" name = "product[price]" class="form-input" id="price" required>
+            </div>
+
+            <div class="field">
+                <label for="size">Size</label>
+                <input type="text" name = "product[size]" class="form-input" id="size" placeholder="Small / Medium / Large" required>
+            </div>
+    
+            <div class="field">
+                <label for="colour">Colour</label>
+                <input type="text" name = "product[colour]" class="form-input" id="colour" required>
+            </div>
+    
+            <div class="field">
+                <label for="noOfItems">Number of units</label>
+                <input type="number" name = "product[noOfUnits]" class="form-input" id="noOfUnits" value = "1" min = "1">
+            </div>
+    
+            <div class="field">
+                <label for="description">Detailed Description (1 paragraph)</label>
+                <textarea class="form-input" name = "product[description]" id = "description" required></textarea>
+            </div>
+    
+            <div class="field">
+                <label for="image_uploads">Choose 5 correctly named images to upload (PNG, JPG)</label>
+                <input type="file" id="image_uploads" name="images" multiple required>
+            </div>
+
+            <h2 class = "input-heading">In Production?</h2>
+
+            <div class="grouped fields production">
+                <div class="field">
+                    <div class="ui radio checkbox">
+                        <input type="radio" name="product[production]" checked tabindex="0" class="hidden" value = "Yes" id = "production_yes">
+                        <label for="production_yes">Yes</label>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="ui radio checkbox">
+                        <input type="radio" name="product[production]" tabindex="0" class="hidden" value = "No" id = "production_no">
+                        <label for="production_no">No</label>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class = "input-heading">In Stock?</h2>
+
+            <div class="grouped fields stock">
+                <div class="field">
+                    <div class="ui radio checkbox">
+                        <input type="radio" name="product[stock]" checked tabindex="0" class="hidden" value = "Yes" id = "stock_yes">
+                        <label for="stock_yes">Yes</label>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="ui radio checkbox">
+                        <input type="radio" name="product[stock]" tabindex="0" class="hidden" value = "No" id = "stock_no">
+                        <label for="stock_no">No</label>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- <h1>Specifications Entry</h1> -->
+    
+            <div class="field">
+                <label for="dimensions">Dimensions</label>
+                <input type="text" name = "product[dimensions]" class="form-input" id="dimensions" placeholder="Height x Width">
+            </div>
+    
+            <div class="field">
+                <label for="wood">Type of Wood</label>
+                <input type="text" name = "product[wood]" class="form-input" id="wood">
+            </div>
+            
+            <div class="field">
+                <label for="shape">Shape</label>
+                <input type="text" name = "product[shape]" class="form-input" id="shape">
+            </div>
+    
+            <div class="field">
+                <label for="mount">Mount Mechanism</label>
+                <input type="text" name = "product[mount]" class="form-input" id="mount">
+            </div>
+    
+            <div class="field">
+                <label for="finish">Type of Finish</label>
+                <input type="text" name = "product[finish]" class="form-input" id="finish">
+            </div>
+    
+            <div class="field">
+                <label for="weight">Weight (in kg)</label>
+                <input type="text" name = "product[weight]" class="form-input" id="weight">
+            </div>
+
+            <button class = "ui button submit" type="submit">Create</button>
+        </form>
+    </div>
+</div>
+
+<%- include("../partials/footer"); %>

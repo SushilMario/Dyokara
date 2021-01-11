@@ -1,6 +1,6 @@
 .navbar
 {
-    margin-bottom: 8rem;
+    margin-bottom: 6rem;
 }
 
 .row
@@ -89,6 +89,12 @@
 
 @media only screen and (max-width: 576px) 
 {
+    .category-box
+    {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
     .product
     {
         width: 25rem;

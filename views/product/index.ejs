@@ -2,52 +2,131 @@
 
 <link rel="stylesheet" href="/stylesheets/index.css">
 
-<%- include("../partials/navbar"); %>
+</head>
+    
+<body>
+    <nav class="navbar navbar-expand-sm navbar-light">
+        <a class = "navbar-brand" href = "/">
+            <img class = "brand-image" src="https://res.cloudinary.com/dyokara/image/upload/v1610269490/App/logo1_ijmrsq.png">
+        </a>
 
-<div class="container initial-container">
-    <% if(currentUser){ %>
-        <% if(currentUser.isAdmin){ %>
-            <div class = "mb-5 text-right">
-                <a href = "/products/new" class="ui button">New</a>
-            </div>
-        <% } %>
-    <% } %>
-    <div class="row">
-        <% if(Object.entries(productDisplay).length !== 0){ %>
-            <% productDisplay.forEach((category, index) => { %> 
-                <div class = "box header">
-                    <h2><%= category.name %></h2>
-                    <div><%= category.byline %></div>
-                </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation-container" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-                <% category.products.forEach(product => { %>
-                    <div class="col-6 col-md-4 col-lg-3">
-                        <div class="product">
-                            <div>
-                                <a href='/products/<%= product._id %>'>
-                                    <img class="product-image" src = "<%= product.images[1].url %>">
-                                </a>
-                            </div>
-                    
-                            <div class = "product-details">
-                                <div class = "product-name bold"><%= product.name %></div>
-                    
-                                <div class = "product-price bold">Rs <%= product.price %></div>
-                            </div>
-            
-                            <div class = "product-details">
-                                <div class = "product-size"><%= product.size %></div>
-                    
-                                <div class = "product-colour"><%= product.colour %></div>
-                            </div>
-                        </div>
+        <div class="collapse navbar-collapse" id="navigation-container">
+            <ul class="navbar-nav left">
+                <li class="nav-item dropdown" id = "navDropdown">
+                    <div class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Categories
                     </div>
-                <% }) %>
-            <% }) %>
-        <% }else{ %>
-            <div class = "col-12 text-center display-4">We don't have any products yet</div>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href = "/products">All</a>
+                        <% categories.forEach(category => { %>
+                            <a class="dropdown-item" href = "/products/categories/<%= category.name %>"><%= category.name %></a>
+                        <% }) %>
+                    </div>
+                </li>
+                <% if(currentUser){ %>
+                    <li class="nav-item">
+                        <a class="nav-link" href = "/users/<%= currentUser._id %>/cart">Cart(<%= currentUser.cart.length %>)</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href = "/users/<%= currentUser._id %>/wishlist">Wishlist(<%= currentUser.wishlist.length %>)</a>
+                    </li>
+                <% } %>
+            </ul>
+
+            <ul class="navbar-nav center ml-auto mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link pl-0" href = "/">
+                        <img class = "brand-image" src="https://res.cloudinary.com/dyokara/image/upload/v1610269490/App/logo1_ijmrsq.png">
+                    </a>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav right">
+                <% if(currentUser){ %>
+                    <li class="nav-item dropdown" id = "navDropdown">
+                        <div class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Logged in as: <%= currentUser.username %>
+                        </div>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href = "/logout">Log Out</a>
+                            <a class="dropdown-item" href = "/login/details/edit">Edit Details</a>
+                            <a class="dropdown-item" href = "/previousOrders">Previous Orders</a>
+                            <% if(currentUser.isAdmin){ %>
+                                <a class="dropdown-item" href = "/orders">Orders</a>
+                                <a class="dropdown-item" href = "/categories">Catalogue</a>
+                            <% } %>
+                        </div>
+                    </li>
+                <% }else{ %>
+                    <li class="nav-item">
+                        <a class="nav-link" href = "/login">Sign In</a>
+                    </li>
+                <% } %>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <% if(error && error.length > 0){ %>
+        <div class="alert error">
+            <%= error %>
+        </div>
+        <% } %>
+    
+        <% if(success && success.length > 0){ %>
+        <div class="alert success">
+            <%= success %>
+        </div>
         <% } %>
     </div>
+
+<div class="container initial-container">
+    <% if(categories.length !== 0){ %>
+        <% categories.forEach(category => { %> 
+            <% if(category.products.length !== 0){ %>
+                <div class = "box header-box">
+                    <div class = "main-heading"><%= category.name %></div>
+                    <% if(category.byline !== ""){ %>
+                        <div class = "sub-heading"><%= category.byline %></div>
+                    <% } %>
+                </div>
+    
+                <div class="row">
+                    <% category.products.forEach(product => { %>
+                        <div class="col-6 col-md-4 col-lg-3">
+                            <% if(product.production === "Yes"){ %>
+                                <div class="product">
+                                    <div>
+                                        <a href='/products/<%= product._id %>'>
+                                            <img class="product-image" src = "<%= product.images[0].url %>">
+                                        </a>
+                                    </div>
+                            
+                                    <div class = "product-details">
+                                        <div class = "product-name bold"><%= product.name %></div>
+                            
+                                        <div class = "product-price bold">Rs <%= product.price %></div>
+                                    </div>
+                    
+                                    <div class = "product-details">
+                                        <div class = "product-size"><%= product.size %></div>
+                            
+                                        <div class = "product-colour"><%= product.colour %></div>
+                                    </div>
+                                </div>
+                            <% } %>
+                        </div>
+                    <% }) %>
+                </div>
+            <% } %>
+        <% }) %>
+    <% }else{ %>
+        <div class = "col-12 text-center display-4">We don't have any products yet</div>
+    <% } %>
 </div>
 
 <%- include("../partials/footer"); %>
