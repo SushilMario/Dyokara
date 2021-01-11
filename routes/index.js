@@ -80,6 +80,7 @@ router.post("/login/details",
                 else 
                 {
                     user.phoneNumber = phoneNumber;
+                    user.shippingAddress = shippingAddress;
 
                     user.save();
 
