@@ -388,6 +388,8 @@ input.form-control-lg
         width: 65%;
         
         margin-top: 3rem;
+
+        height: fit-content;
     }
 
     .product-variations
@@ -435,11 +437,6 @@ input.form-control-lg
     i.fas
     {
         display: inline-block;
-    }
-
-    .product-overview
-    {
-        height: fit-content;
     }
 
     .product-variations-section
