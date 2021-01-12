@@ -58,6 +58,11 @@
     opacity: 0.5;
 }
 
+.product-name
+{
+    max-width: 60%;
+}
+
 .product-details
 {
     width: 100%;
