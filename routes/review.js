@@ -28,7 +28,7 @@ router.get("/new", middleware.isLoggedIn, middleware.canReview,
 
                     for(let review of product.reviews)
                     {
-                        if(req.user.id.equals(review.author.id))
+                        if(review.author.id.equals(req.user.id))
                         {
                             hasReviewedProduct = true;
                             break;
@@ -38,7 +38,7 @@ router.get("/new", middleware.isLoggedIn, middleware.canReview,
                     if(hasReviewedProduct)
                     {
                         req.flash("error", "Multiple reviews not allowed!");
-                        res.redirect("back");
+                        res.redirect("/products/" + product._id);
                     }
 
                     else

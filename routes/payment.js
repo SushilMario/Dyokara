@@ -181,7 +181,7 @@ router.get("/:mode", middleware.isLoggedIn,
 router.get("/modes/gpay",
     (req, res) =>
     {
-        res.render("order/gpay");
+        res.render("order/gpay", {total: req.user.currentOrder.total, number: process.env.GPAY_NUMBER});
     }
 )
 
@@ -191,7 +191,7 @@ router.get("/modes/directTransfer",
         const bankAccountName = "Paul Abraham";
         const bankName = "State Bank of India, Kolencherry";
 
-        res.render("order/directTransfer", {bankAccountName: bankAccountName, bankName: bankName, bankAccountNo: process.env.BANK_ACCOUNT_NUMBER, IFSC: process.env.IFSC});
+        res.render("order/directTransfer", {total: req.user.currentOrder.total, bankAccountName: bankAccountName, bankName: bankName, bankAccountNo: process.env.BANK_ACCOUNT_NUMBER, IFSC: process.env.IFSC});
     }
 )
 
