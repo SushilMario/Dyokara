@@ -446,15 +446,8 @@ body::before
     }
 }
 
-/* Navbar media query */
-
-@media only screen and (max-width: 576px) 
+@media only screen and (max-width: 768px) 
 {
-    html
-    {
-        font-size: 9px;
-    }
-
     .navbar
     {
         margin-bottom: 3rem;
@@ -468,6 +461,14 @@ body::before
     .navbar-nav.center
     {
         display: none;
+    }
+}
+
+@media only screen and (max-width: 576px) 
+{
+    html
+    {
+        font-size: 9px;
     }
 
     .footer-container

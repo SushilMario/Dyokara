@@ -5,7 +5,7 @@
 </head>
     
 <body>
-    <nav class="navbar navbar-expand-sm navbar-light">
+    <nav class="navbar navbar-expand-md navbar-light">
         <a class = "navbar-brand" href = "/">
             <img class = "brand-image" src="https://res.cloudinary.com/dyokara/image/upload/v1610269490/App/logo1_ijmrsq.png">
         </a>
@@ -31,9 +31,6 @@
                     <li class="nav-item">
                         <a class="nav-link" href = "/users/<%= currentUser._id %>/cart">Cart(<%= currentUser.cart.length %>)</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href = "/users/<%= currentUser._id %>/wishlist">Wishlist(<%= currentUser.wishlist.length %>)</a>
-                    </li>
                 <% } %>
             </ul>
 
@@ -47,16 +44,21 @@
 
             <ul class="navbar-nav right">
                 <% if(currentUser){ %>
+                    <li class="nav-item">
+                        <a class="nav-link" href = "/users/<%= currentUser._id %>/wishlist">Wishlist(<%= currentUser.wishlist.length %>)</a>
+                    </li>
+
                     <li class="nav-item dropdown" id = "navDropdown">
                         <div class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Logged in as: <%= currentUser.username %>
+                            <%= currentUser.username %>
                         </div>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item" href = "/logout">Log Out</a>
                             <a class="dropdown-item" href = "/login/details/edit">Edit Details</a>
+                            <a class="dropdown-item" href = "/previousOrders">Previous Orders</a>
                             <% if(currentUser.isAdmin){ %>
                                 <a class="dropdown-item" href = "/orders">Orders</a>
-                                <a class="dropdown-item" href = "/products/new">New Product</a>
+                                <a class="dropdown-item" href = "/categories">Catalogue</a>
                             <% } %>
                         </div>
                     </li>

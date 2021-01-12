@@ -41,11 +41,11 @@
                 <div class="order-details number">
                     <span class = "order-field"><%= category.lineups.length %></span>
                 </div>
-        
+                
                 <div class="order-status">
-                    <form action = "/categories/<%= category._id %>?_method=PUT" method = "POST" class = "order-status-form order-field">
-                        <button type="submit" class = "ui button order-status"><i class = "fas fa-edit"></i></button>
-                    </form>
+                    <a href = "/categories/<%= category._id %>/edit" class="ui button order-status">
+                        <i class = "fas fa-edit"></i>
+                    </a>
                 </div>
             </div>
         <% }) %>
