@@ -178,20 +178,74 @@ router.get("/:mode", middleware.isLoggedIn,
 
 //Payment modes
 
-router.get("/modes/gpay",
+router.get("/modes/gpay", middleware.isLoggedIn,
     (req, res) =>
     {
-        res.render("order/gpay", {total: req.user.currentOrder.total, number: process.env.GPAY_NUMBER});
+        User.findById(req.user.id,
+            async(err, user) =>
+            {
+                if(err)
+                {
+                    res.send(err);
+                }
+                else 
+                {
+                    const {cart} = user;
+
+                    if(user.currentOrder.isCart)
+                    {
+                        const noOfItems = cart.length;
+
+                        for(let i = 0; i < noOfItems; i++)
+                        {
+                            cart.pop();
+                            console.log(i + " " + noOfItems);
+                        }
+                    }
+
+                    await user.save();
+                    
+                    res.render("order/gpay", {total: user.currentOrder.total, number: process.env.GPAY_NUMBER});
+                }
+            }    
+        )
     }
 )
 
-router.get("/modes/directTransfer",
+router.get("/modes/directTransfer", middleware.isLoggedIn,
     (req, res) =>
     {
-        const bankAccountName = "Paul Abraham";
-        const bankName = "State Bank of India, Kolencherry";
+        User.findById(req.user.id,
+            async (err, user) =>
+            {
+                if(err)
+                {
+                    res.send(err);
+                }
+                else 
+                {
+                    const {cart} = user;
 
-        res.render("order/directTransfer", {total: req.user.currentOrder.total, bankAccountName: bankAccountName, bankName: bankName, bankAccountNo: process.env.BANK_ACCOUNT_NUMBER, IFSC: process.env.IFSC});
+                    if(user.currentOrder.isCart)
+                    {
+                        const noOfItems = cart.length;
+
+                        for(let i = 0; i < noOfItems; i++)
+                        {
+                            cart.pop();
+                            console.log(i + " " + noOfItems);
+                        }
+                    }
+
+                    await user.save();
+
+                    const bankAccountName = "Paul Abraham";
+                    const bankName = "State Bank of India, Kolencherry";
+
+                    res.render("order/directTransfer", {total: user.currentOrder.total, bankAccountName: bankAccountName, bankName: bankName, bankAccountNo: process.env.BANK_ACCOUNT_NUMBER, IFSC: process.env.IFSC});
+                }
+            }    
+        )
     }
 )
 

@@ -199,12 +199,6 @@ router.post("/checkout", middleware.isLoggedIn,
                 else
                 {
                     const order = user.cart.slice();
-                    const noOfItems = user.cart.length;
-                    for(let i = 0; i < noOfItems; i++)
-                    {
-                        user.cart.pop();
-                        console.log(i);
-                    }
 
                     let orderWeight = 0, deliveryCharge = 0, total = 0;
                     order.forEach(item => 
@@ -220,6 +214,7 @@ router.post("/checkout", middleware.isLoggedIn,
                     user.currentOrder.items = order;
                     user.currentOrder.total = total;
                     user.currentOrder.orderDate = moment();
+                    user.currentOrder.isCart = true;
 
                     user.save();
                     res.render("user/checkout", {order: order, deliveryCharge: deliveryCharge, total: total});

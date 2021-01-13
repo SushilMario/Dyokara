@@ -41,7 +41,12 @@ let UserSchema = new mongoose.Schema
                 }
             ],
             total: Number,
-            orderDate: Date
+            orderDate: Date,
+            isCart:
+            {
+                type: Boolean,
+                default: false
+            }
         },
 
         cart:
