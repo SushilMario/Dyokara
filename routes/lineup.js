@@ -153,7 +153,7 @@ router.put("/:id", middleware.isAdmin,
                 {
                     foundLineup.name = name;
 
-                    await lineup.save();
+                    await foundLineup.save();
 
                     res.redirect(`/categories/${foundLineup.categoryID}`);
                 }
@@ -198,9 +198,9 @@ router.get("/:id/edit/production", middleware.isAdmin,
 router.put("/:id/edit/production", middleware.isAdmin,
     (req, res) =>
     {
-        const {lineupNumber, production} = req.body.lineup;
+        const {production} = req.body.lineup;
 
-        Line_up.findOne({lineupNumber: lineupNumber},
+        Line_up.findById(req.params.id,
             (err, foundLineup) =>
             {
                 if(err)
@@ -210,7 +210,7 @@ router.put("/:id/edit/production", middleware.isAdmin,
                 }
                 else if(foundLineup)
                 {
-                    Product.find({lineupNumber: lineupNumber},
+                    Product.find({lineupNumber: foundLineup.lineupNumber},
                         (err, products) =>
                         {
                             if(err)
@@ -219,15 +219,33 @@ router.put("/:id/edit/production", middleware.isAdmin,
                             }
                             else if(products)
                             {
-                                products.forEach
-                                (
-                                    async product =>
-                                    {
-                                        product.production = production;
-            
-                                        await product.save();
-                                    }
-                                )
+                                if(production === "Yes")
+                                {
+                                    products.forEach
+                                    (
+                                        async product =>
+                                        {
+                                            product.production = production;
+                
+                                            await product.save();
+                                        }
+                                    )
+                                }
+
+                                else if(production === "No")
+                                {
+                                    products.forEach
+                                    (
+                                        async product =>
+                                        {
+                                            product.production = production;
+                                            product.stock = "No";
+                
+                                            await product.save();
+                                        }
+                                    )
+                                }
+                                
 
                                 res.redirect(`/categories/${foundLineup.categoryID}`);
                             }

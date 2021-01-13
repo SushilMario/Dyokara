@@ -26,6 +26,10 @@
             <div class="order-status">
                 <span class = "order-field">Edit</span>
             </div>
+            
+            <div class="order-status">
+                <span class = "order-field">Production</span>
+            </div>
         </div>
 
         <% lineups.forEach(lineup => { %>
@@ -45,6 +49,10 @@
                 <div class="order-status">
                     <a href = "/lineups/<%= lineup._id %>/edit" class="ui button order-status">
                         <i class = "fas fa-edit"></i>
+                    </a>
+
+                    <a href = "/lineups/<%= lineup._id %>/edit/production" class="ui button order-status">
+                        <i class="fas fa-hammer"></i>
                     </a>
                 </div>
             </div>

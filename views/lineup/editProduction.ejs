@@ -9,12 +9,12 @@
     <div class="form-container">
         <h1 class = "form-heading mb-5">Edit Lineup Production</h1>
 
-        <form action = "/lineups/<%= lineup._id %>/production?_method=PUT" method = "POST" class = "ui form">
-            <h2 class = "form-heading mb-3 warning">Warning: This applies to all products in this lineup!</h2>
+        <form action = "/lineups/<%= lineup._id %>/edit/production?_method=PUT" method = "POST" class = "ui form">
+            <h2 class = "form-heading mb-5 warning">Warning: This applies to all products in this lineup!</h2>
 
             <div class="field">
                 <label for="productNumber">Lineup Number</label>
-                <input type="text" name = "lineup[lineupNumber]" class="form-input" id="lineupNumber" value = "<%= lineup.LineupNumber %>" required disabled>
+                <input type="text" name = "lineup[lineupNumber]" class="form-input" id="lineupNumber" value = "<%= lineup.lineupNumber %>" required disabled>
             </div>
             
             <div class="field">
