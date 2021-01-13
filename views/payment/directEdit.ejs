@@ -18,7 +18,7 @@
         <form action="/payments/edit/directTransfer?_method=PUT" method="POST" class="ui form">
             <div class="field">
                 <label class = "label" for = "bankAccountNo">Account Number</label>
-                <input class = "form-input" type="text" name="bankAccountNo" id = "bankAccountNo" value = "<% (currentUser.bankAccountNo) ? currentUser.bankAccountNo : "" %>" required>
+                <input class = "form-input" type="text" name="bankAccountNo" id = "bankAccountNo" value = "<%= (currentUser.bankAccountNo) ? currentUser.bankAccountNo : "" %>" required>
             </div>
             <div class="field">
                 <label class = "label" for = "shippingAddress">Shipping Address</label>
