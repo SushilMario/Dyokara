@@ -26,8 +26,8 @@
                 </div>
         
                 <div class="order-details number">
-                    <% if(order.customer.accountNo){ %>
-                        <span class = "order-field">order.customer.accountNo</span>
+                    <% if(order.customer.bankAccountNo){ %>
+                        <span class = "order-field"><%= order.customer.bankAccountNo %></span>
                     <% }else{ %>
                         <span class = "order-field">None</span>
                     <% } %>
