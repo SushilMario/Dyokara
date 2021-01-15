@@ -12,6 +12,11 @@ const router = express.Router();
 router.get("/",
     (req, res) => 
     {
+        if(req.user)
+        {
+            res.redirect("/products");
+        }
+
         res.render("landing");
     }
 )
