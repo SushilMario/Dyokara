@@ -50,6 +50,7 @@
     justify-content: space-between;
 
     margin-bottom: 4rem;
+    height: fit-content;
 }
 
 .action-container
@@ -87,7 +88,7 @@
     font-size: 2rem;
 
     width: 45rem;
-    height: 45rem;
+    height: fit-content;
 
     border-radius: 0.5rem;
 
@@ -359,7 +360,7 @@ input.form-control-lg
     .carousel.slide, .product-overview
     {
         width: 40rem;
-        height: 40rem;
+        height: fit-content;
     }
 
     .product-variations-section
