@@ -451,6 +451,7 @@ body::before
     .navbar
     {
         margin-bottom: 3rem;
+        font-size: 2rem;
     }
 
     .navbar-brand
@@ -469,6 +470,11 @@ body::before
     html
     {
         font-size: 9px;
+    }
+
+    .navbar
+    {
+        font-size: 2.5rem;
     }
 
     .footer-container
