@@ -448,12 +448,6 @@ body::before
 
 @media only screen and (max-width: 768px) 
 {
-    .navbar
-    {
-        margin-bottom: 3rem;
-        font-size: 2rem;
-    }
-
     .navbar-brand
     {
         display: inline;
@@ -470,11 +464,6 @@ body::before
     html
     {
         font-size: 9px;
-    }
-
-    .navbar
-    {
-        font-size: 2.5rem;
     }
 
     .footer-container
