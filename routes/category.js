@@ -144,6 +144,8 @@ router.put("/:id", middleware.isAdmin,
                     foundCategory.byline = byline;
 
                     await foundCategory.save();
+
+                    res.redirect("/categories/");
                 }
                 else
                 {
