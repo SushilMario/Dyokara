@@ -17,7 +17,10 @@ router.get("/",
             res.redirect("/products");
         }
 
-        res.render("landing");
+        else
+        {
+            res.render("landing");
+        }
     }
 )
 
