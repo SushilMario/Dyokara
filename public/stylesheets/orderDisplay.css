@@ -85,12 +85,6 @@
     text-align: center;
     font-size: 2.5rem;
     font-weight: 700;
-
-    max-width: 30rem;
-
-    white-space: nowrap;      /*keep text on one line */
-    overflow: hidden;         /*prevent text from being shown outside the border */
-    text-overflow: ellipsis;  /*cut off text with an ellipsis*/
 }
 
 .item-sub_details
@@ -253,11 +247,16 @@ table .payment-charges
 
     .bag, .heading, .payment
     {
-        width: fit-content;
+        width: 100%;
     }
 
     .item
     {
         width: 95%;
+    }
+
+    .item-details
+    {
+        width: 80%;
     }
 }

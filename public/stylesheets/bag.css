@@ -49,7 +49,7 @@
     justify-content: space-between;
     position: relative;
 
-    height: 12rem;
+    height: fit-content;
     width: 80%;
     padding: 1rem;
     margin-bottom: 4rem;
@@ -78,6 +78,7 @@
     display: flex;
     justify-content: space-around;
     align-items: flex-start;
+    height: fit-content;
     
     width: 90%;
 
@@ -107,6 +108,8 @@
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+
+    height: fit-content;
 
     font-size: 2rem;
     font-weight: 600;
@@ -260,7 +263,7 @@
 
     .item
     {
-        height: 22rem;
+        height: fit-content;
 
         padding: 1.5rem 1.25rem;
     }
@@ -304,20 +307,16 @@
 
     .ui.button.delete
     {
-        padding: 1.1rem;
+        font-size: 2rem;
+        padding: 1rem 1.5rem;
     }
 }
 
 @media only screen and (max-width: 410px) 
 {
-    html
-    {
-        font-size: 6px;
-    }
-
     .item
     {
-        height: 19rem;
+        height: fit-content;
     }
 
     .item-image
@@ -331,7 +330,7 @@
 {
     .item
     {
-        height: 25rem;
+        height: fit-content;
     }
 
     .item-image

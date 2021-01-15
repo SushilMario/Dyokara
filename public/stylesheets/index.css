@@ -60,7 +60,9 @@
 
 .product-name
 {
-    max-width: 60%;
+    width: 100%;
+
+    text-align: center;
 }
 
 .product-details

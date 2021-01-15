@@ -13,7 +13,7 @@
             <div class = "item">
                 <div style = "background-image: url('<%= item.product.images[0].url %>');" class = "item-image"></div>
                 <div class="item-details">
-                    <div class = "item-name"><%= item.product.name %><%= item.customisation === 'Custom' ? '(Custom)' : '' %></div>
+                    <div class = "item-name"><%= item.product.name %></div>
                     <div>
                         <div class = "item-sub_details">
                             <div class = "item-size">
@@ -32,6 +32,12 @@
     
                             <div class = "item-price">
                                 Item price: <span class="semi-bold">Rs <%= item.product.price %></span>
+                            </div>
+                        </div>
+
+                        <div class = "item-sub_details">
+                            <div class = "item-customisation">
+                                <span class="semi-bold"><%= item.customisation === 'Custom' ? '(Custom)' : '' %></span>
                             </div>
                         </div>
                     </div>
