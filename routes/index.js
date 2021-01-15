@@ -12,7 +12,7 @@ const router = express.Router();
 router.get("/",
     (req, res) => 
     {
-        if(req.user)
+        if(req.isAuthenticated())
         {
             res.redirect("/products");
         }
