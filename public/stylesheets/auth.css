@@ -1,6 +1,7 @@
 body
 {
     color: #FAF9F9;
+    min-height: 100vh;
 }
 
 body::before
