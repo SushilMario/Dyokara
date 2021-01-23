@@ -232,6 +232,13 @@ body::before
     color: #e7c7ac;
 }
 
+.line
+{
+    margin: 0.5rem auto;
+
+    margin-bottom: 3rem;
+}
+
 .semi-bold
 {
     font-weight: 600;
@@ -424,6 +431,16 @@ body::before
     width: 100%;
 }
 
+.footer-container.narrow
+{
+    display: none;
+}
+
+.footer-container .table td, .table th 
+{
+    width: 50%;
+}
+
 .footer-container h1
 {
     text-align: center;
@@ -463,6 +480,20 @@ body::before
     width: 33.3333%;
 
     font-size: 2rem;
+}
+
+.footer-container a:hover
+{
+    text-decoration: none;
+    color: #553328;
+}
+
+.footer-container .line
+{
+    margin: 1.5rem 0;
+
+    border: none;
+    color: #000000;
 }
 
 /* Animations */
@@ -529,14 +560,14 @@ body::before
         padding: 0.5rem;
     }
 
-    .social
+    .footer-container.wide
     {
         display: none;
     }
 
-    .footer-row i.fas
+    .footer-container.narrow
     {
-        display: none;
+        display: block;
     }
 
     td i.fab
