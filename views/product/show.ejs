@@ -147,7 +147,19 @@
                 <input class = "form-control-lg" type = "number" id = "quantity" value = "1" min = "1" max = "10">
             </div>
         <% }else if(product.stock === 'No'){ %>
-            <div class = "sub-heading">This item is currently out of stock</div>
+            <div class = "text-center">This item is currently out of stock</div>
+
+            <% if(currentUser){ %>
+                <% if(!product.notificationList.includes(currentUser._id)){ %>
+                    <div class = "mx-auto my-3">
+                        <form class = "product-form" action = "/products/<%= product._id %>/notify?_method=PUT" method = "POST">
+                            <button type = "submit" class="ui button">Notify Me</button>
+                        </form>
+                    </div>
+                <% } %>
+
+                <div class = "text-center">We'll send you an email to your registered email address when this product is back in stock</div>
+            <% } %>
         <% }else{ %>
             <div class = "sub-heading">Sign in to unlock purchases</div>
             <div class = "mx-auto">

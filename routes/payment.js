@@ -31,8 +31,8 @@ router.get("/edit/directTransfer", middleware.isLoggedIn,
 router.put("/edit/gpay", middleware.isLoggedIn,
     (req, res) =>
     {
-        const {phoneNumber} = req.body;
-        const {shippingAddress} = req.body;
+        const {phoneNumber, address} = req.body;
+        const {line1, line2, city, state, pinCode} = address;
 
         User.findById(req.user.id,
             (err, user) =>
@@ -44,7 +44,12 @@ router.put("/edit/gpay", middleware.isLoggedIn,
                 else 
                 {
                     user.phoneNumber = phoneNumber;
-                    user.shippingAddress = shippingAddress;
+                    user.address.line1 = line1;
+                    user.address.line2 = line2;
+                    user.address.city = city;
+                    user.address.state = state;
+                    user.address.pinCode = pinCode;
+
                     user.save();
 
                     res.redirect("/payments/gpay");
@@ -57,8 +62,8 @@ router.put("/edit/gpay", middleware.isLoggedIn,
 router.put("/edit/directTransfer", middleware.isLoggedIn,
     (req, res) =>
     {
-        const {bankAccountNo} = req.body;
-        const {shippingAddress} = req.body;
+        const {bankAccountNo, address} = req.body;
+        const {line1, line2, city, state, pinCode} = address;
 
         User.findById(req.user.id,
             (err, user) =>
@@ -70,7 +75,12 @@ router.put("/edit/directTransfer", middleware.isLoggedIn,
                 else 
                 {
                     user.bankAccountNo = bankAccountNo;
-                    user.shippingAddress = shippingAddress;
+                    user.address.line1 = line1;
+                    user.address.line2 = line2;
+                    user.address.city = city;
+                    user.address.state = state;
+                    user.address.pinCode = pinCode;
+
                     user.save();
 
                     res.redirect("/payments/directTransfer");
@@ -156,7 +166,7 @@ router.get("/:mode", middleware.isLoggedIn,
                                                 res.redirect(`/payments/modes/${req.params.mode}`);
                                             }
                                         }    
-                                    );
+                                    )
 
                                     track.currentOrderNumber += 1;
                                     await track.save();
@@ -169,7 +179,6 @@ router.get("/:mode", middleware.isLoggedIn,
                         req.flash("error", "No items to checkout!");
                         res.redirect("/products");
                     }
-
                 }   
             }
         );

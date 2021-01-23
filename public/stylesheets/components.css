@@ -19,9 +19,11 @@ body
 {
     box-sizing: border-box;
 
-    font-family: 'Cormorant Garamond', serif;
+    /* font-family: 'Cormorant Garamond', serif; */
+    font-family: 'EB Garamond', serif;
+    
     font-size: 1.6rem;
-    color: #555B6E;
+    color: #553328;
 
     height: fit-content;
     min-height: 100%;
@@ -42,11 +44,17 @@ body::before
     z-index: -1;
 
     display: block;
-    background-image: url("https://res.cloudinary.com/dyokara/image/upload/v1608442821/App/background_wmvmkh.jpg");
-    background-repeat: repeat;
-    background-position: bottom;
-    background-size: cover;
-    opacity: 0.3;
+    /* background-image: url("https://res.cloudinary.com/dyokara/image/upload/v1611291989/App/Artboard_1-100_ncv6dc.jpg"); */
+    /* background-image: url("https://res.cloudinary.com/dyokara/image/upload/v1608442821/App/background_wmvmkh.jpg"); */
+    background-image: url("https://res.cloudinary.com/dyokara/image/upload/v1611324376/App/Artboard_1_0.5x_em5sno.png"); 
+    /* background-repeat: repeat; */
+    background-position: top;
+    background-size: cover; 
+
+    background-attachment: fixed;
+
+    /* background: linear-gradient(#5f2c1e, #753205,#582e22); */
+    opacity: 1;
 }
 
 /* Navbar */
@@ -65,7 +73,9 @@ body::before
     display: flex;
     align-items: center;
 
-    background-color: rgba(255, 255, 255, 0.4);
+    /* background-color: rgba(255, 255, 255, 0); */
+    background-color: #FAF9F9;
+    box-shadow: 0 0.5rem 1rem rgba( 0 , 0 , 0 , 0.5);
 }
 
 .navbar .navbar-nav.left, .navbar .navbar-nav.right
@@ -105,8 +115,7 @@ body::before
 {
     height: 3.5rem;
     width: 14.5rem;
-    
-    margin-top: 0.75rem;
+    margin-top: 0.55rem;
 }
 
 .center
@@ -116,9 +125,9 @@ body::before
 
 .nav-link
 {
-    color: #555B6E;
+    color: #553328;
     font-size: 2rem;
-    font-weight: 700;
+    font-weight: 500;
 
     transition: all 0.2s;
 
@@ -127,7 +136,12 @@ body::before
 
 .nav-link:hover
 {
-    color: #FFD6BA;
+    color: #e7c7ac;
+}
+
+.navbar-nav .dropdown-menu
+{
+    margin-top: 0.55rem;
 }
 
 .nav-item.dropdown .dropdown-menu .dropdown-item
@@ -135,13 +149,23 @@ body::before
     font-size: 1.8rem;
     z-index: 2;
 
-    color: #555B6E;
+    color: #553328;
 }
 
 .nav-item.dropdown .dropdown-menu .dropdown-item:active
 {
     color: #FAF9F9;
-    background-color: #555B6E;
+    background-color: #553328;
+}
+
+.navbar-light .navbar-nav .nav-link 
+{
+    color: #553328;
+}
+
+.navbar-light .navbar-nav .nav-link:hover 
+{
+    color: #e7c7ac;
 }
 
 .move-down
@@ -197,7 +221,7 @@ body::before
 
 .link
 {
-    color: #555B6E;
+    color: #553328;
     text-decoration-line: underline;
 
     transition: all 0.2s;
@@ -237,7 +261,7 @@ body::before
 
 .main-heading
 {
-    font-weight: 700;
+    font-weight: 600;
     font-size: 3rem;
     text-align: center;
 }
@@ -249,13 +273,20 @@ body::before
     text-align: center;
 }
 
+/* Table  */
+
+.table
+{
+    color: #3a231b;
+}
+
 /* Box */
 
 .header
 {
     text-align: center;
     font-size: 3rem;
-    font-weight: 700;
+    font-weight: 600;
     letter-spacing: 1rem;
 
     padding-left: 1rem;
@@ -290,7 +321,7 @@ body::before
 
 .input-heading
 {
-    font-weight: 700;
+    font-weight: 600;
     color: #000000;
 }
 
@@ -320,7 +351,7 @@ body::before
 
     text-align: center;
     text-decoration: none;
-    color: #555B6E;
+    color: #553328;
 
     box-shadow: 0 0.5rem 1rem rgba( 0 , 0 , 0 , 0.5);
 
@@ -334,7 +365,7 @@ body::before
     text-decoration: none;
     color: #FAF9F9;
 
-    background-color: #555B6E;
+    background-color: #553328;
     box-shadow: 0 1rem 2rem rgba( 0 , 0 , 0 , 0.5);
 
     cursor: pointer;
@@ -342,7 +373,9 @@ body::before
 
 .ui.button
 {
-    font-family: 'Cormorant Garamond', serif;
+    /* font-family: 'Cormorant Garamond', serif; */
+    font-family: 'EB Garamond', serif;
+    /* font-family: 'Quicksand', sans-serif; */
     font-size: 1.75rem;
 
     margin: 0;
@@ -352,8 +385,8 @@ body::before
 
     letter-spacing: 0.2rem;
 
-    background-color: #FFD6BA;
-    color: #555B6E; 
+    background-color: #fde3cb;
+    color: #553328; 
     
     transition: all 0.2s;
 
@@ -362,8 +395,8 @@ body::before
 
 .ui.button:hover
 {
-    background-color: #555B6E;
-    color: #FFD6BA;
+    background-color: #553328;
+    color: #fde3cb;
     
     /* transform: translateY(-0.25rem); */
     box-shadow: 0 1rem 2rem rgba( 0 , 0 , 0 , 0.5);
@@ -456,6 +489,26 @@ body::before
     .navbar-nav.center
     {
         display: none;
+    }
+
+    .navbar-collapse
+    {
+        margin-top: 1rem;
+    }
+
+    .brand-image
+    {
+        margin-top: 0;
+    }
+
+    .navbar-light .navbar-nav .nav-link 
+    {
+        color:#573232;
+    }
+
+    .navbar-light .navbar-nav .nav-link:hover 
+    {
+        color:#e7c7ac;
     }
 }
 

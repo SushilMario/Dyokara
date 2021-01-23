@@ -78,7 +78,10 @@ router.get("/:id", middleware.isAdmin,
 
                     else if(order)
                     {
-                        res.render("order/show", {order: order});
+                        const shippingAddress = 
+                        `${order.customer.address.line1}, ${order.customer.address.line2}, ${order.customer.address.city}, ${order.customer.address.state}, ${order.customer.address.pinCode}`
+                        
+                        res.render("order/show", {order: order, shippingAddress: shippingAddress});
                     }
 
                     else

@@ -5,7 +5,7 @@ body
 
 body::before
 {
-    background-image: url("https://res.cloudinary.com/dyokara/image/upload/v1608442982/App/form_landscape_gdcp7e.jpg");
+    background-image: url("https://res.cloudinary.com/dyokara/image/upload/v1610874838/App/login_landscape_nkomrb.jpg");
 
     opacity: 1;
 }
@@ -24,7 +24,7 @@ body::before
     width: fit-content;
 
     margin: auto;
-    margin-top: 12.5%;
+    margin-top: 7.5%;
 
     animation: render 1s ease-out;
 
@@ -57,7 +57,7 @@ body::before
     margin-bottom: 2rem;
 
     font-weight: 800;
-    /* font-size: 2rem; */
+    font-size: 2rem;
     color: #FAF9F9;
     letter-spacing: 0.25rem;
 }
@@ -66,7 +66,7 @@ body::before
 {
     body::before
     {
-        background-image: url("https://res.cloudinary.com/dyokara/image/upload/v1608443046/App/form_portrait_sn87mh.jpg");
+        background-image: url("https://res.cloudinary.com/dyokara/image/upload/v1610874929/App/login_portrait_beng6o.jpg");
     }
 
     .navbar
@@ -81,6 +81,6 @@ body::before
 
     .form-container
     {
-        margin-top: 35%;
+        margin-top: 15%;
     }
 }

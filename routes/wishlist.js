@@ -58,7 +58,7 @@ router.post("/products/:product_id", middleware.isLoggedIn,
                                 for(let i = 0; i < user.wishlist.length; i++)
                                 {
                                     const {product, wishlistCustomisation} = user.wishlist[i];
-                                    if(product.equals(foundProduct._id) && customisation.equals(wishlistCustomisation))
+                                    if(product.equals(foundProduct._id) && customisation === wishlistCustomisation)
                                     {
                                         index = i;
                                     }

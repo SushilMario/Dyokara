@@ -137,7 +137,8 @@ passport.use(new GoogleStrategy
                         const newUser = 
                         {
                             username: profile.displayName,
-                            googleId: profile.id
+                            googleId: profile.id,
+                            email: profile.emails[0].value
                         };
 
                         User.create(newUser,
@@ -201,45 +202,65 @@ app.use
 //     }
 // )
 
-// Product.deleteMany({name: "Clock"},
-//     (err) =>
+// Product.find({},
+//     (err, products) =>
 //     {
 //         if(err)
 //         console.log(err);
+
 //         else
-//         console.log("Deleted!");
+//         {
+//             products.forEach
+//             (
+//                 async product =>
+//                 {
+//                     product.notificationList = [];
+
+//                     await product.save();
+//                 }
+//             )
+
+//             console.log("All updated");
+//         }
 //     }
 // )
 
-// const primaryTrack = 
-// {
-//     name: "primary",
-//     currentOrderNumber: 1,
-//     currentLineupNumber: 0,
-// };
+const primaryTrack = 
+{
+    name: "primary",
+    currentOrderNumber: 1,
+    currentLineupNumber: 0,
+};
 
-// Tracking.create(primaryTrack,
-//     (err, track) =>
+Tracking.create(primaryTrack,
+    (err, track) =>
+    {
+        if(err)
+        {
+            console.log("Primary track could not be created");
+        }
+        else
+        {
+            console.log("Primary track created!");
+        }
+    }    
+)
+
+// User.findOne({username: "Dyokara Info"}, 
+//     async(err, user) =>
 //     {
 //         if(err)
 //         {
-//             console.log("Primary track could not be created");
+//             console.log(err);
 //         }
 //         else
 //         {
-//             console.log("Primary track created!");
+//             user.isAdmin = true;
+//             user.save();
+
+//             console.log("Updated");
 //         }
 //     }    
-// )
-
-// Order.deleteMany({},
-//     (err) =>
-//     {
-//         if(err)
-//         console.log(err);
-//         else
-//         console.log("Deleted!");
-//     }
 // )
 
 //The routes

@@ -7,11 +7,9 @@
 
 <div class="container initial-container">
     <div class="form-container">
-        <h1 class = "form-heading mb-5">New Category</h1>
+        <h1 class = "form-heading mb-5">Edit Category</h1>
 
         <form action = "/categories/<%= category._id %>?_method=PUT" method = "POST" class = "ui form">
-            <h2 class = "form-heading mb-3">Edit</h2>
-            
             <div class="field">
                 <label class = "label" for = "name">Name</label>
                 <input class = "form-input" type="text" name="category[name]" id = "name" value = "<%= category.name %>" disabled required>

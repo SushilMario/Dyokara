@@ -8,8 +8,18 @@ let UserSchema = new mongoose.Schema
     {
         username: String,
         googleId: String,
+        email: String,
         phoneNumber: String,
-        shippingAddress: String,
+        
+        address:
+        {
+            line1: String,
+            line2: String,
+            city: String,
+            state: String,
+            pinCode: String
+        },
+
         bankAccountNo: String,
 
         isAdmin:

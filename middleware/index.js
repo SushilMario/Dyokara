@@ -184,4 +184,21 @@ middlewareObj.canReview = (req, res, next) =>
     )
 }
 
+//Calculate delivery rate
+
+middlewareObj.calculateDeliveryRate = (pinCode, orderWeight) =>
+{
+    const statePin = `${pinCode[0]}${pinCode[1]}`;
+
+    if(statePin === "67" || statePin === "68" || statePin === "69")
+    {
+        return (50 + ((orderWeight - 1) * 50));
+    }
+
+    else
+    {
+        return (80 + ((orderWeight - 1) * 60));
+    }
+}
+
 module.exports = middlewareObj;

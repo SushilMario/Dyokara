@@ -55,11 +55,12 @@
         <section>Account Number: <%= (order.customer.bankAccountNo) ? order.customer.bankAccountNo : "Not provided" %></section>
         <section>
             <p class = "mt-3">Shipping Address: </p>
-            <p class = "mt-1"><%= order.customer.shippingAddress %></p>
+            <p class = "mt-1"><%= shippingAddress %></p>
         </section>
+        <section>Total: Rs <%= order.total %></section>
 
         <% if(!order.confirmed){ %>
-            <div class = "payment-gateway">
+            <div class = "payment-gateway mt-3">
                 <form action = "/orders/<%= order._id %>?_method=PUT" method = "POST">
                     <button type="submit" class = "ui button pay">Confirm</button>
                 </form>

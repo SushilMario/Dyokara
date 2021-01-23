@@ -208,7 +208,7 @@ router.post("/checkout", middleware.isLoggedIn,
                         }
                     );
 
-                    deliveryCharge = Math.ceil(orderWeight) * 50;
+                    deliveryCharge = middleware.calculateDeliveryRate(req.user.address.pinCode, Math.ceil(orderWeight));
                     total += deliveryCharge;
 
                     user.currentOrder.items = order;
@@ -223,38 +223,5 @@ router.post("/checkout", middleware.isLoggedIn,
         );
     }
 )
-
-//Authorization function
-
-// const isAuthorized = (req, res, next) =>
-// {
-// 	if(req.isAuthenticated())
-// 	{
-// 		review.findById(req.params.review_id,
-// 			function(err, foundreview)
-// 			{
-// 				if(err)
-// 				{
-// 					res.redirect("back");
-// 				}
-// 				else
-// 				{
-// 					if(foundreview.author.id.equals(req.user.id))
-// 					{
-// 						return next();
-// 					}
-// 					else
-// 					{
-// 						res.redirect("back");
-// 					}
-// 				}
-// 			}
-// 		)
-// 	}
-// 	else
-// 	{
-// 		res.redirect("back");
-// 	}
-// }
 
 module.exports = router;

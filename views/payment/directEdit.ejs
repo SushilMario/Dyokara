@@ -18,12 +18,34 @@
         <form action="/payments/edit/directTransfer?_method=PUT" method="POST" class="ui form">
             <div class="field">
                 <label class = "label" for = "bankAccountNo">Account Number</label>
-                <input class = "form-input" type="text" name="bankAccountNo" id = "bankAccountNo" value = "<%= (currentUser.bankAccountNo) ? currentUser.bankAccountNo : "" %>" required>
+                <input class = "form-input" type="text" name="bankAccountNo" id = "bankAccountNo" value = "<%= currentUser.bankAccountNo %>" required>
             </div>
+            
             <div class="field">
-                <label class = "label" for = "shippingAddress">Shipping Address</label>
-                <textarea class="form-input" name = "shippingAddress" id = "shippingAddress" rows="5" required><%= currentUser.shippingAddress %></textarea>
+                <label class = "label" for = "line1">Address Line 1</label>
+                <input class = "form-input" type="text" name="address[line1]" id = "line1" value = "<%= currentUser.address.line1 %>" required>
             </div>
+
+            <div class="field">
+                <label class = "label" for = "line2">Address Line 2</label>
+                <input class = "form-input" type="text" name="address[line2]" id = "line2" value = "<%= currentUser.address.line2 %>" required>
+            </div>
+
+            <div class="field">
+                <label class = "label" for = "city">City</label>
+                <input class = "form-input" type="text" name="address[city]" id = "city" value = "<%= currentUser.address.city %>" required>
+            </div>
+
+            <div class="field">
+                <label class = "label" for = "state">State</label>
+                <input class = "form-input" type="text" name="address[state]" id = "state" placeholder = "Your state" required>
+            </div>
+
+            <div class="field">
+                <label class = "label" for = "pinCode">Pin Code</label>
+                <input class = "form-input" type="text" name="address[pinCode]" id = "pinCode" value = "<%= currentUser.address.pinCode %>" required>
+            </div>
+
             <button class = "ui button submit" type="submit">Submit</button>
         </form>
     </div>

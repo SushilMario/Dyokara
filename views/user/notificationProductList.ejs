@@ -1,0 +1,59 @@
+<%- include("../partials/header"); %>
+
+<link rel="stylesheet" href="/stylesheets/adminIndex.css">
+
+<%- include("../partials/navbar"); %>
+
+<div class="container initial-container">
+    <div class = "box header-box">
+        <div class = "main-heading">Products Out of Stock</div>
+    </div>
+
+    <% if(products.length != 0){ %>
+        <div class = "order order-header">
+            <div class="order-details">
+                <span class = "order-field">Product Number</span>
+            </div>
+    
+            <div class="order-details">
+                <span class = "order-field">Product Name</span>
+            </div>
+
+            <div class="order-details">
+                <span class = "order-field">Number of customers</span>
+            </div>
+    
+            <div class="order-status">
+                <span class = "order-field">Edit</span>
+            </div>
+        </div>
+
+        <% products.forEach(product => { %>
+            <% if(product.production === "Yes"){ %>
+                <div class = "order">
+                    <div class="order-details number">
+                        <a href = "/notify/products/<%= product._id %>/users" class = "order-field link"><%= product.productNumber %></a>
+                    </div>
+            
+                    <div class="order-details number">
+                        <span class = "order-field"><%= product.name %></span>
+                    </div>
+    
+                    <div class="order-details number">
+                        <span class = "order-field"><%= product.notificationList.length %></span>
+                    </div>
+            
+                    <div class="order-status">
+                        <a href = "/products/<%= product._id %>/edit" class="ui button order-status">
+                            <i class = "fas fa-edit"></i>
+                        </a>
+                    </div>
+                </div>
+            <% } %>
+        <% }) %>
+    <% }else{ %>
+        <div class = "col-12 text-center display-4">No products!</div>
+    <% } %>
+</div>
+
+<%- include("../partials/footer"); %>

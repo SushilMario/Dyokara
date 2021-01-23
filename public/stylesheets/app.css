@@ -1,11 +1,11 @@
 body
 {
-    color: #555B6E;
+    color: #553328;
 }
 
 body::before
 {
-    background-image: url("https://res.cloudinary.com/dyokara/image/upload/v1608442821/App/background_wmvmkh.jpg");
+    background-image: url("https://res.cloudinary.com/dyokara/image/upload/v1611324376/App/Artboard_1_0.5x_em5sno.png");
 }
 
 .form-container 
@@ -30,7 +30,7 @@ body::before
 
 .ui.form .field .form-input
 {
-    color: #555B6E;
+    color: #553328;
 
     background-color: rgba( 255 , 255 , 255);    
     border-radius: 0.5rem;
@@ -52,7 +52,7 @@ body::before
 {
     resize: none;
 
-    color: #555B6E;
+    color: #553328;
 }
 
 .field .form-input.display:focus
@@ -92,6 +92,9 @@ body::before
 .footer-container
 {
     margin-top: 4rem;
+
+    position: relative;
+    top: initial;
 }
 
 .phone

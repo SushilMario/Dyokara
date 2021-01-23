@@ -19,7 +19,7 @@
 .heading
 {
     font-size: 4rem;
-    font-weight: 700;
+    font-weight: 600;
     letter-spacing: 1.5rem;
 
     border-radius: 0.5rem;
@@ -83,7 +83,7 @@
     width: 90%;
 
     font-size: 2.5rem;
-    font-weight: 700;
+    font-weight: 500;
 }
 
 .item-details-container
@@ -140,7 +140,7 @@
 
 .ui.button.checkout
 {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'EB Garamond', serif;
     font-size: 2.25rem;
 
     width: fit-content;

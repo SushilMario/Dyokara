@@ -4,6 +4,7 @@ const express = require("express"),
 const middleware = require("../middleware");
 
 const User = require("../models/User.js");
+const Product = require("../models/Product.js");
 
 const router = express.Router();
 
@@ -39,20 +40,21 @@ router.get("/google", passport.authenticate
     (
         'google',
         {
-            scope: ['profile']
+            scope: [ 'email', 'profile' ]
         }
     )
 )
 
 //Handle redirect from google
 
-router.get("/google/redirect", passport.authenticate('google'),
+router.get("/google/redirect", passport.authenticate('google'), 
     (req, res) =>
     {
         if(!req.user.phoneNumber)
         {
             res.redirect("/login/details");
         }
+
         else
         {
             res.redirect("/products");
@@ -76,7 +78,8 @@ router.get("/login/details",
 router.post("/login/details",
     (req, res) =>
     {
-        const {phoneNumber, shippingAddress} = req.body;
+        const {phoneNumber, address} = req.body;
+        const {line1, line2, city, state, pinCode} = address;
 
         User.findById(req.user.id,
             (err, user) =>
@@ -88,7 +91,11 @@ router.post("/login/details",
                 else 
                 {
                     user.phoneNumber = phoneNumber;
-                    user.shippingAddress = shippingAddress;
+                    user.address.line1 = line1;
+                    user.address.line2 = line2;
+                    user.address.city = city;
+                    user.address.state = state;
+                    user.address.pinCode = pinCode;
 
                     user.save();
 
@@ -114,7 +121,8 @@ router.get("/login/details/edit", middleware.isLoggedIn,
 router.put("/login/details/edit", middleware.isLoggedIn,
     (req, res) =>
     {
-        const {phoneNumber, shippingAddress} = req.body;
+        const {phoneNumber, address} = req.body;
+        const {line1, line2, city, state, pinCode} = address;
 
         User.findById(req.user.id,
             (err, user) =>
@@ -126,7 +134,12 @@ router.put("/login/details/edit", middleware.isLoggedIn,
                 else 
                 {
                     user.phoneNumber = phoneNumber;
-                    user.shippingAddress = shippingAddress;
+                    user.address.line1 = line1;
+                    user.address.line2 = line2;
+                    user.address.city = city;
+                    user.address.state = state;
+                    user.address.pinCode = pinCode;
+
                     user.save();
 
                     res.redirect("/products");
@@ -171,6 +184,59 @@ router.get("/previousOrders", middleware.isLoggedIn,
                 else
                 {
                     req.flash("error", "User doesn't exist");
+                    res.redirect("/products");
+                }
+            }
+        )
+    }
+)
+
+//Notification Product List
+
+router.get("/notify/products", middleware.isAdmin,
+    (req, res) =>
+    {
+        Product.find({stock: "No"},
+            (err, products) =>
+            {
+                if(err) 
+                {
+                    res.send(err);
+                }
+            
+                else
+                {
+                    const productList = products.sort(middleware.compareValues("productNumber"));
+
+                    res.render("user/notificationProductList", {products: productList});
+                }
+            }
+        )
+    }
+)
+
+//Notification User List
+
+router.get("/notify/products/:id/users", middleware.isAdmin,
+    (req, res) =>
+    {
+        Product.findById(req.params.id).populate("notificationList").exec
+        (
+            (err, foundProduct) =>
+            {
+                if(err) 
+                {
+                    res.send(err);
+                }
+            
+                else if(foundProduct)
+                {
+                    res.render("user/notificationUserList", {product: foundProduct, notificationList: foundProduct.notificationList});
+                }
+
+                else
+                {
+                    req.flash("error", "Product doesn't exist");
                     res.redirect("/products");
                 }
             }

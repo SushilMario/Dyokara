@@ -34,7 +34,7 @@
 
 .carousel-control-icon
 {
-    color: #555B6E;
+    color: #553328;
 
     font-size: 2rem;
 }
@@ -69,14 +69,14 @@
     font-size: 2.5rem;
     display: flex;
     padding-bottom: 0.45rem;
-    color: #FFD6BA;
+    color: #fde3cb;
 
     cursor: pointer;
 }
 
 .icon-button:hover
 {
-    color: #555B6E;
+    color: #553328;
 }
 
 .product-overview
@@ -134,7 +134,7 @@
 .product-name
 {
     font-size: 3rem;
-    font-weight: 700;
+    font-weight: 600;
 }
 
 .product-details
@@ -212,7 +212,7 @@ input.form-control-lg
 
     text-align: center;
     text-decoration: none;
-    color: #555B6E;
+    color: #553328;
 
     box-shadow: 0 0.5rem 1rem rgba( 0 , 0 , 0 , 0.5);
 
@@ -224,9 +224,9 @@ input.form-control-lg
 .product-variations-item:hover
 {   
     text-decoration: none;
-    color: #FAF9F9;
+    color: #553328;
 
-    background-color: #555B6E;
+    background-color: #fbe1ca;
     box-shadow: 0 1rem 2rem rgba( 0 , 0 , 0 , 0.5);
 
     cursor: pointer;
@@ -261,7 +261,7 @@ input.form-control-lg
 {
     text-align: center;
     font-size: 3rem;
-    font-weight: 700;
+    font-weight: 600;
     letter-spacing: 1rem;
 
     padding-left: 1rem;
@@ -269,7 +269,7 @@ input.form-control-lg
 
 .line
 {
-    border: 0.1rem solid #555B6E;
+    border: 0.1rem solid #553328;
     margin: 0.5rem auto;
 
     margin-bottom: 3rem;
@@ -299,19 +299,19 @@ input.form-control-lg
 
 .product-table
 {
-    /* border: 1px solid #555B6E; */
+    /* border: 1px solid #553328; */
 
     margin-bottom: 0;
 }
 
 .table-row
 {
-    border: 1px solid #555B6E;
+    border: 1px solid #553328;
 }
 
 .product-table .table-row .table-row-element
 {
-    border: 1px solid #555B6E;
+    border: 1px solid #553328;
 }
 
 .product-review
@@ -329,7 +329,7 @@ input.form-control-lg
 .product-review-author
 {
     font-size: 2.25rem;
-    font-weight: 700;
+    font-weight: 600;
 }
 
 .product-review-rating

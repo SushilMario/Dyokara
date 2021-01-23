@@ -1,0 +1,47 @@
+<%- include("../partials/header"); %>
+
+<link rel="stylesheet" href="/stylesheets/adminIndex.css">
+
+<%- include("../partials/navbar"); %>
+
+<div class="container initial-container">
+    <div class = "box header-box">
+        <div class = "main-heading">Users</div>
+    </div>
+
+    <% if(notificationList.length != 0){ %>
+        <div class = "order order-header">
+            <div class="order-details">
+                <span class = "order-field">Username</span>
+            </div>
+
+            <div class="order-details">
+                <span class = "order-field">Phone Number</span>
+            </div>
+    
+            <div class="order-details">
+                <span class = "order-field">Email</span>
+            </div>
+        </div>
+
+        <% notificationList.forEach(user => { %>
+            <div class = "order">
+                <div class="order-details number">
+                    <span class = "order-field"><%= user.username %></span>
+                </div>
+
+                <div class="order-details number">
+                    <span class = "order-field"><%= user.phoneNumber %></span>
+                </div>
+
+                <div class="order-details number">
+                    <span class = "order-field"><%= user.email %></span>
+                </div>
+            </div>
+        <% }) %>
+    <% }else{ %>
+        <div class = "col-12 text-center display-4">No customers to notify!</div>
+    <% } %>
+</div>
+
+<%- include("../partials/footer"); %>

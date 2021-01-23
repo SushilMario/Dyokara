@@ -36,6 +36,14 @@ let ProductSchema = new mongoose.Schema
             colourNumber: Number,
             category: String,
 
+            notificationList:
+            [
+                {
+                    type: mongoose.Schema.Types.ObjectId,
+                    ref: "User"
+                }
+            ],
+
             reviews:
             [
                 {

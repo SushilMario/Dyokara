@@ -410,6 +410,47 @@ router.get("/variations/:lineupNumber/:productNumber/:sizeNumber",
     }
 )
 
+//Notification List
+
+router.put("/:id/notify", middleware.isLoggedIn,
+    (req, res) =>
+    {
+        Product.findById(req.params.id,
+            async(err, foundProduct) =>
+            {
+                if(err)
+                {
+                    res.send("Error");
+                }
+                else if(foundProduct)
+                {
+                    if(foundProduct.stock === "Yes")
+                    {
+                        req.flash("error", "Product is in stock");
+                        res.redirect(`/products/${foundProduct._id}`);
+                    }
+
+                    else
+                    {
+                        const notificationList = [];
+                        notificationList.push(req.user.id);
+
+                        foundProduct.notificationList = notificationList;
+                        await foundProduct.save();
+
+                        res.redirect(`/products/${foundProduct._id}`);
+                    }
+                }
+                else
+                {
+                    req.flash("error", "Product does not exist");
+                    res.redirect("/products/new");
+                }
+            }
+        )
+    }
+)
+
 //Edit
 
 router.get("/:id/edit", middleware.isAdmin,
@@ -455,15 +496,24 @@ router.put("/:id", middleware.isAdmin,
                     foundProduct.name = product.name;
                     foundProduct.description = product.description;
                     foundProduct.price = parseInt(product.price);
-                    foundProduct.noOfUnits = parseInt(product.noOfUnits)
-                    foundProduct.production = product.production;
-                    foundProduct.stock = product.stock;
+                    foundProduct.noOfUnits = parseInt(product.noOfUnits);
                     foundProduct.specifications["Dimensions"] = product.dimensions;
                     foundProduct.specifications["Finish"] = product.finish;
                     foundProduct.specifications["Mounting Mechanism"] = product.mount;
                     foundProduct.specifications["Type of wood"] = product.wood;
                     foundProduct.specifications["Shape"] = product.shape;
                     foundProduct.specifications["Weight (in kg)"] = product.weight;
+
+                    if(foundProduct.stock === "No" && product.stock === "Yes")
+                    {
+                        if(foundProduct.notificationList.length > 0)
+                        {
+                            foundProduct.notificationList = [];
+                        }
+                    }
+
+                    foundProduct.production = product.production;
+                    foundProduct.stock = product.stock;
 
                     if(foundProduct.production === "No")
                     {
@@ -523,7 +573,7 @@ router.post("/:id/checkout", middleware.isLoggedIn,
                     
                     const orderWeight = parseFloat(item.product.specifications["Weight (in kg)"]);
 
-                    const deliveryCharge = Math.ceil(orderWeight) * quantity * 50;
+                    const deliveryCharge = middleware.calculateDeliveryRate(req.user.address.pinCode, Math.ceil(orderWeight));
 
                     const total = (item.product.price * quantity)  + deliveryCharge;
 

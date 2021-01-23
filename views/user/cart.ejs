@@ -9,7 +9,7 @@
         <% if(cart.length == 0){ %>
             <div class = "heading bag-heading m-auto">Your cart is empty</div>
         <% }else{ %>
-            <div class = "heading bag-heading">Your items</div>
+            <div class = "heading bag-heading">Cart</div>
             <div>
                 <form action="/users/<%= currentUser._id %>/cart/checkout" method="POST">
                     <button class = "ui button checkout" type="submit">Proceed to checkout</button>

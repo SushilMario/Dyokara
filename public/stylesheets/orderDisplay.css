@@ -17,7 +17,7 @@
 .heading
 {
     font-size: 4rem;
-    font-weight: 700;
+    font-weight: 500;
     letter-spacing: 1rem;
 
     text-align: center;
@@ -84,7 +84,7 @@
 {
     text-align: center;
     font-size: 2.5rem;
-    font-weight: 700;
+    font-weight: 500;
 }
 
 .item-sub_details
@@ -120,7 +120,7 @@
 .payment-heading
 {
     font-size: 3rem;
-    font-weight: 700;
+    font-weight: 500;
 
     padding-left: 0.5rem;
 
@@ -156,13 +156,13 @@
 
 .payment-line-top
 {
-    border-top: 0.2rem solid #555B6E !important;
+    border-top: 0.2rem solid #553328 !important;
     margin: 0.5rem 0;
 }
 
 .payment-line-bottom
 {
-    border-bottom: 0.2rem solid #555B6E !important;
+    border-bottom: 0.2rem solid #553328 !important;
     margin: 0.5rem 0;
 }
 
