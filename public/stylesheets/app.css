@@ -89,14 +89,6 @@ body::before
     width: 35rem;
 }
 
-.footer-container
-{
-    margin-top: 4rem;
-
-    position: relative;
-    top: initial;
-}
-
 .phone
 {
     display: none;
