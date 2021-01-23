@@ -8,6 +8,8 @@ body::before
 {
     background-image: url("https://res.cloudinary.com/dyokara/image/upload/v1610874838/App/login_landscape_nkomrb.jpg");
     background-position: center;
+    background-size: contain;
+    background-attachment: fixed;
     opacity: 1;
 }
 
