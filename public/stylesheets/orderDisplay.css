@@ -181,6 +181,7 @@ table .payment-charges
 {
     display: flex;
     justify-content: space-between;
+    margin-top: 1.5rem;
 }
 
 .ui.button.pay

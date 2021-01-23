@@ -458,4 +458,9 @@ input.form-control-lg
     {
         width: 95%;
     }
+
+    .product-variations-item
+    {
+        width: 33.333%;
+    }
 }

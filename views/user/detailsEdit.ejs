@@ -2,6 +2,7 @@
 
 <link rel="stylesheet" href="/stylesheets/form.css">
 <link rel="stylesheet" href="/stylesheets/auth.css">
+<link rel="stylesheet" href="/stylesheets/longForm.css">
 
 <%- include("../partials/navbar"); %>
 
@@ -31,7 +32,7 @@
 
             <div class="field">
                 <label class = "label" for = "state">State</label>
-                <input class = "form-input" type="text" name="address[state]" id = "state" placeholder = "Your state" required>
+                <input class = "form-input" type="text" name="address[state]" id = "state" value = "<%= currentUser.address.state %>" required>
             </div>
 
             <div class="field">

@@ -208,7 +208,6 @@ router.get("/modes/gpay", middleware.isLoggedIn,
                         for(let i = 0; i < noOfItems; i++)
                         {
                             cart.pop();
-                            console.log(i + " " + noOfItems);
                         }
                     }
 
@@ -242,7 +241,6 @@ router.get("/modes/directTransfer", middleware.isLoggedIn,
                         for(let i = 0; i < noOfItems; i++)
                         {
                             cart.pop();
-                            console.log(i + " " + noOfItems);
                         }
                     }
 

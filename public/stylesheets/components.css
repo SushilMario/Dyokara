@@ -229,7 +229,7 @@ body::before
 
 .link:hover
 {
-    opacity: 0.5;
+    color: #e7c7ac;
 }
 
 .semi-bold
