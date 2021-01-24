@@ -11,33 +11,33 @@
     <div class="form-container mt-5">
         <h1 class = "form-heading mb-4">Pay through Direct Transfer</h1>
         <div class="display-container">
-            <h2 class = "mb-5">Proceed to your bank's website to continue</h2>
+            <h2 class = "mb-5 text-center">Proceed to your bank's website to continue</h2>
             <div class="field">
-                <label for = "accountNoDisplay" class="label display-label">Transfer to this account number</label>
+                <label for = "accountNoDisplay" class="label display-label bold">Transfer to this account number</label>
                 <input class = "form-input display mb-3" type="text" id = "accountNoDisplay" value = "<%= bankAccountNo %>">
             </div>
             <button class = "ui button mb-5" id = "accountNoCopy">Copy</button>
 
             <div class="field">
-                <label for = "accountHolderDisplay" class="label display-label">Account Holder Name</label>
+                <label for = "accountHolderDisplay" class="label display-label bold">Account Holder Name</label>
                 <input class = "form-input display mb-3" type="text" id = "accountHolderDisplay" value = "<%= bankAccountName %>">
             </div>
             <button class = "ui button mb-5" id = "accountHolderCopy">Copy</button>
 
             <div class="field">
-                <label for = "totalAmountDisplay" class="label display-label">Total Amount</label>
+                <label for = "totalAmountDisplay" class="label display-label bold">Total Amount</label>
                 <input class = "form-input display mb-3" type="text" id = "totalAmountDisplay" value = "<%= total %>">
             </div>
             <button class = "ui button mb-5" id = "totalAmountCopy">Copy</button>
 
             <div class="field">
-                <label for = "IFSCDisplay" class="label display-label">IFSC</label>
+                <label for = "IFSCDisplay" class="label display-label bold">IFSC</label>
                 <input class = "form-input display mb-3" type="text" id = "IFSCDisplay" value = "<%= IFSC %>">
             </div>
             <button class = "ui button mb-5" id = "IFSCCopy">Copy</button>
 
             <div class="field">
-                <label for = "accountBranchDisplay" class="label display-label">Bank Branch</label>
+                <label for = "accountBranchDisplay" class="label display-label bold">Bank Branch</label>
                 <input class = "form-input display mb-3" type="text" id = "accountBranchDisplay" value = "<%= bankName %>">
             </div>
             <button class = "ui button mb-5" id = "accountBranchCopy">Copy</button>

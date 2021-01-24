@@ -10,26 +10,26 @@
     <div class="form-container mt-5">
         <h1 class = "form-heading mb-4">Pay with Google Pay</h1>
         <div class="display-container phone">
-            <h2 class = "mb-5">Open in the Google Pay app to continue</h2>
+            <h2 class = "mb-5 text-center">Open in the Google Pay app to continue</h2>
             <div class="field">
-                <label for = "phoneDisplay" class="label display-label">Transfer to this number</label>
+                <label for = "phoneDisplay" class="label display-label bold">Transfer to this number</label>
                 <input class = "form-input display mb-3" type="text" id = "phoneDisplay" value = "<%= number %>">
             </div>
             <button class = "ui button mb-5" id = "phoneCopy">Copy</button>
 
             <div class="field">
-                <label for = "amountDisplay" class="label display-label">Total Amount</label>
+                <label for = "amountDisplay" class="label display-label bold">Total Amount</label>
                 <input class = "form-input display mb-3" type="text" id = "amountDisplay" value = "<%= total %>">
             </div>
             <button class = "ui button" id = "amountCopy">Copy</button>
         </div>
         <div class="display-container other">
             <div class="image"></div>
-        </div>
 
-        <div class="field">
-            <label for = "amountDisplay" class="label display-label">Total Amount</label>
-            <input class = "form-input display mb-3" type="text" id = "amountDisplay" value = "<%= total %>">
+            <div class="field">
+                <label for = "amountDisplay" class="label display-label bold">Total Amount</label>
+                <input class = "form-input display mb-3" type="text" id = "amountDisplay" value = "<%= total %>">
+            </div>
         </div>
     </div>
 </div>
