@@ -202,14 +202,17 @@ input.form-control-lg
 {
     width: 25%;
     margin: 0 2.5%;
-    padding: 0.5rem 1rem;
-    background-color: rgb(255, 255, 255);
+    padding: 0.75rem 0;
+    background-color: #FAF9F9;
 
     border-radius: 0.5rem;
 
     text-align: center;
     text-decoration: none;
     color: #553328;
+    letter-spacing: 0.2rem;
+    font-weight: 600;
+    font-size: 1.75rem;
 
     box-shadow: 0 0.5rem 1rem rgba( 0 , 0 , 0 , 0.5);
 
@@ -231,7 +234,7 @@ input.form-control-lg
 
 .selected
 {
-    color: #FAF9F9;
+    color: #fbe1ca;
 
     background-color: #553328;
 
