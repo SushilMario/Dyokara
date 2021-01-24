@@ -122,12 +122,10 @@
 
 .product-rating
 {
-    font-size: 1.75rem;
+    font-size: 2rem;
     font-weight: 600;
     text-align: center;
-    font-family: 'Roboto', sans-serif;
 
-    margin-top: 1.2rem;
     width: 8%;
 }
 
@@ -164,7 +162,6 @@ input.form-control-lg
     font-size: 1.75rem;
     font-weight: 300;
     text-align: center;
-    font-family: 'Roboto', sans-serif;
 
     padding: 0.25rem;
 
@@ -334,7 +331,6 @@ input.form-control-lg
     font-size: 1.75rem;
     font-weight: 600;
     text-align: center;
-    font-family: 'Roboto', sans-serif;
 }
 
 .space

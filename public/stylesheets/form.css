@@ -49,8 +49,6 @@ body::before
     resize: none;
 
     color: #553328;
-
-    font-family: 'Roboto', sans-serif;
 }
 
 .ui.button.login
