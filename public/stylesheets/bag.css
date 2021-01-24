@@ -5,17 +5,6 @@
     align-items: center;
 }
 
-.bag-header
-{
-    width: 80%;
-
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-
-    margin-bottom: 6rem;
-}
-
 .heading
 {
     font-size: 4rem;
@@ -28,7 +17,6 @@
     height: 6rem;
 
     padding: 0 3.5rem;
-    padding-left: 5rem;
 
     text-align: center;
 
@@ -40,7 +28,6 @@
     letter-spacing: 0.75rem;
 
     padding: 0 3rem;
-    padding-left: 4.5rem;
 }
 
 .item
@@ -62,15 +49,49 @@
     box-shadow: 0 1rem 2rem rgba( 0 , 0 , 0 , 0.5);
 }
 
-.item-image
+.item-image-container
 {
     height: 10rem;
     width: 10rem;
     /* width: 25%; */
-    background-size: cover;
-    background-position: center;
+    /* background-size: cover;
+    background-position: center; */
+
+    margin: auto 0;
 
     border-radius: 0.5rem;
+}
+
+.item-image
+{
+    border-radius: 0.5rem;
+
+    transition: all 0.2s;
+
+    height: 100%;
+    opacity: 1;
+}
+
+.item-image:hover
+{
+    opacity: 0.5;
+}
+
+.item-row
+{
+    width: 100%;
+}
+
+.item-column
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.item-final-small
+{
+    display: none;
 }
 
 .item-details
@@ -82,51 +103,13 @@
     
     width: 90%;
 
-    font-size: 2.5rem;
-    font-weight: 500;
-}
-
-.item-details-container
-{
-    width: 20rem;
-    height: 100%;
-
-    text-align: center;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.item-details-name
-{
-    max-width: 30rem;
-}
-
-.item-sub_details
-{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-
-    height: fit-content;
-
-    font-size: 2rem;
+    font-size: 1.75rem;
     font-weight: 600;
 }
 
-.item-details-quantity
+.item-details-row
 {
     text-align: center;
-}
-
-.item-final-container
-{
-    height: 100%;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
 }
 
 .ui.button
@@ -221,11 +204,6 @@
 
 @media only screen and (max-width: 640px) 
 {
-    .item-details-name
-    {
-        max-width: 25rem;
-    }
-
     .item-details-container
     {
         width: 15rem;
@@ -242,11 +220,6 @@
 
 @media only screen and (max-width: 500px) 
 {
-    html
-    {
-        font-size: 6.5px;
-    }
-
     .bag-header 
     {
         flex-direction: column;
@@ -268,47 +241,43 @@
         padding: 1.5rem 1.25rem;
     }
 
-    .item-image
+    .item-image-container
     {
-        height: 19rem;
-        width: 19rem;
+        height: 12rem;
+        width: 12rem;
     }
 
-    .item-details
+    .item-column
     {
-        flex-wrap: wrap;
-
-        justify-content: space-around;
-        align-items: flex-start;
-
-        width: 75%;
+        -ms-flex: 0 0 50%;
+        flex: 0 0 50%;
+        max-width: 50%;
     }
 
-    .item-details-container
+    .item-column-final
     {
-        height: 65%;
+        -ms-flex: 0 0 100%;
+        flex: 0 0 100%;
+        max-width: 100%;
 
-        width: 15rem;
-
-        justify-content: center;
+        display: flex;
     }
 
-    .item-final-container
+    .item-column-final .item-details-row
     {
-        height: 30%;
-        width: 90%;
-
-        /* padding-bottom: 2.5%; */
-
-        flex-direction: row;
-        justify-content: space-around;
-        align-items: flex-end;
+        -ms-flex: 0 0 50%;
+        flex: 0 0 50%;
+        max-width: 50%;
     }
 
-    .ui.button.delete
+    .item-final-big
     {
-        font-size: 2rem;
-        padding: 1rem 1.5rem;
+        display: none;
+    }
+
+    .item-final-small
+    {
+        display: block;
     }
 }
 
@@ -318,12 +287,6 @@
     {
         height: fit-content;
     }
-
-    .item-image
-    {
-        height: 16rem;
-        width: 16rem;
-    }
 }
 
 @media only screen and (max-width: 348px) 
@@ -331,21 +294,5 @@
     .item
     {
         height: fit-content;
-    }
-
-    .item-image
-    {
-        height: 22rem;
-    }
-
-    .item-details-container
-    {
-        justify-content: space-between;
-        height: 50%;
-    }
-
-    .item-final-container
-    {
-        height: 20%;
     }
 }

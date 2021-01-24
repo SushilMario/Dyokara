@@ -67,6 +67,14 @@
     background-position: center;
 
     border-radius: 0.5rem;
+
+    transition: all 0.2s;
+    opacity: 1;
+}
+
+.item-image:hover
+{
+    opacity: 0.5;
 }
 
 .item-details

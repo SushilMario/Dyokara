@@ -5,48 +5,74 @@
 <%- include("../partials/navbar"); %>
 
 <div class="container initial-container">
-    <div class = "bag-header">
+    <div class = "bag-header mb-5">
         <% if(cart.length == 0){ %>
             <div class = "heading bag-heading m-auto">Your cart is empty</div>
         <% }else{ %>
-            <div class = "heading bag-heading">Cart</div>
-            <div>
-                <form action="/users/<%= currentUser._id %>/cart/checkout" method="POST">
-                    <button class = "ui button checkout" type="submit">Proceed to checkout</button>
-                </form>
+            <div class = "box header-box w-100">
+                <div class = "main-heading">Cart</div>
             </div>
         <% } %>
     </div> 
 
     <% cart.forEach(item => { %>
         <div class = "item">
-            <div style = "background-image: url('<%= item.product.images[0].url %>');" class="item-image"></div>
-            <div class="item-details">
-                <div class = "item-details-container">
-                    <div class = "item-details-name">
+            <div class = "item-image-container">
+                <a href='/products/<%= item.product._id %>''>
+                    <img class="item-image" src = "<%= item.product.images[0].url %>">
+                </a>
+            </div>
+
+            <div class="item-details container">
+                <!-- <div class="row w-100 mb-3">
+                    <div class = "item-details-name col-12">
                         <a href = "/products/<%= item.product._id %>" class = "link"><%= item.product.name %></a>
                     </div>
-                    <div class = "item-sub_details">
-                        <div><%= item.product.size %></div>
-                        <div><%= item.product.colour %></div>
-                        <div><%= item.customisation === 'Custom' ? '(Custom)' : '' %></div>
+                </div> -->
+
+                <div class="row item-row">
+                    <div class = "col-4 item-column">
+                        <div class = "row item-details-row"><%= item.product.size %></div>
+                        <div class = "mt-3 row item-details-row">Quantity</div> 
+                        <div class = "mt-3 row item-details-row">
+                            <input type="number" name="quantity" class = "text-center" value = "<%= item.quantity %>" min="1" max="10" step="1">
+                        </div>
+                        <div class = "mt-3 row item-details-row item-final-small"><%= item.customisation === 'Custom' ? '(Custom)' : 'Standard' %></div>
+                    </div>
+
+                    <div class = "col-4 item-column">
+                        <div class = "row item-details-row"><%= item.product.colour %></div>
+                        <div class = "mt-3 row item-details-row">Unit Price</div> 
+                        <div class = "mt-3 row item-details-row">
+                            Rs <%= item.product.price %>
+                        </div>
+                        <div class = "mt-3 row item-details-row item-final-small">
+                            <form action = "/users/<%= currentUser._id %>/cart/products/<%= item.product._id %>?_method=DELETE" method = "POST">
+                                <button class = "ui button delete" type="submit">Remove</button>
+                            </form>
+                        </div> 
+                    </div>
+
+                    <div class = "col-4 item-column item-column-final item-final-big">
+                        <div class = "row item-details-row"><%= item.customisation === 'Custom' ? '(Custom)' : 'Standard' %></div>
+                        <div class = "mt-3 row item-details-row">
+                            <form action = "/users/<%= currentUser._id %>/cart/products/<%= item.product._id %>?_method=DELETE" method = "POST">
+                                <button class = "ui button delete" type="submit">Remove</button>
+                            </form>
+                        </div> 
                     </div>
                 </div>
-                <div class = "mt-3">
-                    Quantity: <input type="number" name="quantity" class = "item-details-quantity" value = "<%= item.quantity %>" min="1" max="10" step="1">
-                </div>
-                <div class = "item-final-container">
-                    <div class = "item-details-price">Unit Price: Rs <%= item.product.price %></div>
-                    <div>
-                        <form action = "/users/<%= currentUser._id %>/cart/products/<%= item.product._id %>?_method=DELETE" method = "POST">
-                            <button class = "ui button delete" type="submit">Remove</button>
-                        </form>
-                    </div>
-                </div>
+
                 <div class = "d-none item-id"><%= item.product._id %></div>
             </div>
         </div>
     <% }) %>
+
+    <div class = "mt-5">
+        <form action="/users/<%= currentUser._id %>/cart/checkout" method="POST">
+            <button class = "ui button checkout" type="submit">Proceed to checkout</button>
+        </form>
+    </div>
 </div>
 
 <div class = "d-none" id = "user-id"><%= currentUser._id %></div>

@@ -189,7 +189,7 @@ input.form-control-lg
 {
     display: flex;
     justify-content: space-around;
-    align-items: center; 
+    align-items: flex-start; 
     flex-wrap: wrap;
 
     height: fit-content;
@@ -202,7 +202,7 @@ input.form-control-lg
 {
     width: 25%;
     margin: 0 2.5%;
-    padding: 0.75rem 0;
+    padding: 0.75rem 0.75rem;
     background-color: #FAF9F9;
 
     border-radius: 0.5rem;
