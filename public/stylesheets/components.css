@@ -241,12 +241,12 @@ body::before
 
 .semi-bold
 {
-    font-weight: 600;
+    font-weight: 500;
 }
 
 .bold
 {
-    font-weight: 700;
+    font-weight: 600;
 }
 
 .overflow

@@ -74,7 +74,7 @@ router.post("/products/:product_id", middleware.isLoggedIn,
                                 }
 
                                 user.save();
-                                res.redirect(`/users/${req.params.id}/wishlist`);
+                                res.redirect("back");
                             }
                         }
                     );	

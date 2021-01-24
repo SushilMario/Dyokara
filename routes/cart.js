@@ -76,7 +76,7 @@ router.post("/products/:product_id", middleware.isLoggedIn,
                                     user.cart.push(newItem);
                                 }
                                 user.save();
-                                res.redirect(`/users/${req.params.id}/cart`);
+                                res.redirect("back");
                             }
                         }
                     );	
