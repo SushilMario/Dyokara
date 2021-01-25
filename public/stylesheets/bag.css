@@ -232,6 +232,7 @@
         width: 100%;
         height: fit-content;
         margin-bottom: 4rem;
+        padding: 0.75rem 0;
     }
 
     .item
