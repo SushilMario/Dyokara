@@ -26,6 +26,7 @@
     padding-top: 2rem;
     padding-bottom: 1.25rem;
     margin-bottom: 30px;
+    height: fit-content;
 
     /* background-color: rgb(255, 255, 255, 0.5); */
 
@@ -70,7 +71,7 @@
     width: 100%;
     margin-top: 0.5rem;
 
-    height: 3.5rem;
+    height: fit-content;
 
     display: flex;
     justify-content: space-between;

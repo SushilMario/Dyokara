@@ -26,10 +26,15 @@
 
             <% order.items.forEach(item => { %>
                 <div class = "item order-item">
-                    <div style = "background-image: url('<%= item.product.images[0].url %>');" class = "item-image"></div>
+                    <!-- <div style = "background-image: url('<%= item.product.images[0].url %>');" class = "item-image"></div> -->
+                    <div class = "item-image-container">
+                        <a href='/products/<%= item.product._id %>''>
+                            <img class="item-image" src = "<%= item.product.images[0].url %>">
+                        </a>
+                    </div>
                     <div class="item-details">
                         <div class = "item-name">
-                            <a href = "/products/<%= item.product._id %>" class = "link"><%= item.product.name %></a>
+                            <h2><%= item.product.name %></h2>
                         </div>
                         <div>
                             <div class = "item-sub_details">
@@ -52,10 +57,8 @@
                                 </div>
                             </div>
 
-                            <div class = "item-sub_details">
-                                <div class = "item-customisation w-100 text-center">
-                                    <span class="bold"><%= item.customisation === 'Custom' ? '(Custom)' : '' %></span>
-                                </div>
+                            <div class = "item-customisation w-100 text-center">
+                                <span class="bold"><%= item.customisation === 'Custom' ? '(Custom)' : '(Standard)' %></span>
                             </div>
                         </div>
                     </div>
