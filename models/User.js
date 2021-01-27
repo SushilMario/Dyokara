@@ -101,7 +101,7 @@ let UserSchema = new mongoose.Schema
             }
         ],
 
-        previousOrders:
+        orderHistory:
         [
             {
                 type: mongoose.Schema.Types.ObjectId,

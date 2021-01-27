@@ -117,7 +117,7 @@ router.put("/:id", middleware.isAdmin,
                             }
                             else
                             {
-                                user.previousOrders.push(order);
+                                user.orderHistory.push(order);
                                 await user.save();
                             }
                         }    

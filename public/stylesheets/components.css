@@ -287,6 +287,13 @@ body::before
     color: #3a231b;
 }
 
+/* Form */
+
+.ui.form input[type=text]
+{
+    font-family: 'EB Garamond', serif;
+}
+
 /* Box */
 
 .header

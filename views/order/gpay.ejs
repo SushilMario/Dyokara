@@ -2,6 +2,7 @@
 
 <link rel="stylesheet" href="/stylesheets/form.css">
 <link rel="stylesheet" href="/stylesheets/app.css">
+<link rel="stylesheet" href="/stylesheets/longForm.css">
 <link rel="stylesheet" href="/stylesheets/portal.css">
 
 <%- include("../partials/navbar"); %>
@@ -31,6 +32,10 @@
                 <input class = "form-input display mb-3" type="text" id = "amountDisplay" value = "<%= total %>">
             </div>
         </div>
+    </div>
+
+    <div class = "mt-2 text-center">
+        <a href="/payments/finish" class="ui button">Done</a>
     </div>
 </div>
 

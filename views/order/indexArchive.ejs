@@ -13,7 +13,7 @@
             </div>
     
             <div class="order-details">
-                <span class = "order-field">Account Number</span>
+                <span class = "order-field">Customer Name</span>
                 <span class = "order-field">Total Amount</span>
             </div>
         </div>
@@ -26,11 +26,7 @@
                 </div>
         
                 <div class="order-details number">
-                    <% if(order.customer.bankAccountNo){ %>
-                        <span class = "order-field"><%= order.customer.bankAccountNo %></span>
-                    <% }else{ %>
-                        <span class = "order-field">None</span>
-                    <% } %>
+                    <span class = "order-field"><%= order.customer.username %></span>
                     <span class = "order-field">Rs <%= order.total %></span>
                 </div>
             </div>

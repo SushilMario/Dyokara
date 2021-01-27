@@ -1,48 +1,50 @@
 <%- include("../partials/header"); %>
 
-<link rel="stylesheet" href="/stylesheets/form.css">
-<link rel="stylesheet" href="/stylesheets/auth.css">
-<link rel="stylesheet" href="/stylesheets/longForm.css">
+    <link rel="stylesheet" href="/stylesheets/form.css">
+    <link rel="stylesheet" href="/stylesheets/auth.css">
+    <link rel="stylesheet" href="/stylesheets/longForm.css">
 
-<%- include("../partials/navbar"); %>
+</head>
+    
+<body>
 
-<div class="container initial-container">
-    <div class="form-container">
-        <h1 class = "form-heading mb-5">Some additional details</h1>
-        <form action="/login/details" method="POST" class="ui form">
-            <div class="field">
-                <label class = "label" for = "phoneNumber">Phone Number</label>
-                <input class = "form-input" type="text" name="phoneNumber" id = "phoneNumber" placeholder = "Your mobile number" required>
-            </div>
-            
-            <div class="field">
-                <label class = "label" for = "line1">Address Line 1</label>
-                <input class = "form-input" type="text" name="address[line1]" id = "line1" placeholder = "House / Apartment" required>
-            </div>
+    <div class="container initial-container pt-5">
+        <div class="form-container mt-0">
+            <h1 class = "form-heading mb-5">Some additional details</h1>
+            <form action="/login/details" method="POST" class="ui form">
+                <div class="field">
+                    <label class = "label" for = "phoneNumber">Phone Number</label>
+                    <input class = "form-input" type="text" name="phoneNumber" id = "phoneNumber" placeholder = "Your mobile number" required>
+                </div>
+                
+                <div class="field">
+                    <label class = "label" for = "line1">Address Line 1</label>
+                    <input class = "form-input" type="text" name="address[line1]" id = "line1" placeholder = "House / Apartment" required>
+                </div>
 
-            <div class="field">
-                <label class = "label" for = "line2">Address Line 2</label>
-                <input class = "form-input" type="text" name="address[line2]" id = "line2" placeholder = "Street / Locality" required>
-            </div>
+                <div class="field">
+                    <label class = "label" for = "line2">Address Line 2</label>
+                    <input class = "form-input" type="text" name="address[line2]" id = "line2" placeholder = "Street / Locality" required>
+                </div>
 
-            <div class="field">
-                <label class = "label" for = "city">City</label>
-                <input class = "form-input" type="text" name="address[city]" id = "city" placeholder = "Your city" required>
-            </div>
+                <div class="field">
+                    <label class = "label" for = "city">City</label>
+                    <input class = "form-input" type="text" name="address[city]" id = "city" placeholder = "Your city" required>
+                </div>
 
-            <div class="field">
-                <label class = "label" for = "state">State</label>
-                <input class = "form-input" type="text" name="address[state]" id = "state" placeholder = "Your state" required>
-            </div>
+                <div class="field">
+                    <label class = "label" for = "state">State</label>
+                    <input class = "form-input" type="text" name="address[state]" id = "state" placeholder = "Your state" required>
+                </div>
 
-            <div class="field">
-                <label class = "label" for = "pinCode">Pin Code</label>
-                <input class = "form-input" type="text" name="address[pinCode]" id = "pinCode" placeholder = "Your pin Code" required>
-            </div>
-            
-            <button class = "ui button submit mt-3" type="submit">Submit</button>
-        </form>
+                <div class="field">
+                    <label class = "label" for = "pinCode">Pin Code</label>
+                    <input class = "form-input" type="text" name="address[pinCode]" id = "pinCode" placeholder = "Your pin Code" required>
+                </div>
+                
+                <button class = "ui button submit mt-3" type="submit">Submit</button>
+            </form>
+        </div>
     </div>
-</div>
 
 <%- include("../partials/footer"); %>

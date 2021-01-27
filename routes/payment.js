@@ -90,6 +90,16 @@ router.put("/edit/directTransfer", middleware.isLoggedIn,
     }
 )
 
+// Payment redirect
+
+router.get("/finish", middleware.isLoggedIn,
+    (req, res) =>
+    {
+        req.flash("success", "Your order has been placed, thank you for shopping with us!");
+        res.redirect("/products");
+    }
+)
+
 //Create new order
 
 router.get("/:mode", middleware.isLoggedIn,
@@ -104,6 +114,12 @@ router.get("/:mode", middleware.isLoggedIn,
                 }
                 else
                 { 
+                    if(req.params.mode !== "gpay" && req.params.mode !== "directTransfer")
+                    {
+                        req.flash("error", "Invalid payment option");
+                        res.redirect("/products");
+                    }
+
                     if(user.currentOrder)
                     {
                         const newOrder = {};

@@ -11,15 +11,10 @@
                 <span class = "order-field">Order Number</span>
                 <span class = "order-field">Phone Number</span>
             </div>
-    
+
             <div class="order-details">
-                <span class = "order-field">Account Number</span>
+                <span class = "order-field">Customer Name</span>
                 <span class = "order-field">Total Amount</span>
-            </div>
-    
-            <div class="order-status">
-                <span class = "order-field">Confirm</span>
-                <span class = "order-field">Delete</span>
             </div>
         </div>
 
@@ -32,22 +27,18 @@
                     </div>
             
                     <div class="order-details number">
-                        <% if(order.customer.bankAccountNo){ %>
-                            <span class = "order-field"><%= order.customer.bankAccountNo %></span>
-                        <% }else{ %>
-                            <span class = "order-field">None</span>
-                        <% } %>
+                        <span class = "order-field"><%= order.customer.username %></span>
                         <span class = "order-field">Rs <%= order.total %></span>
                     </div>
             
-                    <div class="order-status">
+                    <!-- <div class="order-status">
                         <form action = "/orders/<%= order._id %>?_method=PUT" method = "POST" class = "order-status-form order-field">
                             <button type="submit" class = "ui button order-status"><i class = "fas fa-check"></i></button>
                         </form>
                         <form action = "/orders/<%= order._id %>?_method=DELETE" method = "POST" class = "order-status-form order-field">
                             <button type="submit" class = "ui button order-status"><i class="fas fa-trash-alt"></i></button>
                         </form>
-                    </div>
+                    </div> -->
                 </div>
             <% } %>
         <% }) %>

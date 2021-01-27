@@ -149,14 +149,14 @@ router.put("/login/details/edit", middleware.isLoggedIn,
     }
 )
 
-//Previous orders
+// Order History
 
-router.get("/previousOrders", middleware.isLoggedIn,
+router.get("/orderHistory", middleware.isLoggedIn,
     (req, res) =>
     {
         User.findById(req.user.id).populate(
             {
-                path: 'previousOrders',
+                path: 'orderHistory',
                 populate: 
                 {
                     path: 'items',
@@ -177,8 +177,8 @@ router.get("/previousOrders", middleware.isLoggedIn,
             
                 else if(user)
                 {
-                    const orders = user.previousOrders.sort(middleware.compareValues("orderNumber", "desc"));
-                    res.render("user/previousOrders", {orders: orders});
+                    const orders = user.orderHistory.sort(middleware.compareValues("orderNumber", "desc"));
+                    res.render("user/orderHistory", {orders: orders});
                 }
 
                 else
