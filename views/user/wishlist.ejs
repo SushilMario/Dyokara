@@ -5,15 +5,13 @@
 <%- include("../partials/navbar"); %>
 
 <div class="container initial-container">
-    <div class = "bag-header mb-5">
-        <% if(wishlist.length == 0){ %>
-            <div class = "heading bag-heading m-auto">Your wishlist is empty</div>
-        <% }else{ %>
-            <div class = "box header-box w-100">
-                <div class = "main-heading">Wishlist</div>
-            </div>
-        <% } %>
-    </div> 
+    <% if(wishlist.length == 0){ %>
+        <div class = "heading bag-heading m-auto">Your wishlist is empty</div>
+    <% }else{ %>
+        <div class = "box header-box mb-5">
+            <div class = "main-heading">Wishlist</div>
+        </div>
+    <% } %>
 
     <% wishlist.forEach(item => { %>
         <div class = "item">
