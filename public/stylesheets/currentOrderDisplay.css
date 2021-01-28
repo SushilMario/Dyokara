@@ -1,0 +1,20 @@
+.container.initial-container
+{
+    flex-direction: column;
+    align-items: center;
+}
+
+.bag
+{
+    width: 100%;
+}
+
+.box.header-box
+{
+    width: fit-content;
+}
+
+.box.header-box
+{
+    width: fit-content;
+}

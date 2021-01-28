@@ -1,53 +1,54 @@
 <%- include("../partials/header"); %>
 
 <link rel="stylesheet" href="/stylesheets/orderDisplay.css"/>
+<link rel="stylesheet" href="/stylesheets/currentOrderDisplay.css"/>
 
 <%- include("../partials/navbar"); %>
 
 <div class="container initial-container">
     <div class="bag">
-        <div class = "box header-box w-100">
-            <div class = "main-heading"><%= order.orderNumber %></div>
-            <div class = "sub-heading"><%= order.orderDate.toDateString() %></div>
-        </div>
-
-        <% order.items.forEach(item => { %>
-            <div class = "item">
-                <div style = "background-image: url('<%= item.product.images[0].url %>');" class = "item-image"></div>
-                <div class="item-details">
-                    <div class = "item-name"><%= item.product.name %></div>
-                    <div>
-                        <div class = "item-sub_details">
-                            <div class = "item-size">
-                                Size: <span class="semi-bold"><%= item.product.size %></span>
+        <div class = "box header-box mt-5">
+            <div class = "main-heading mb-3"><%= order.orderNumber %></div>
+            <div class = "sub-heading mb-4"><%= order.orderDate.toDateString() %></div>
+        
+            <% order.items.forEach(item => { %>
+                <div class = "item">
+                    <div style = "background-image: url('<%= item.product.images[0].url %>');" class = "item-image"></div>
+                    <div class="item-details">
+                        <div class = "item-name"><%= item.product.name %></div>
+                        <div>
+                            <div class = "item-sub_details">
+                                <div class = "item-size">
+                                    Size: <span class="semi-bold"><%= item.product.size %></span>
+                                </div>
+        
+                                <div class = "item-quantity">
+                                    Quantity: <span class="semi-bold"><%= item.quantity %></span>
+                                </div>
                             </div>
-    
-                            <div class = "item-quantity">
-                                Quantity: <span class="semi-bold"><%= item.quantity %></span>
+        
+                            <div class = "item-sub_details">
+                                <div class = "item-colour">
+                                    Colour: <span class="semi-bold"><%= item.product.colour %></span>
+                                </div>
+        
+                                <div class = "item-price">
+                                    Item price: <span class="semi-bold">Rs <%= item.product.price %></span>
+                                </div>
                             </div>
                         </div>
-    
-                        <div class = "item-sub_details">
-                            <div class = "item-colour">
-                                Colour: <span class="semi-bold"><%= item.product.colour %></span>
-                            </div>
-    
-                            <div class = "item-price">
-                                Item price: <span class="semi-bold">Rs <%= item.product.price %></span>
-                            </div>
+                        
+                        <div class = "item-customisation w-100 text-center">
+                            <span class="bold"><%= item.customisation === 'Custom' ? '(Custom)' : '(Standard)' %></span>
                         </div>
-                    </div>
-                    
-                    <div class = "item-customisation w-100 text-center">
-                        <span class="bold"><%= item.customisation === 'Custom' ? '(Custom)' : '(Standard)' %></span>
                     </div>
                 </div>
-            </div>
-        <% }) %>
+            <% }) %>
+        </div>
     </div>
 
-    <div class="payment">
-        <div class="payment-heading mb-4 pl-0">Customer details</div>
+    <div class="payment mt-5">
+        <div class = "main-heading mb-4">Customer Details</div>
                 
         <section>Name: <%= order.customer.username %></section>
         <section>Phone Number: <%= order.customer.phoneNumber %></section>

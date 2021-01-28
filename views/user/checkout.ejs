@@ -1,6 +1,7 @@
 <%- include("../partials/header"); %>
 
 <link rel="stylesheet" href="/stylesheets/orderDisplay.css"/>
+<link rel="stylesheet" href="/stylesheets/currentOrderDisplay.css"/>
 
 <style>
     .item-image:hover
@@ -13,48 +14,48 @@
 
 <div class="container initial-container">
     <div class="bag">
-        <div class = "heading">
-            <div>Your items</div>
-        </div>
-        <% order.forEach(item => { %>
-            <div class = "item">
-                <div style = "background-image: url('<%= item.product.images[0].url %>');" class = "item-image"></div>
-                <div class="item-details">
-                    <div class = "item-name"><%= item.product.name %></div>
-                    <div>
-                        <div class = "item-sub_details first">
-                            <div class = "item-size">
-                                Size: <span class="semi-bold"><%= item.product.size %></span>
+        <div class = "box header-box mt-5">
+            <div class = "main-heading mb-4">Order Summary</div>
+            <% order.forEach(item => { %>
+                <div class = "item">
+                    <div style = "background-image: url('<%= item.product.images[0].url %>');" class = "item-image"></div>
+                    <div class="item-details">
+                        <div class = "item-name"><%= item.product.name %></div>
+                        <div>
+                            <div class = "item-sub_details first">
+                                <div class = "item-size">
+                                    Size: <span class="semi-bold"><%= item.product.size %></span>
+                                </div>
+        
+                                <div class = "item-quantity">
+                                    Quantity: <span class="semi-bold"><%= item.quantity %></span>
+                                </div>
                             </div>
-    
-                            <div class = "item-quantity">
-                                Quantity: <span class="semi-bold"><%= item.quantity %></span>
+        
+                            <div class = "item-sub_details second">
+                                <div class = "item-colour">
+                                    Colour: <span class="semi-bold"><%= item.product.colour %></span>
+                                </div>
+        
+                                <div class = "item-price">
+                                    Item price: <span class="semi-bold">Rs <%= item.product.price %></span>
+                                </div>
                             </div>
-                        </div>
-    
-                        <div class = "item-sub_details second">
-                            <div class = "item-colour">
-                                Colour: <span class="semi-bold"><%= item.product.colour %></span>
-                            </div>
-    
-                            <div class = "item-price">
-                                Item price: <span class="semi-bold">Rs <%= item.product.price %></span>
-                            </div>
-                        </div>
 
-                        <div class = "item-sub_details third">
-                            <div class = "item-customisation w-100 text-center">
-                                <span class="bold"><%= item.customisation === 'Custom' ? '(Custom)' : '(Standard)' %></span>
+                            <div class = "item-sub_details third">
+                                <div class = "item-customisation w-100 text-center">
+                                    <span class="bold"><%= item.customisation === 'Custom' ? '(Custom)' : '(Standard)' %></span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        <% }) %>
+            <% }) %>
+        </div>
     </div>
 
-    <div class="payment">
-        <div class="payment-heading mb-4">Only one more step!</div>
+    <div class="payment mt-5">
+        <div class = "main-heading mb-4">Only one more step!</div>
 
         <h2 class = "text-center">
             Delivery will be within 7-14 business days

@@ -292,7 +292,7 @@ body::before
 .ui.form input[type=text]
 {
     font-family: 'EB Garamond', serif;
-    font-size: 2rem;
+    font-size: 2rem; 
 }
 
 /* Box */

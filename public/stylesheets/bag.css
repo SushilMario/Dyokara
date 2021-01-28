@@ -48,6 +48,9 @@
 .item-name
 {
     margin-bottom: 3rem;
+    background-color: #fde3cb;
+    border-radius: 0.5rem;
+    border: 0.1rem solid #553328;
 }
 
 .item-primary-container
