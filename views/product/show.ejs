@@ -29,7 +29,7 @@
     </div>
 
     <div class= "product-overview">
-        <div class = "product-name w-100"><%= product.name %></div>
+        <div class = "product-name text-center w-100 section-heading"><%= product.name %></div>
         
         <div class = "product-header d-flex justify-content-between align-items-center pl-1.5">
             <% if(product.averageRating != 0.0){ %>
@@ -120,11 +120,11 @@
 <div class="third container">
     <div class = "box product-section purchase">
         <% if(currentUser && product.stock === "Yes"){ %>
-            <div class = "product-heading">Like what you see?</div>
+            <div class = "product-heading section-heading mb-5">Like what you see?</div>
 
-            <hr class = "line purchase-line">
+            <!-- <hr class = "line purchase-line"> -->
     
-            <div class="product-links mb-4">
+            <div class="product-links">
                 <form class = "product-form" action="/products/<%= product._id %>/checkout" method="POST">
                     <input type = "text" name = "customisation" class = "d-none form-customisation">
                     <input type = "number" name = "quantity" class = "d-none form-quantity" min = "1" max = "10">
@@ -172,9 +172,7 @@
 
     <% if(currentUser && product.stock === "Yes"){ %>
         <div class = "box product-section personalisation">
-            <div class = "product-heading">Personalise</div>
-
-            <hr class = "line customisation-line">
+            <div class = "product-heading section-heading mb-4">Personalise</div>
 
             <label for = "customisation" class = "sub-heading mb-4">Think it could do with a personal touch? Want to make it your own?</label>
 
@@ -203,10 +201,10 @@
     <% } %>
 
     <div class = "box product-section">
-        <div class = "product-heading">
+        <div class = "product-heading section-heading mb-5">
             Description
         </div>
-        <hr class = "line description-line">
+
         <div class = "text-center"><%= product.description %></div>
     </div>
 
