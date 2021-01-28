@@ -148,7 +148,7 @@ middlewareObj.canReview = (req, res, next) =>
     let checker = false;
     const userId = req.user.id;
 
-    User.findById(req.user.id).populate("previousOrders").exec(
+    User.findById(req.user.id).populate("orderHistory").exec(
         (err, foundUser) =>
         {
             if(err)
@@ -159,7 +159,7 @@ middlewareObj.canReview = (req, res, next) =>
             {
                 const productID = req.params.id;
                 
-                for(let order of foundUser.previousOrders)
+                for(let order of foundUser.orderHistory)
                 {
                     for(let id of order.productIDs)
                     {

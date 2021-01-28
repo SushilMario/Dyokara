@@ -49,6 +49,7 @@ body::before
     resize: none;
 
     color: #553328;
+    font-size: 2rem;
 }
 
 .ui.button.login
