@@ -279,7 +279,7 @@ router.get("/:id",
 
                                 if(req.user)
                                 {
-                                    User.findById(req.user.id).populate("previousOrders").exec(
+                                    User.findById(req.user.id).populate("orderHistory").exec(
                                         (err, foundUser) =>
                                         {
                                             if(err)
@@ -290,7 +290,7 @@ router.get("/:id",
                                             {
                                                 //Has bought product?
 
-                                                for(let order of foundUser.previousOrders)
+                                                for(let order of foundUser.orderHistory)
                                                 {
                                                     for(let id of order.productIDs)
                                                     {

@@ -17,59 +17,57 @@
 
     <% wishlist.forEach(item => { %>
         <div class = "item">
-            <div class = "item-image-container">
-                <a href='/products/<%= item.product._id %>''>
-                    <img class="item-image" src = "<%= item.product.images[0].url %>">
-                </a>
-            </div>
-
-            <div class="item-details container">
-                <div class="row w-100 mb-3">
-                    <div class = "item-details-name col-12 d-flex justify-content-center">
-                        <h2><%= item.product.name %></h2>
-                    </div>
+            <h1 class = "text-center item-name"><%= item.product.name %></h1>
+            
+            <div class="item-primary-container">
+                <div class = "item-image-container">
+                    <a href='/products/<%= item.product._id %>''>
+                        <img class="item-image" src = "<%= item.product.images[0].url %>">
+                    </a>
                 </div>
-
-                <div class="row item-row">
-                    <div class = "col-4 item-column">
-                        <div class = "row item-details-row"><%= item.product.size %></div>
-
-                        <div class = "mt-3 row item-details-row item-final-small"><%= item.customisation === 'Custom' ? '(Custom)' : '(Standard)' %></div>
-
-                        <div class = "mt-3 row item-details-row item-move">
-                            <form action="/users/<%= currentUser._id %>/wishlist/products/<%=item.product._id%>/move" method="POST">
-                                <button class = "ui button move" type="submit">Move to Cart</button>
-                            </form>
-                        </div> 
-
-                        <div class = "mt-3 row item-details-row item-final-small">
-                            <form action = "/users/<%= currentUser._id %>/wishlist/products/<%= item.product._id %>?_method=DELETE" method = "POST">
-                                <button class = "ui button delete" type="submit">Remove</button>
-                            </form>
-                        </div> 
-                    </div>
-
-                    <div class = "col-4 item-column">
-                        <div class = "row item-details-row"><%= item.product.colour %></div>
-
-                        <div class = "mt-3 row item-details-row">Unit Price</div> 
-                        <div class = "mt-3 row item-details-row">
-                            Rs <%= item.product.price %>
+    
+                <div class="item-details container">
+                    <div class="row item-row">
+                        <div class = "col-4 item-column">
+                            <div class = "row item-details-row"><%= item.product.size %></div>
+    
+                            <div class = "mt-3 row item-details-row item-final-small"><%= item.customisation === 'Custom' ? '(Custom)' : '(Standard)' %></div>
+    
+                            <div class = "mt-3 row item-details-row item-move">
+                                <form action="/users/<%= currentUser._id %>/wishlist/products/<%=item.product._id%>/move" method="POST">
+                                    <button class = "ui button move" type="submit">Move to Cart</button>
+                                </form>
+                            </div> 
+    
+                            <div class = "mt-3 row item-details-row item-final-small">
+                                <form action = "/users/<%= currentUser._id %>/wishlist/products/<%= item.product._id %>?_method=DELETE" method = "POST">
+                                    <button class = "ui button delete" type="submit">Remove</button>
+                                </form>
+                            </div> 
+                        </div>
+    
+                        <div class = "col-4 item-column">
+                            <div class = "row item-details-row"><%= item.product.colour %></div>
+    
+                            <div class = "mt-3 row item-details-row">Unit Price</div> 
+                            <div class = "mt-3 row item-details-row">
+                                Rs <%= item.product.price %>
+                            </div>
+                        </div>
+    
+                        <div class = "col-4 item-column item-column-final item-final-big">
+                            <div class = "row item-details-row"><%= item.customisation === 'Custom' ? '(Custom)' : '(Standard)' %></div>
+    
+                            <div class = "mt-3 row item-details-row">
+                                <form action = "/users/<%= currentUser._id %>/wishlist/products/<%= item.product._id %>?_method=DELETE" method = "POST">
+                                    <button class = "ui button delete" type="submit">Remove</button>
+                                </form>
+                            </div> 
                         </div>
                     </div>
-
-                    <div class = "col-4 item-column item-column-final item-final-big">
-                        <div class = "row item-details-row"><%= item.customisation === 'Custom' ? '(Custom)' : '(Standard)' %></div>
-
-                        <div class = "mt-3 row item-details-row">
-                            <form action = "/users/<%= currentUser._id %>/wishlist/products/<%= item.product._id %>?_method=DELETE" method = "POST">
-                                <button class = "ui button delete" type="submit">Remove</button>
-                            </form>
-                        </div> 
-                    </div>
+    
+                    <div class = "d-none item-id"><%= item.product._id %></div>
                 </div>
-
-                <div class = "d-none item-id"><%= item.product._id %></div>
             </div>
         </div>
     <% }) %>

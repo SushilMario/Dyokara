@@ -40,7 +40,7 @@ const Tracking = require("./models/Tracking");
 const Order = require("./models/Order");
 const Product = require("./models/Product");
 
-//Mongoose setup
+//Mongoose setup 
 
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false);
@@ -225,26 +225,26 @@ app.use
 //     }
 // )
 
-const primaryTrack = 
-{
-    name: "primary",
-    currentOrderNumber: 1,
-    currentLineupNumber: 0,
-};
+// const primaryTrack = 
+// {
+//     name: "primary",
+//     currentOrderNumber: 1,
+//     currentLineupNumber: 0,
+// };
 
-Tracking.create(primaryTrack,
-    (err, track) =>
-    {
-        if(err)
-        {
-            console.log("Primary track could not be created");
-        }
-        else
-        {
-            console.log("Primary track created!");
-        }
-    }    
-)
+// Tracking.create(primaryTrack,
+//     (err, track) =>
+//     {
+//         if(err)
+//         {
+//             console.log("Primary track could not be created");
+//         }
+//         else
+//         {
+//             console.log("Primary track created!");
+//         }
+//     }    
+// )
 
 // User.findOne({username: "Sushil Mario"}, 
 //     async(err, user) =>

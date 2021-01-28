@@ -94,7 +94,7 @@ router.get("/:id", middleware.isAdmin,
     }
 )
 
-//Update
+//Update Payment
 
 router.put("/:id", middleware.isAdmin,
     (req, res) =>
@@ -108,6 +108,9 @@ router.put("/:id", middleware.isAdmin,
                 }
                 else
                 {
+                    order.confirmed = true;
+                    await order.save();
+
                     User.findById(order.customer,
                         async(err, user) =>
                         {
@@ -119,14 +122,58 @@ router.put("/:id", middleware.isAdmin,
                             {
                                 user.orderHistory.push(order);
                                 await user.save();
+
+                                res.redirect("/orders");
                             }
                         }    
                     );
+                }
+            }    
+        );
+    }
+);
 
-                    order.confirmed = true;
+//Update Delivery
+
+router.put("/:id/delivery", middleware.isAdmin,
+    (req, res) =>
+    {
+        Order.findById(req.params.id,
+            async(err, order) =>
+            {
+                if(err)
+                {
+                    console.log(err);
+                }
+                else
+                {
+                    order.delivered = true;
                     await order.save();
 
-                    res.redirect("/orders");
+                    User.findById(order.customer,
+                        async(err, user) =>
+                        {
+                            if(err)
+                            {
+                                console.log("User not found");
+                            }
+                            else
+                            {
+                                const {orderHistory} = user;
+
+                                for(let i = 0; i < orderHistory.length; i++)
+                                {
+                                    if(order._id.equals(orderHistory[i]._id))
+                                    {
+                                        orderHistory[i] = order;
+                                    }
+                                }
+                                await user.save();
+
+                                res.redirect("/orders/archive");
+                            }
+                        }    
+                    );
                 }
             }    
         );

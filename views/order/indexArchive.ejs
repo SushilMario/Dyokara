@@ -19,7 +19,7 @@
         </div>
 
         <% orders.forEach(order => { %>
-            <div class = "order">
+            <div class = "order <%= (order.delivered) ? 'success' : 'error' %>">
                 <div class="order-details number">
                     <a href = "/orders/<%= order._id %>" class = "order-field link"><%= order.orderNumber %></a>
                     <span class = "order-field"><%= order.customer.phoneNumber %></span>

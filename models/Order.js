@@ -38,6 +38,11 @@ let OrderSchema = new mongoose.Schema
         {
             type: Boolean, 
             default: false
+        },
+        delivered:
+        {
+            type: Boolean, 
+            default: false
         }
     }
 );

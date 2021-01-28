@@ -82,6 +82,18 @@
     box-shadow: 0 1rem 2rem rgba( 0 , 0 , 0 , 0.5); 
 } */
 
+.success
+{
+    background-color: rgba(15, 155, 2, 0.5);
+    color: rgb(9, 78, 2);
+}
+
+.error
+{
+    background-color: rgba(230, 45, 45, 0.5);
+    color: rgb(105, 0, 0);
+}
+
 @media only screen and (max-width: 992px) 
 {
     html 
