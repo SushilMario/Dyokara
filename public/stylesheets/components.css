@@ -182,7 +182,7 @@ body::before
     font-weight: 600;
 
     background-color: #FAF9F9;
-    height: 5rem;
+    height: fit-content;
 
     padding-top: 0.9rem;
     padding-bottom: 1.1rem;
