@@ -22,7 +22,9 @@
                 <div class = "sub-heading">
                     Total: <span class="semi-bold">Rs <%= order.total %></span>
                 </div>
+            </div>
 
+            <div class = "box header-box order-box mt-5 pt-4">
                 <% order.items.forEach(item => { %>
                     <div class = "item order-item mt-4">
                         <!-- <div style = "background-image: url('<%= item.product.images[0].url %>');" class = "item-image"></div> -->

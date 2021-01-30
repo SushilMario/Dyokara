@@ -14,8 +14,11 @@
 
 <div class="container initial-container">
     <div class="bag">
-        <div class = "box header-box mt-5">
-            <div class = "main-heading mb-4">Order Summary</div>
+        <div class = "box header-box primary mt-5">
+            <div class = "main-heading">Order Summary</div>
+        </div>
+
+        <div class = "box header-box mt-5 pt-5">
             <% order.forEach(item => { %>
                 <div class = "item">
                     <div style = "background-image: url('<%= item.product.images[0].url %>');" class = "item-image"></div>

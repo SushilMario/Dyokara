@@ -14,10 +14,12 @@
 
 <div class="container initial-container">
     <div class="bag">
-        <div class = "box header-box mt-5">
-            <div class = "main-heading mb-3"><%= order.orderNumber %></div>
-            <div class = "sub-heading mb-4"><%= order.orderDate.toDateString() %></div>
+        <div class = "box header-box primary mt-5">
+            <div class = "main-heading"><%= order.orderNumber %></div>
+            <div class = "sub-heading"><%= order.orderDate.toDateString() %></div>
+        </div>
         
+        <div class = "box header-box mt-5 pt-5">
             <% order.items.forEach(item => { %>
                 <div class = "item">
                     <div style = "background-image: url('<%= item.product.images[0].url %>');" class = "item-image"></div>
