@@ -12,7 +12,7 @@
         <form action = "/info?_method=PUT" method = "POST" class = "ui form">
             <div class="field">
                 <label class = "label" for = "announcement">Announcement</label>
-                <input class = "form-input" type="text" name = "announcement" id = "announcement" value = "<%= announcement %>">
+                <textarea class = "form-control" name = "announcement" rows="3" id = "announcement"><%= announcement %></textarea>
             </div>
 
             <button class = "ui button submit" type="submit">Save</button>
