@@ -176,22 +176,6 @@ app.use
 
 // Create new tracking object
 
-Tracking.findOne({name: "primary"},
-    async(err, track) =>
-    {
-        if(err)
-        {
-            res.send(err);
-        }
-        else
-        {
-            track.announcement = "";
-            await track.save();
-            console.log("Updated");
-        }
-    }
-)
-
 // Tracking.deleteMany({name: "primary"},
 //     (err) =>
 //     {
