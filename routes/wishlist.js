@@ -74,6 +74,8 @@ router.post("/products/:product_id", middleware.isLoggedIn,
                                 }
 
                                 user.save();
+
+                                req.flash("success", "Product added!");
                                 res.redirect("back");
                             }
                         }

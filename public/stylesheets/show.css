@@ -1,12 +1,10 @@
-.intial-container
-{
-    display: flex;
-    justify-content: space-between;
-}
-
 .product-showcase
 {
     margin-bottom: 4rem;
+    width: 100%;
+
+    display: flex;
+    justify-content: space-between;
 }
 
 .carousel.slide

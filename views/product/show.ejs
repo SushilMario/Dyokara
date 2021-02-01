@@ -4,95 +4,109 @@
 
 <%- include("../partials/navbar"); %>
 
-<div class="container initial-container product-showcase">
-    <div id = "productCarousel" class = "carousel slide" data-ride = "carousel" data-interval = "false">
-        <!-- <ol class="carousel-indicators">
-            <li data-target="#productCarousel" data-slide-to="0" class="active"></li>
-            <li data-target="#productCarousel" data-slide-to="1"></li>
-            <li data-target="#productCarousel" data-slide-to="2"></li>
-        </ol> -->
-        <div class="carousel-inner w-100 h-100">
-            <% product.images.forEach((image, i) => { %>
-                <div class = "carousel-item w-100 h-100 <%= (i == 0) ? 'active' : 'not-active' %>">
-                    <img src = "<%= image.url %>" class = "" alt="..."> 
-                </div>
-            <% }) %>
+<div class="container initial-container">
+    <% if(error && error.length > 0){ %>
+        <div class="alert error">
+            <%= error %>
         </div>
-        <a class="carousel-control-prev" href="#productCarousel" role="button" data-slide="prev">
-            <span class = "carousel-control-icon" aria-hidden="true"><i class="fas fa-arrow-left"></i></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#productCarousel" role="button" data-slide="next">
-            <span class = "carousel-control-icon" aria-hidden="true"><i class="fas fa-arrow-right"></i></span>
-            <span class="sr-only">Next</span>
-        </a>
-    </div>
+    <% } %>
 
-    <div class= "product-overview">
-        <div class = "product-name text-center w-100 section-heading"><%= product.name %></div>
-        
-        <div class = "product-header d-flex justify-content-between align-items-center pl-1.5 mt-3">
-            <% if(product.averageRating != 0.0){ %>
-                <div class = "product-rating d-flex justify-content-between align-items-center pb-3">
-                    <%= product.averageRating %> <i class="fas fa-star d-inline pb-1 mt-1"></i>
-                </div>
-            <% } %>
+    <% if(success && success.length > 0){ %>
+        <div class="alert success">
+            <%= success %>
+        </div>
+    <% } %>
+
+    <div class="product-showcase">
+        <div id = "productCarousel" class = "carousel slide" data-ride = "carousel" data-interval = "false">
+            <!-- <ol class="carousel-indicators">
+                <li data-target="#productCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#productCarousel" data-slide-to="1"></li>
+                <li data-target="#productCarousel" data-slide-to="2"></li>
+            </ol> -->
+            <div class="carousel-inner w-100 h-100">
+                <% product.images.forEach((image, i) => { %>
+                    <div class = "carousel-item w-100 h-100 <%= (i == 0) ? 'active' : 'not-active' %>">
+                        <img src = "<%= image.url %>" class = "" alt="..."> 
+                    </div>
+                <% }) %>
+            </div>
+            <a class="carousel-control-prev" href="#productCarousel" role="button" data-slide="prev">
+                <span class = "carousel-control-icon" aria-hidden="true"><i class="fas fa-arrow-left"></i></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#productCarousel" role="button" data-slide="next">
+                <span class = "carousel-control-icon" aria-hidden="true"><i class="fas fa-arrow-right"></i></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    
+        <div class= "product-overview">
+            <div class = "product-name text-center w-100 section-heading"><%= product.name %></div>
             
-            <% if(currentUser){ %>
-                <% if(currentUser.isAdmin){ %>
-                    <div class = "action-container">
-                        <a href = "/lineups/<%= lineup._id %>/" class="icon-button"><i class="fas fa-level-up-alt"></i></a>
-                        <a href = "/products/<%= product._id %>/edit" class="icon-button"><i class="fas fa-edit"></i></a>
-                        <!-- <a href = "/products/<%= product._id %>/confirm" class="icon-button"><i class="icon-button far fa-trash-alt"></i></a> -->
+            <div class = "product-header d-flex justify-content-between align-items-center pl-1.5 mt-3">
+                <% if(product.averageRating != 0.0){ %>
+                    <div class = "product-rating d-flex justify-content-between align-items-center pb-3">
+                        <%= product.averageRating %> <i class="fas fa-star d-inline pb-1 mt-1"></i>
                     </div>
                 <% } %>
-            <% } %>
-        </div>
-        <div class = "product-details">
-            <table class="table table-borderless product-table mb-4">
-                <tbody>
-                    <tr>
-                        <td>Price</td>
-                        <td class = "product-details-separator text-center">:</td>
-                        <td class = "product-details-value text-right">Rs <%= product.price %></td>
-                    </tr>
-                    <tr>
-                        <td>Size</td>
-                        <td class = "product-details-separator text-center">:</td>
-                        <td class = "product-details-value text-right"><%= product.size %></td>
-                    </tr>
-                    <tr>
-                        <td>Colour</td>
-                        <td class = "product-details-separator text-center">:</td>
-                        <td class = "product-details-value text-right"><%= product.colour %></td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <table class="table table-borderless product-table mb-4">
-                <tbody>
-                    <tr>
-                        <td>Number of units</td>
-                        <td class = "product-details-separator text-center">:</td>
-                        <td class = "product-details-value text-right"><%= product.noOfUnits %></td>
-                    </tr>
-                    <tr>
-                        <td>In Stock</td>
-                        <td class = "product-details-separator text-center">:</td>
-                        <td class = "product-details-value text-right"><%= product.stock %></td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <table class="table table-borderless product-table">
-                <tbody>
-                    <tr>
-                        <td>Category</td>
-                        <td class = "product-details-separator text-center">:</td>
-                        <td class = "product-details-value text-right"><%= product.category %></td>
-                    </tr>
-                </tbody>
-            </table>
+                
+                <% if(currentUser){ %>
+                    <% if(currentUser.isAdmin){ %>
+                        <div class = "action-container">
+                            <a href = "/lineups/<%= lineup._id %>/" class="icon-button"><i class="fas fa-level-up-alt"></i></a>
+                            <a href = "/products/<%= product._id %>/edit" class="icon-button"><i class="fas fa-edit"></i></a>
+                            <!-- <a href = "/products/<%= product._id %>/confirm" class="icon-button"><i class="icon-button far fa-trash-alt"></i></a> -->
+                        </div>
+                    <% } %>
+                <% } %>
+            </div>
+            <div class = "product-details">
+                <table class="table table-borderless product-table mb-4">
+                    <tbody>
+                        <tr>
+                            <td>Price</td>
+                            <td class = "product-details-separator text-center">:</td>
+                            <td class = "product-details-value text-right">Rs <%= product.price %></td>
+                        </tr>
+                        <tr>
+                            <td>Size</td>
+                            <td class = "product-details-separator text-center">:</td>
+                            <td class = "product-details-value text-right"><%= product.size %></td>
+                        </tr>
+                        <tr>
+                            <td>Colour</td>
+                            <td class = "product-details-separator text-center">:</td>
+                            <td class = "product-details-value text-right"><%= product.colour %></td>
+                        </tr>
+                    </tbody>
+                </table>
+    
+                <table class="table table-borderless product-table mb-4">
+                    <tbody>
+                        <tr>
+                            <td>Number of units</td>
+                            <td class = "product-details-separator text-center">:</td>
+                            <td class = "product-details-value text-right"><%= product.noOfUnits %></td>
+                        </tr>
+                        <tr>
+                            <td>In Stock</td>
+                            <td class = "product-details-separator text-center">:</td>
+                            <td class = "product-details-value text-right"><%= product.stock %></td>
+                        </tr>
+                    </tbody>
+                </table>
+    
+                <table class="table table-borderless product-table">
+                    <tbody>
+                        <tr>
+                            <td>Category</td>
+                            <td class = "product-details-separator text-center">:</td>
+                            <td class = "product-details-value text-right"><%= product.category %></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>
