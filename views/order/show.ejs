@@ -19,36 +19,40 @@
             <div class = "sub-heading"><%= order.orderDate.toDateString() %></div>
         </div>
         
-        <div class = "box header-box mt-5 pt-5">
+        <div class = "box header-box mt-5 order-box">
             <% order.items.forEach(item => { %>
                 <div class = "item">
-                    <div style = "background-image: url('<%= item.product.images[0].url %>');" class = "item-image"></div>
-                    <div class="item-details">
-                        <div class = "item-name"><%= item.product.name %></div>
-                        <div>
-                            <div class = "item-sub_details">
-                                <div class = "item-size">
-                                    Size: <span class="semi-bold"><%= item.product.size %></span>
-                                </div>
-        
-                                <div class = "item-quantity">
-                                    Quantity: <span class="semi-bold"><%= item.quantity %></span>
-                                </div>
-                            </div>
-        
-                            <div class = "item-sub_details">
-                                <div class = "item-colour">
-                                    Colour: <span class="semi-bold"><%= item.product.colour %></span>
-                                </div>
-        
-                                <div class = "item-price">
-                                    Item price: <span class="semi-bold">Rs <%= item.product.price %></span>
-                                </div>
-                            </div>
-                        </div>
+                    <h1 class = "text-center item-name section-heading"><%= item.product.name %></h1>
+    
+                    <div class="item-primary-container">
+                        <div style = "background-image: url('<%= item.product.images[0].url %>');" class = "item-image"></div>
                         
-                        <div class = "item-customisation w-100 text-center">
-                            <span class="bold"><%= item.customisation === 'Custom' ? '(Custom)' : '(Standard)' %></span>
+                        <div class="item-details">
+                            <div>
+                                <div class = "item-sub_details">
+                                    <div class = "item-size">
+                                        Size: <span class="semi-bold"><%= item.product.size %></span>
+                                    </div>
+            
+                                    <div class = "item-quantity">
+                                        Quantity: <span class="semi-bold"><%= item.quantity %></span>
+                                    </div>
+                                </div>
+            
+                                <div class = "item-sub_details">
+                                    <div class = "item-colour">
+                                        Colour: <span class="semi-bold"><%= item.product.colour %></span>
+                                    </div>
+            
+                                    <div class = "item-price">
+                                        Item price: <span class="semi-bold">Rs <%= item.product.price %></span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class = "item-customisation w-100 text-center">
+                                <span class="bold"><%= item.customisation === 'Custom' ? '(Custom)' : '(Standard)' %></span>
+                            </div>
                         </div>
                     </div>
                 </div>

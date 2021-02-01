@@ -19,6 +19,12 @@
     width: 75%;
 }
 
+.order-box
+{
+    padding: 2rem;
+    padding-bottom: 0;
+}
+
 .heading
 {
     font-size: 4rem;
@@ -44,9 +50,9 @@
 
 .item
 {
-    display: flex;
+    /* display: flex;
     justify-content: space-between;
-    position: relative;
+    position: relative; */
 
     height: fit-content;
     width: 100%;
@@ -63,6 +69,16 @@
     border-radius: 0.5rem;
     box-shadow: none;
     border: 0.1rem solid #553328;
+}
+
+.item-primary-container
+{
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+
+    height: fit-content;
+    width: 100%;
 }
 
 .item-image

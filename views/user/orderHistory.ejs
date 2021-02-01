@@ -14,52 +14,59 @@
         <% orders.forEach(order => { %>
             <div class = "box header-box mt-5">
                 <div class = "main-heading">
-                    Order Number: <span class="semi-bold"><%= order.orderNumber %></span>
+                    <span>Order Number: </span> 
+                    <span class="semi-bold"><%= order.orderNumber %></span>
                 </div>
-                <div class = "sub-heading">
-                    Date: <span class="semi-bold"><%= order.orderDate.toDateString() %></span>
-                </div>
-                <div class = "sub-heading">
-                    Total: <span class="semi-bold">Rs <%= order.total %></span>
+                <div class = "sub-heading d-flex justify-content-around">
+                    <div>
+                        <span>Date: </span>
+                        <span class="semi-bold"><%= order.orderDate.toDateString() %></span>
+                    </div>
+
+                    <div>
+                        <span>Total: </span>
+                        <span class="semi-bold">Rs <%= order.total %></span>
+                    </div>
                 </div>
             </div>
 
-            <div class = "box header-box order-box mt-5 pt-4">
+            <div class = "box header-box order-box mt-5">
                 <% order.items.forEach(item => { %>
-                    <div class = "item order-item mt-4">
-                        <!-- <div style = "background-image: url('<%= item.product.images[0].url %>');" class = "item-image"></div> -->
-                        <div class = "item-image-container">
-                            <a href='/products/<%= item.product._id %>''>
-                                <img class="item-image" src = "<%= item.product.images[0].url %>">
-                            </a>
-                        </div>
-                        <div class="item-details">
-                            <div class = "item-name">
-                                <h2><%= item.product.name %></h2>
-                            </div>
-                            <div>
-                                <div class = "item-sub_details">
-                                    <div class = "item-size">
-                                        <span>Size: </span><span class="semi-bold"><%= item.product.size %></span>
-                                    </div>
-            
-                                    <div class = "item-quantity">
-                                        <span>Quantity: </span><span class="semi-bold"><%= item.quantity %></span>
-                                    </div>
-                                </div>
-            
-                                <div class = "item-sub_details">
-                                    <div class = "item-colour">
-                                        <span>Colour: </span><span class="semi-bold"><%= item.product.colour %></span>
-                                    </div>
-            
-                                    <div class = "item-price">
-                                        <span>Item price: </span><span class="semi-bold">Rs <%= item.product.price %></span>
-                                    </div>
-                                </div>
+                    <div class = "item order-item">
+                        <h1 class = "text-center item-name section-heading"><%= item.product.name %></h1>
     
-                                <div class = "item-customisation w-100 text-center">
-                                    <span class="bold"><%= item.customisation === 'Custom' ? '(Custom)' : '(Standard)' %></span>
+                        <div class="item-primary-container">
+                            <div class = "item-image-container">
+                                <a href='/products/<%= item.product._id %>''>
+                                    <img class="item-image" src = "<%= item.product.images[0].url %>">
+                                </a>
+                            </div>
+
+                            <div class="item-details">
+                                <div>
+                                    <div class = "item-sub_details">
+                                        <div class = "item-size">
+                                            <span>Size: </span><span class="semi-bold"><%= item.product.size %></span>
+                                        </div>
+                
+                                        <div class = "item-quantity">
+                                            <span>Quantity: </span><span class="semi-bold"><%= item.quantity %></span>
+                                        </div>
+                                    </div>
+                
+                                    <div class = "item-sub_details">
+                                        <div class = "item-colour">
+                                            <span>Colour: </span><span class="semi-bold"><%= item.product.colour %></span>
+                                        </div>
+                
+                                        <div class = "item-price">
+                                            <span>Item price: </span><span class="semi-bold">Rs <%= item.product.price %></span>
+                                        </div>
+                                    </div>
+        
+                                    <div class = "item-customisation w-100 text-center">
+                                        <span class="bold"><%= item.customisation === 'Custom' ? '(Custom)' : '(Standard)' %></span>
+                                    </div>
                                 </div>
                             </div>
                         </div>

@@ -174,6 +174,95 @@ app.use
     }
 )
 
+// Create new tracking object
+
+// Tracking.findOne({name: "primary"},
+//     async(err, track) =>
+//     {
+//         if(err)
+//         {
+//             res.send(err);
+//         }
+//         else
+//         {
+//             track.currentOrderNumber = 1;
+//             await track.save();
+//             console.log("Updated");
+//         }
+//     }
+// )
+
+// Tracking.deleteMany({name: "primary"},
+//     (err) =>
+//     {
+//         if(err)
+//         console.log(err);
+//         else
+//         console.log("Deleted!");
+//     }
+// )
+
+// Product.find({},
+//     (err, products) =>
+//     {
+//         if(err)
+//         console.log(err);
+
+//         else
+//         {
+//             products.forEach
+//             (
+//                 async product =>
+//                 {
+//                     product.notificationList = [];
+
+//                     await product.save();
+//                 }
+//             )
+
+//             console.log("All updated");
+//         }
+//     }
+// )
+
+// const primaryTrack = 
+// {
+//     name: "primary",
+//     currentOrderNumber: 1,
+//     currentLineupNumber: 0,
+// };
+
+// Tracking.create(primaryTrack,
+//     (err, track) =>
+//     {
+//         if(err)
+//         {
+//             console.log("Primary track could not be created");
+//         }
+//         else
+//         {
+//             console.log("Primary track created!");
+//         }
+//     }    
+// )
+
+// User.findOne({username: "Sushil Mario"}, 
+//     async(err, user) =>
+//     {
+//         if(err)
+//         {
+//             console.log(err);
+//         }
+//         else
+//         {
+//             user.isAdmin = true;
+//             user.save();
+
+//             console.log("Updated");
+//         }
+//     }    
+// )
+
 //The routes
 
 app.use("/categories", categoryRoutes);
