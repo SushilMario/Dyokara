@@ -25,19 +25,31 @@ moment().format();
 router.get("/", 
     (req, res) =>
     {	
-        Category.find({}).populate("products").exec
-        (
-            (err, categories) =>
+        Tracking.findOne({name: "primary"},
+            (err, track) =>
             {
                 if(err)
                 {
                     res.send(err);
                 }
-                else if(categories)
+                else
                 {
-                    res.render("product/index", {categories: categories});
+                    Category.find({}).populate("products").exec
+                    (
+                        (err, categories) =>
+                        {
+                            if(err)
+                            {
+                                res.send(err);
+                            }
+                            else if(categories)
+                            {
+                                res.render("product/index", {categories: categories, announcement: track.announcement});
+                            }
+                        }    
+                    )
                 }
-            }    
+            }
         )
     }
 )
@@ -47,36 +59,48 @@ router.get("/",
 router.get("/categories/:category", 
     (req, res) =>
     {	
-        Category.find({},
-            (err, categories) =>
+        Tracking.findOne({name: "primary"},
+            (err, track) =>
             {
                 if(err)
                 {
                     res.send(err);
                 }
-                else if(categories)
+                else
                 {
-                    Category.findOne({name: req.params.category}).populate("products").exec
-                    (
-                        (err, foundCategory) =>
+                    Category.find({},
+                        (err, categories) =>
                         {
                             if(err)
                             {
                                 res.send(err);
                             }
-                            else if(foundCategory && foundCategory.products.length !== 0)
+                            else if(categories)
                             {
-                                res.render("product/indexCategory", {categories: categories, foundCategory: foundCategory});
-                            }
-                            else
-                            {
-                                req.flash("error", "Category does not exist");
-                                res.redirect("/products");
+                                Category.findOne({name: req.params.category}).populate("products").exec
+                                (
+                                    (err, foundCategory) =>
+                                    {
+                                        if(err)
+                                        {
+                                            res.send(err);
+                                        }
+                                        else if(foundCategory && foundCategory.products.length !== 0)
+                                        {
+                                            res.render("product/indexCategory", {categories: categories, foundCategory: foundCategory, announcement: track.announcement});
+                                        }
+                                        else
+                                        {
+                                            req.flash("error", "Category does not exist");
+                                            res.redirect("/products");
+                                        }
+                                    }    
+                                )
                             }
                         }    
                     )
                 }
-            }    
+            }
         )
     }
 )

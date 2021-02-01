@@ -3,6 +3,7 @@ const express = require("express"),
 
 const middleware = require("../middleware");
 
+const Tracking = require("../models/Tracking.js");
 const User = require("../models/User.js");
 const Product = require("../models/Product.js");
 
@@ -237,6 +238,54 @@ router.get("/notify/products/:id/users", middleware.isAdmin,
                 else
                 {
                     req.flash("error", "Product doesn't exist");
+                    res.redirect("/products");
+                }
+            }
+        )
+    }
+)
+
+//Info - Edit
+
+router.get("/info",
+    (req, res) =>
+    {
+        Tracking.findOne({name: "primary"},
+            (err, track) =>
+            {
+                if(err)
+                {
+                    res.send(err);
+                }
+                else
+                {
+                    res.render("user/info", {announcement: track.announcement});
+                }
+            }
+        )
+    }
+)
+
+//Info - Update
+
+router.put("/info",
+    (req, res) =>
+    {
+        const {announcement} = req.body;
+
+        Tracking.findOne({name: "primary"},
+            async(err, track) =>
+            {
+                if(err)
+                {
+                    res.send(err);
+                }
+                else
+                {
+                    track.announcement = announcement;
+
+                    await track.save();
+
                     res.redirect("/products");
                 }
             }

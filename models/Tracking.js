@@ -5,7 +5,8 @@ let TrackingSchema = new mongoose.Schema
     {
         name: String,
         currentOrderNumber: Number,
-        currentLineupNumber: Number
+        currentLineupNumber: Number,
+        announcement: String
     }
 );
 

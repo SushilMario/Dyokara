@@ -1,0 +1,23 @@
+<%- include("../partials/header"); %>
+
+<link rel="stylesheet" href="/stylesheets/form.css"/>
+<link rel="stylesheet" href="/stylesheets/app.css"/>
+
+<%- include("../partials/navbar"); %>
+
+<div class="container initial-container">
+    <div class="form-container">
+        <h1 class = "form-heading mb-5">Edit Info</h1>
+
+        <form action = "/info?_method=PUT" method = "POST" class = "ui form">
+            <div class="field">
+                <label class = "label" for = "announcement">Announcement</label>
+                <input class = "form-input" type="text" name = "announcement" id = "announcement" value = "<%= announcement %>">
+            </div>
+
+            <button class = "ui button submit" type="submit">Save</button>
+        </form>
+    </div>
+</div>
+
+<%- include("../partials/footer"); %>

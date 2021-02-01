@@ -204,6 +204,12 @@ body::before
     color: rgb(105, 0, 0);
 }
 
+.display
+{
+    background-color: #fde3cb;
+    color: #553328;
+}
+
 .warning
 {
     color: rgb(105, 0, 0);
