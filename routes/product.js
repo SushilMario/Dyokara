@@ -44,6 +44,11 @@ router.get("/",
                             }
                             else if(categories)
                             {
+                                for(let i = 0; i < categories.length; i++)
+                                {
+                                    categories[i].products = categories[i].products.sort(middleware.compareValues("lineupNumber", 'desc'));
+                                }
+
                                 res.render("product/index", {categories: categories, announcement: track.announcement});
                             }
                         }    
@@ -87,6 +92,8 @@ router.get("/categories/:category",
                                         }
                                         else if(foundCategory && foundCategory.products.length !== 0)
                                         {
+                                            foundCategory.products = foundCategory.products.sort(middleware.compareValues("lineupNumber", 'desc'));
+
                                             res.render("product/indexCategory", {categories: categories, foundCategory: foundCategory, announcement: track.announcement});
                                         }
                                         else
