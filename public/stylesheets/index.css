@@ -36,10 +36,6 @@
 
     border-radius: 0.5rem;
     box-shadow: 0 1rem 2rem rgba( 0 , 0 , 0 , 0.5);
-
-    animation-name: render;
-    animation-duration: 0.5s;
-    animation-timing-function: ease-in;
 }
 
 .product-image

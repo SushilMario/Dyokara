@@ -283,6 +283,13 @@ h2
     display: none;
 }
 
+.fade-in
+{
+    animation-name: render;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-in;
+}
+
 .main-heading
 {
     font-weight: 600;

@@ -95,7 +95,7 @@
     <% if(categories.length !== 0){ %>
         <% categories.forEach(category => { %> 
             <% if(category.products.length !== 0){ %>
-                <div class = "box header-box">
+                <div class = "box header-box fade-in">
                     <div class = "main-heading"><%= category.name %></div>
                     <% if(category.byline !== ""){ %>
                         <div class = "sub-heading"><%= category.byline %></div>
@@ -106,7 +106,7 @@
                     <% category.products.forEach(product => { %>
                         <% if(product.production === "Yes"){ %>
                             <div class="col-6 col-md-6 col-lg-4 col-xl-3">
-                                <div class="product">
+                                <div class="product fade-in">
                                     <div>
                                         <a href='/products/<%= product._id %>'>
                                             <img class="product-image" src = "<%= product.images[0].url %>">
