@@ -81,6 +81,23 @@ for(let i = 0; i < quantityInputs.length; i++)
             }
         }
     )
+
+    quantityInputs[i].addEventListener
+    (
+        "change",
+        () =>
+        {
+            if(parseInt(quantityInputs[i].value) > 10)
+            {
+                quantityInputs[i].value = 10;
+            }
+    
+            else if(parseInt(quantityInputs[i].value) < 1)
+            {
+                quantityInputs[i].value = 1;
+            }
+        }
+    )
 }
 
 

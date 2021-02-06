@@ -17,6 +17,11 @@ actualInput.addEventListener
         {
             actualInput.value = 10;
         }
+
+        else if(parseInt(actualInput.value) < 1)
+        {
+            actualInput.value = 1;
+        }
     }
 )
 
