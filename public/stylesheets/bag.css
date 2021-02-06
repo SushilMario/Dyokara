@@ -159,8 +159,8 @@
 
 .ui.button.delete:hover
 {
-    background-color: red;
-    color: #FFFFFF;
+    background-color: #e62d2d;
+    color: #FAF9F9;
 }
 
 /* .ui.button.checkout:hover

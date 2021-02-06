@@ -54,33 +54,33 @@ for(let i = 0; i < quantityInputs.length; i++)
     // console.log(quantityInputs[i]);
     // quantityInputs[i].addEventListener("input", changed(quantityInputs[i], i));
     quantityInputs[i].addEventListener("input",
-    ({target}) =>
-    {
-        console.log("ON INPUT!");
-        const productId = itemIds[i].textContent;
-        const userId = userIdElement.textContent;
-
-        const number = parseInt(target.value);
-
-        if(target.value && typeof number === "number")
+        ({target}) =>
         {
-            if(number !== 0)
+            console.log("ON INPUT!");
+            const productId = itemIds[i].textContent;
+            const userId = userIdElement.textContent;
+
+            const number = parseInt(target.value);
+
+            if(target.value && typeof number === "number")
             {
-                fetch(`/users/${userId}/cart/products/${productId}`, 
-                    { 
-                        method: 'PUT',  
-                        body: JSON.stringify({quantity: target.value}),
-                        headers: 
-                        {
-                            'Content-Type': 'application/json'
+                if(number !== 0)
+                {
+                    fetch(`/users/${userId}/cart/products/${productId}`, 
+                        { 
+                            method: 'PUT',  
+                            body: JSON.stringify({quantity: target.value}),
+                            headers: 
+                            {
+                                'Content-Type': 'application/json'
+                            }
                         }
-                    }
-                ) 
+                    ) 
+                }
+                
             }
-            
         }
-    }
-)
+    )
 }
 
 
