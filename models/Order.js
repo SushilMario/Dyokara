@@ -30,6 +30,11 @@ let OrderSchema = new mongoose.Schema
                 {
                     type: String,
                     default: "None"
+                },
+                purchasePrice:
+                {
+                    type: Number, 
+                    default: 0
                 }
             }
         ],

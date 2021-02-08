@@ -167,14 +167,16 @@
 
             <% if(currentUser){ %>
                 <% if(!product.notificationList.includes(currentUser._id)){ %>
+                    <div class = "text-center">Woulf you like to be notified when this product is back in stock?</div>
+
                     <div class = "mx-auto my-3">
                         <form class = "product-form" action = "/products/<%= product._id %>/notify?_method=PUT" method = "POST">
                             <button type = "submit" class="ui button">Notify Me</button>
                         </form>
                     </div>
+                <% }else{ %>
+                    <div class = "text-center">We'll send an email to your registered email address when this product is back in stock</div>
                 <% } %>
-
-                <div class = "text-center">We'll send you an email to your registered email address when this product is back in stock</div>
             <% } %>
         <% }else{ %>
             <div class = "sub-heading">Sign in to unlock purchases</div>

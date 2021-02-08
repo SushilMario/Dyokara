@@ -124,10 +124,8 @@ router.get("/:mode", middleware.isLoggedIn,
                     {
                         const newOrder = {};
                         const productIDs = [];
-                        let orderNumber = 0;
-                        let item = {};
+                        let currentItem = {};
                         const items = [];
-                        let total = 0;
 
                         // Generation of a new 8 digit order number
                     
@@ -152,11 +150,12 @@ router.get("/:mode", middleware.isLoggedIn,
 
                                             productIDs.push(_id);
 
-                                            item.product = _id;
-                                            item.quantity = quantity;
-                                            item.customisation = customisation;
+                                            currentItem.product = _id;
+                                            currentItem.quantity = quantity;
+                                            currentItem.customisation = customisation;
+                                            currentItem.purchasePrice = price * quantity;
 
-                                            items.push(item);
+                                            items.push(currentItem);
                                         }
                                     );
 
