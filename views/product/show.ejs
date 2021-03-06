@@ -134,7 +134,7 @@
 <div class="third container">
     <div class = "box product-section purchase">
         <% if(currentUser && product.stock === "Yes"){ %>
-            <div class = "product-heading section-heading mb-5">Like what you see?</div>
+            <div class = "product-heading mb-5">Purchase</div>
 
             <!-- <hr class = "line purchase-line"> -->
     
@@ -188,7 +188,7 @@
 
     <% if(currentUser && product.stock === "Yes"){ %>
         <div class = "box product-section personalisation">
-            <div class = "product-heading section-heading mb-4">Personalise</div>
+            <div class = "product-heading mb-4">Personalise</div>
 
             <label for = "customisation" class = "sub-heading mb-4">Think it could do with a personal touch? Want to make it your own?</label>
 
@@ -197,14 +197,14 @@
                     <div class="field">
                         <div class="ui radio checkbox">
                             <input type="radio" name = "customisation" tabindex="0" class="hidden" value = "Custom" id = "customisation_none">
-                            <label for="customisation_none">Sure!</label>
+                            <label class = "ml-1" for="customisation_none">Sure!</label>
                         </div>
                     </div>
     
                     <div class="field">
                         <div class="ui radio checkbox">
                             <input type="radio" name = "customisation" tabindex="0" class="hidden" value = "None" id = "customisation_custom" checked>
-                            <label for="customisation_custom">No, I'm good</label>
+                            <label class = "ml-1" for="customisation_custom">No, I'm good</label>
                         </div>
                     </div>
                 </div>
@@ -217,7 +217,7 @@
     <% } %>
 
     <div class = "box product-section">
-        <div class = "product-heading section-heading mb-5">
+        <div class = "product-heading mb-5">
             Description
         </div>
 

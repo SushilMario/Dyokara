@@ -264,6 +264,10 @@ input.form-control-lg
     font-weight: 600;
     letter-spacing: 0.75rem;
 
+    margin: 0 auto;
+    width: fit-content;
+    border-bottom: 0.2rem solid #553328;
+
     padding-left: 1rem;
 }
 
