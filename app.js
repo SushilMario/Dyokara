@@ -209,27 +209,27 @@ app.use
 //     }
 // )
 
-const primaryTrack = 
-{
-    name: "primary",
-    currentOrderNumber: 1,
-    currentLineupNumber: 0,
-    announcement: ""
-};
+// const primaryTrack = 
+// {
+//     name: "primary",
+//     currentOrderNumber: 1,
+//     currentLineupNumber: 0,
+//     announcement: ""
+// };
 
-Tracking.create(primaryTrack,
-    (err, track) =>
-    {
-        if(err)
-        {
-            console.log("Primary track could not be created");
-        }
-        else
-        {
-            console.log("Primary track created!");
-        }
-    }    
-)
+// Tracking.create(primaryTrack,
+//     (err, track) =>
+//     {
+//         if(err)
+//         {
+//             console.log("Primary track could not be created");
+//         }
+//         else
+//         {
+//             console.log("Primary track created!");
+//         }
+//     }    
+// )
 
 // User.findOne({username: "Sushil Mario"}, 
 //     async(err, user) =>

@@ -46,7 +46,7 @@ router.get("/",
                             {
                                 for(let i = 0; i < categories.length; i++)
                                 {
-                                    categories[i].products = categories[i].products.sort(middleware.compareValues("lineupNumber", 'desc'));
+                                    categories[i].products = categories[i].products.sort(middleware.compareValues("lineupNumber"));
                                 }
 
                                 res.render("product/index", {categories: categories, announcement: track.announcement});
@@ -92,7 +92,7 @@ router.get("/categories/:category",
                                         }
                                         else if(foundCategory && foundCategory.products.length !== 0)
                                         {
-                                            foundCategory.products = foundCategory.products.sort(middleware.compareValues("lineupNumber", 'desc'));
+                                            foundCategory.products = foundCategory.products.sort(middleware.compareValues("lineupNumber"));
 
                                             res.render("product/indexCategory", {categories: categories, foundCategory: foundCategory, announcement: track.announcement});
                                         }
