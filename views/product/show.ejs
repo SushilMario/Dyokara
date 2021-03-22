@@ -111,25 +111,32 @@
     </div>
 </div>
 
-<div class = "container product-variations">
-    <div class="product-variations-section">
-        <% for(let i = 0; i < lineup.sizeList.length; i++){ %>
-            <% const productNumber = `${product.lineupNumber}${i+1}${product.colourNumber}`; %>
+<% const oneSize = lineup.sizeList.length === 1; %>
+<% const oneColour = lineup.variations[product.sizeNumber - 1].colours.length === 1; %>
 
-            <a href = "/products/variations/<%= product.lineupNumber %>/<%= productNumber %>/<%= i + 1 %>" class = "<%= ((i + 1) === product.sizeNumber) ? 'selected' : 'not-selected' %> product-variations-item">
-                <%= lineup.sizeList[i] %>
-            </a>
+<% if(!((oneSize) && (oneColour))) { %> 
+    <div class = "container product-variations">
+        <% if(!oneSize){ %>
+            <div class="product-variations-section%>">
+                <% for(let i = 0; i < lineup.sizeList.length; i++){ %>
+                    <% const productNumber = `${product.lineupNumber}${i+1}${product.colourNumber}`; %>
+                    <a href = "/products/variations/<%= product.lineupNumber %>/<%= productNumber %>/<%= i + 1 %>" class = "<%= ((i + 1) === product.sizeNumber) ? 'selected' : 'not-selected' %> product-variations-item">
+                        <%= lineup.sizeList[i] %>
+                    </a>
+                <% } %>
+            </div>
         <% } %>
+
+        <div class="product-variations-section%>">
+            <% for(let i = 0; i < lineup.variations[product.sizeNumber - 1].colours.length; i++){ %>
+                <% const productNumber = `${product.lineupNumber}${product.sizeNumber}${i+1}`; %>
+                <a href = "/products/variations/<%= product.lineupNumber %>/<%= productNumber %>/<%= product.sizeNumber %>" class = "<%= ((i + 1) === product.colourNumber) ? 'selected' : 'not-selected' %> product-variations-item">
+                    <%= lineup.variations[product.sizeNumber - 1].colours[i] %>
+                </a>
+            <% } %>  
+        </div>
     </div>
-    <div class="product-variations-section">
-        <% for(let i = 0; i < lineup.variations[product.sizeNumber - 1].colours.length; i++){ %>
-            <% const productNumber = `${product.lineupNumber}${product.sizeNumber}${i+1}`; %>
-            <a href = "/products/variations/<%= product.lineupNumber %>/<%= productNumber %>/<%= product.sizeNumber %>" class = "<%= ((i + 1) === product.colourNumber) ? 'selected' : 'not-selected' %> product-variations-item">
-                <%= lineup.variations[product.sizeNumber - 1].colours[i] %>
-            </a>
-        <% } %>  
-    </div>
-</div>
+<% } %>
 
 <div class="third container">
     <div class = "box product-section purchase">

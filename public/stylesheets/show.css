@@ -196,6 +196,11 @@ input.form-control-lg
     width: 45rem;
 }
 
+.full
+{
+    width: 100%;
+}
+
 .product-variations-item
 {
     width: fit-content;
