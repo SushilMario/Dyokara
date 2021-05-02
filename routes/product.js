@@ -90,7 +90,7 @@ router.get("/categories/:category",
                                         {
                                             res.send(err);
                                         }
-                                        else if(foundCategory && foundCategory.products.length !== 0)
+                                        else if(foundCategory)
                                         {
                                             foundCategory.products = foundCategory.products.sort(middleware.compareValues("lineupNumber"));
 
