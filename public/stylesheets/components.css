@@ -436,7 +436,7 @@ h2
     
     transition: all 0.2s;
 
-    box-shadow: 0 0.5rem 1rem rgba( 0 , 0 , 0 , 0.5);
+    box-shadow: 0 1rem 2rem rgba( 0 , 0 , 0 , 0.5);
 }
 
 .ui.button:hover
@@ -445,14 +445,16 @@ h2
     color: #fde3cb;
     
     /* transform: translateY(-0.25rem); */
-    box-shadow: 0 1rem 2rem rgba( 0 , 0 , 0 , 0.5);
+    box-shadow: 0 0.75rem 1.5rem rgba( 0 , 0 , 0 , 0.5);
 }
 
-/* .ui.button:active
+.ui.button:active
 {
-    transform: translateY(-0.1rem);
-    box-shadow: 0 0.5rem 1rem rgba( 0 , 0 , 0 , 0.5); 
-} */
+    background-color: #553328;
+    color: #fde3cb;
+
+    box-shadow: 0 0.5rem 1rem rgba( 0 , 0 , 0 , 0.5);
+}
 
 /* Footer */
 

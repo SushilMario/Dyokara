@@ -219,7 +219,7 @@ input.form-control-lg
     font-weight: 600;
     font-size: 1.75rem;
 
-    box-shadow: 0 0.5rem 1rem rgba( 0 , 0 , 0 , 0.5);
+    box-shadow: 0 1rem 2rem rgba( 0 , 0 , 0 , 0.5);
 
     transition: all 0.2s;
 
@@ -231,8 +231,21 @@ input.form-control-lg
     text-decoration: none;
     color: #553328;
 
+    box-shadow: 0 0.75rem 1.5rem rgba( 0 , 0 , 0 , 0.5);
+
     background-color: #fbe1ca;
-    box-shadow: 0 1rem 2rem rgba( 0 , 0 , 0 , 0.5);
+
+    cursor: pointer;
+}
+
+.product-variations-item:active
+{   
+    text-decoration: none;
+    color: #553328;
+
+    box-shadow: 0 0.5rem 1rem rgba( 0 , 0 , 0 , 0.5);
+
+    background-color: #fbe1ca;
 
     cursor: pointer;
 }
@@ -243,7 +256,7 @@ input.form-control-lg
 
     background-color: #553328;
 
-    box-shadow: 0 1rem 2rem rgba( 0 , 0 , 0 , 0.5);
+    box-shadow: 0 0.5rem 1rem rgba( 0 , 0 , 0 , 0.5);
 
     pointer-events: none;
     cursor: default;
@@ -462,10 +475,5 @@ input.form-control-lg
     .purchase-line
     {
         width: 95%;
-    }
-
-    .product-variations-item
-    {
-        width: 33.333%;
     }
 }
