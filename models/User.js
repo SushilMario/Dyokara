@@ -51,6 +51,7 @@ let UserSchema = new mongoose.Schema
                 }
             ],
             total: Number,
+            deliveryCharge: Number,
             orderDate: Date,
             isCart:
             {

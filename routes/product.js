@@ -620,6 +620,7 @@ router.post("/:id/checkout", middleware.isLoggedIn,
                             {
                                 user.currentOrder.items = order;
                                 user.currentOrder.total = total;
+                                user.currentOrder.deliveryCharge = deliveryCharge;
                                 user.currentOrder.orderDate = moment();
                                 user.save();
                             }

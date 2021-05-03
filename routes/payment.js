@@ -161,6 +161,8 @@ router.get("/:mode", middleware.isLoggedIn,
 
                                     newOrder.total = user.currentOrder.total;
 
+                                    newOrder.deliveryCharge = user.currentOrder.deliveryCharge;
+
                                     newOrder.orderDate = user.currentOrder.orderDate;
 
                                     newOrder.orderNumber = middleware.stringify(currentOrderNumber, 8);

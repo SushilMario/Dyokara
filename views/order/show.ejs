@@ -43,7 +43,7 @@
                                     <div class = "item-colour">
                                         Colour: <span class="semi-bold"><%= item.product.colour %></span>
                                     </div>
-            
+
                                     <div class = "item-price">
                                         Price: <span class="semi-bold">Rs <%= item.purchasePrice %></span>
                                     </div>
@@ -70,6 +70,8 @@
             <p class = "mt-3">Shipping Address: </p>
             <p class = "mt-1"><%= shippingAddress %></p>
         </section>
+        <section>Subotal: Rs <%= order.total - order.deliveryCharge %></section>
+        <section>Delivery Charge: Rs <%= order.deliveryCharge %></section>
         <section>Total: Rs <%= order.total %></section>
 
         <% if(!order.confirmed){ %>
