@@ -155,8 +155,6 @@
     padding-bottom: 2rem;
     
     transition: all 0.25s;
-
-    box-shadow: 0 1rem 2rem rgba( 0 , 0 , 0 , 0.5); 
 }
 
 .ui.button.delete:hover

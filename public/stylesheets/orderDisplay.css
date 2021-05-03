@@ -230,8 +230,6 @@ table .payment-charges
     font-size: 1.5rem;
     padding: 1rem 2rem;
     margin-right: 0;
-
-    box-shadow: 0 1rem 2rem rgba( 0 , 0 , 0 , 0.5);
 }
 
 @keyframes render
