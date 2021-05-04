@@ -33,7 +33,8 @@
 .carousel-control-icon
 {
     color: #553328;
-
+    padding: 0 0.4rem;
+    background-color: white;
     font-size: 2rem;
 }
 
