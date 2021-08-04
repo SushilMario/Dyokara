@@ -10,7 +10,7 @@ let OrderSchema = new mongoose.Schema
             ref: "User"
         }, 
         total: Number,
-        deliveryCharge: Number,
+        // deliveryCharge: Number,
         orderNumber: String,
         orderDate: Date, 
 

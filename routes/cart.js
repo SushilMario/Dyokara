@@ -210,17 +210,17 @@ router.post("/checkout", middleware.isLoggedIn,
                         }
                     );
 
-                    deliveryCharge = middleware.calculateDeliveryRate(req.user.address.pinCode, Math.ceil(orderWeight));
-                    total += deliveryCharge;
+                    // deliveryCharge = middleware.calculateDeliveryRate(req.user.address.pinCode, Math.ceil(orderWeight));
+                    // total += deliveryCharge;
 
                     user.currentOrder.items = order;
                     user.currentOrder.total = total;
-                    user.currentOrder.deliveryCharge = deliveryCharge;
+                    // user.currentOrder.deliveryCharge = deliveryCharge;
                     user.currentOrder.orderDate = moment();
                     user.currentOrder.isCart = true;
 
                     user.save();
-                    res.render("user/checkout", {order: order, deliveryCharge: deliveryCharge, total: total});
+                    res.render("user/checkout", {order: order, total: total});
                 }
             }   
         );

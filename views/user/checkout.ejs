@@ -87,34 +87,25 @@
                             <td class = "semi-bold"><%= item.product.price * item.quantity %></td>
                         </tr>
                     <% }) %>
-                    <!-- </tr>
-                        <hr class = "payment-line">
-                    </tr> -->
-                    </tr>
-                        <td class = "text-left payment-line-top">Subtotal</td>
-                        <td class = "payment-line-top"></td>
-                        <td class = "payment-line-top"></td>
-                        <td class = "semi-bold payment-line-top"><%= total - deliveryCharge %></td>
-                    </tr>
-                    </tr>
-                        <td class = "text-left">Delivery</td>
-                        <td></td>
-                        <td></td>
-                        <td class = "semi-bold"><%= deliveryCharge %></td>
-                    </tr>
                     </tr>
                         <td class = "text-left payment-line-top payment-line-bottom">Total</td>
                         <td class = "payment-line-top payment-line-bottom"></td>
                         <td class = "payment-line-top payment-line-bottom"></td>
-                        <td class = "semi-bold payment-line-top payment-line-bottom"><%= total %></td>
+                        <td class = "semi-bold payment-line-top payment-line-bottom"><%= total %>*</td>
                     </tr>
                 </tbody>
             </table>
+
+            <div class="mt-2 text-center">
+                * Not inclusive of delivery surcharge and customisation fees
+            </div>
         </div>
 
         <div class = "payment-gateway">
-            <a href = "/payments/edit/gpay" class="ui button pay">Google Pay</a>
-            <a href = "/payments/edit/directTransfer" class="ui button pay">Direct Transfer</a>
+            <a href = "/payments/edit/gpay" class="ui button pay m-auto">Place Order</a>
+
+            <!-- <a href = "/payments/edit/gpay" class="ui button pay">Google Pay</a>
+            <a href = "/payments/edit/directTransfer" class="ui button pay">Direct Transfer</a> -->
         </div>
     </div>
 </div>

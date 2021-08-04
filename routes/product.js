@@ -604,9 +604,11 @@ router.post("/:id/checkout", middleware.isLoggedIn,
                     
                     const orderWeight = parseFloat(item.product.specifications["Weight (in kg)"]);
 
-                    const deliveryCharge = middleware.calculateDeliveryRate(req.user.address.pinCode, Math.ceil(orderWeight));
+                    // const deliveryCharge = middleware.calculateDeliveryRate(req.user.address.pinCode, Math.ceil(orderWeight));
 
-                    const total = (item.product.price * quantity)  + deliveryCharge;
+                    // const total = (item.product.price * quantity)  + deliveryCharge;
+
+                    const total = item.product.price * quantity;
 
                     User.findById(req.user._id,
                         (err, user) =>
@@ -620,14 +622,14 @@ router.post("/:id/checkout", middleware.isLoggedIn,
                             {
                                 user.currentOrder.items = order;
                                 user.currentOrder.total = total;
-                                user.currentOrder.deliveryCharge = deliveryCharge;
+                                // user.currentOrder.deliveryCharge = deliveryCharge;
                                 user.currentOrder.orderDate = moment();
                                 user.save();
                             }
                         }    
                     )
 
-					res.render("user/checkout", {order: order, deliveryCharge: deliveryCharge, total: total});	
+					res.render("user/checkout", {order: order, total: total});	
                 }
                 else
                 {

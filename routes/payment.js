@@ -52,7 +52,7 @@ router.put("/edit/gpay", middleware.isLoggedIn,
 
                     user.save();
 
-                    res.redirect("/payments/gpay");
+                    res.redirect("/payments");
                 }
             }
         )
@@ -90,19 +90,9 @@ router.put("/edit/directTransfer", middleware.isLoggedIn,
     }
 )
 
-// Payment redirect
-
-router.get("/finish", middleware.isLoggedIn,
-    (req, res) =>
-    {
-        req.flash("success", "Your order has been placed, thank you for shopping with us!");
-        res.redirect("/products");
-    }
-)
-
 //Create new order
 
-router.get("/:mode", middleware.isLoggedIn,
+router.get("/", middleware.isLoggedIn,
     (req, res) =>
     {
         User.findById(req.user._id).populate({path: "currentOrder.items.product"}).exec(
@@ -114,12 +104,6 @@ router.get("/:mode", middleware.isLoggedIn,
                 }
                 else
                 { 
-                    if(req.params.mode !== "gpay" && req.params.mode !== "directTransfer")
-                    {
-                        req.flash("error", "Invalid payment option");
-                        res.redirect("/products");
-                    }
-
                     if(user.currentOrder)
                     {
                         const newOrder = {};
@@ -180,7 +164,7 @@ router.get("/:mode", middleware.isLoggedIn,
                                             }
                                             else
                                             {
-                                                res.redirect(`/payments/modes/${req.params.mode}`);
+                                                res.redirect(`/payments/confirmation`);
                                             }
                                         }    
                                     )
@@ -202,9 +186,109 @@ router.get("/:mode", middleware.isLoggedIn,
     }
 )
 
-//Payment modes
+// router.get("/:mode", middleware.isLoggedIn,
+//     (req, res) =>
+//     {
+//         User.findById(req.user._id).populate({path: "currentOrder.items.product"}).exec(
+//             (err, user) =>
+//             {
+//                 if(err)
+//                 {
+//                     console.log("User not found");
+//                 }
+//                 else
+//                 { 
+//                     if(req.params.mode !== "gpay" && req.params.mode !== "directTransfer")
+//                     {
+//                         req.flash("error", "Invalid payment option");
+//                         res.redirect("/products");
+//                     }
 
-router.get("/modes/gpay", middleware.isLoggedIn,
+//                     if(user.currentOrder)
+//                     {
+//                         const newOrder = {};
+//                         const productIDs = [];
+//                         let currentItem = {};
+//                         const items = [];
+
+//                         // Generation of a new 8 digit order number
+                    
+//                         Tracking.findOne({name: "primary"},
+//                             async(err, track) =>
+//                             {
+//                                 if(err)
+//                                 {
+//                                     req.flash("error", "Error! Please try again!");
+//                                     res.redirect("back");
+//                                 }
+//                                 else
+//                                 {
+//                                     const {currentOrderNumber} = track;
+
+//                                     newOrder.customer = user._id; 
+
+//                                     user.currentOrder.items.forEach(item => 
+//                                         {
+//                                             const {product, quantity, customisation} = item;
+//                                             const {name, price, colour, size, _id} = product;
+
+//                                             productIDs.push(_id);
+
+//                                             currentItem.product = _id;
+//                                             currentItem.quantity = quantity;
+//                                             currentItem.customisation = customisation;
+//                                             currentItem.purchasePrice = price * quantity;
+
+//                                             items.push(currentItem);
+//                                         }
+//                                     );
+
+//                                     newOrder.total = user.currentOrder.total;
+
+//                                     newOrder.deliveryCharge = user.currentOrder.deliveryCharge;
+
+//                                     newOrder.orderDate = user.currentOrder.orderDate;
+
+//                                     newOrder.orderNumber = middleware.stringify(currentOrderNumber, 8);
+
+//                                     newOrder.productIDs = productIDs;
+
+//                                     newOrder.items = items;
+
+//                                     Order.create(newOrder,
+//                                         (err, order) =>
+//                                         {
+//                                             if(err)
+//                                             {
+//                                                 console.log(err);
+//                                             }
+//                                             else
+//                                             {
+//                                                 res.redirect(`/payments/modes/${req.params.mode}`);
+//                                             }
+//                                         }    
+//                                     )
+
+//                                     track.currentOrderNumber += 1;
+//                                     await track.save();
+//                                 }
+//                             }
+//                         );
+//                     }
+//                     else
+//                     {
+//                         req.flash("error", "No items to checkout!");
+//                         res.redirect("/products");
+//                     }
+//                 }   
+//             }
+//         );
+//     }
+// )
+
+// Confirmation of order 
+
+router.get("/confirmation", middleware.isLoggedIn,
     (req, res) =>
     {
         User.findById(req.user.id,
@@ -230,46 +314,91 @@ router.get("/modes/gpay", middleware.isLoggedIn,
 
                     await user.save();
                     
-                    res.render("order/gpay", {total: user.currentOrder.total, number: process.env.GPAY_NUMBER});
+                    res.render("order/confirmation", {total: user.currentOrder.total, number: process.env.GPAY_NUMBER});
                 }
             }    
         )
     }
 )
 
-router.get("/modes/directTransfer", middleware.isLoggedIn,
+//Payment modes
+
+// router.get("/modes/gpay", middleware.isLoggedIn,
+//     (req, res) =>
+//     {
+//         User.findById(req.user.id,
+//             async(err, user) =>
+//             {
+//                 if(err)
+//                 {
+//                     res.send(err);
+//                 }
+//                 else 
+//                 {
+//                     const {cart} = user;
+
+//                     if(user.currentOrder.isCart)
+//                     {
+//                         const noOfItems = cart.length;
+
+//                         for(let i = 0; i < noOfItems; i++)
+//                         {
+//                             cart.pop();
+//                         }
+//                     }
+
+//                     await user.save();
+                    
+//                     res.render("order/gpay", {total: user.currentOrder.total, number: process.env.GPAY_NUMBER});
+//                 }
+//             }    
+//         )
+//     }
+// )
+
+// router.get("/modes/directTransfer", middleware.isLoggedIn,
+//     (req, res) =>
+//     {
+//         User.findById(req.user.id,
+//             async (err, user) =>
+//             {
+//                 if(err)
+//                 {
+//                     res.send(err);
+//                 }
+//                 else 
+//                 {
+//                     const {cart} = user;
+
+//                     if(user.currentOrder.isCart)
+//                     {
+//                         const noOfItems = cart.length;
+
+//                         for(let i = 0; i < noOfItems; i++)
+//                         {
+//                             cart.pop();
+//                         }
+//                     }
+
+//                     await user.save();
+
+//                     const bankAccountName = "Paul Abraham";
+//                     const bankName = "State Bank of India, Kolencherry";
+
+//                     res.render("order/directTransfer", {total: user.currentOrder.total, bankAccountName: bankAccountName, bankName: bankName, bankAccountNo: process.env.BANK_ACCOUNT_NUMBER, IFSC: process.env.IFSC});
+//                 }
+//             }    
+//         )
+//     }
+// )
+
+// Payment redirect
+
+router.get("/finish", middleware.isLoggedIn,
     (req, res) =>
     {
-        User.findById(req.user.id,
-            async (err, user) =>
-            {
-                if(err)
-                {
-                    res.send(err);
-                }
-                else 
-                {
-                    const {cart} = user;
-
-                    if(user.currentOrder.isCart)
-                    {
-                        const noOfItems = cart.length;
-
-                        for(let i = 0; i < noOfItems; i++)
-                        {
-                            cart.pop();
-                        }
-                    }
-
-                    await user.save();
-
-                    const bankAccountName = "Paul Abraham";
-                    const bankName = "State Bank of India, Kolencherry";
-
-                    res.render("order/directTransfer", {total: user.currentOrder.total, bankAccountName: bankAccountName, bankName: bankName, bankAccountNo: process.env.BANK_ACCOUNT_NUMBER, IFSC: process.env.IFSC});
-                }
-            }    
-        )
+        req.flash("success", "Thank you for shopping with us!");
+        res.redirect("/products");
     }
 )
 
